@@ -1,0 +1,824 @@
+# C · hand_pump · claude-haiku-5-5 · trial 3
+
+- Result: **FAIL**, score 0.75, tags: fail, wrong connection (far off), failed:joint
+- Model version: `claude-haiku-5-5`, response id: `msg_vrtx_011CgrX1isvyFJh8WsoJrAa5`
+- Started 2026-11-08T20:52:31-0500, finished 2026-11-08T21:01:44-0500, 553.4 s, attempts 1
+- Tokens: input 30,542, output 118,059 (thinking not reported separately by this provider)
+- Settings: `{"provider": "anthropic", "route": "vertex", "max_tokens": 128000, "thinking": {"type": "adaptive", "display": "summarized"}, "output_config": {"effort": "high"}}`, prompt sha256 `03f90db7821dcbf2dd96c4a8d70713a6cc279bb1f9cb206cb4c07e4976fa8396`
+
+## Failed checks
+
+- Cap: its skirt underside on the pump body's top flange face (within 6 px): error 16.57 (tolerance 6)
+- Link bar: its lower eye hole on the cap's lug upper hole (within 6 px): error 155.64 (tolerance 6)
+- Handle lever: its small middle hole on the link bar's upper eye hole (within 6 px): error 157.09 (tolerance 6)
+
+## Thinking summary (as returned by the provider)
+
+````text
+I need to work out the geometry of each part carefully, starting with the base plate - a flat base with a pedestal, examining its bounding box and outline coordinates to understand the overall shape.
+
+Tracing the outline, I'm seeing a flat plate at the bottom spanning roughly x 5–286, with a raised trapezoidal pedestal rising from y=63.5 up to y=5 between x 44–246. The flat top of this pedestal, around x 84–206 at y≈5–9, is likely where the pump body's bottom flange rests, so now I'm checking the pump body outline to confirm its bottom shape aligns with that pedestal surface.
+
+I'm tracing the body outline's edges more carefully, trying to match up the long diagonal segments and the cluster of close points near the neck to figure out the actual tilt and shape of the pump body.
+
+Trying to pin the bounding box and orientation of the body—it seems tilted, with the neck near the top around (75,5) and the wider flange-like section stretching toward the lower right, though the exact span of that flange is unclear since the distances seem too long for a typical flange width.
+
+Working out the hole center gives roughly (315.5, 25.3) with radius near 5.8, matching the top eye. Then I'm locating the other eye at the bottom-left end of the rod, checking those hole coordinates to confirm where the rod's bottom end sits on the pump body's centerline.
+
+The flat end face midpoint comes out to roughly (13.5,136), giving a rod length of about 321.7 from the top eye, with an axis angle near 160°. I'm double-checking this by tracing the rod's long edges to confirm the direction is consistent.
+
+Now I'm considering how the pump body's centerline relates to this inclined rod axis—whether the body itself sits vertical in the working view while the rod runs at roughly 20° to it, since this is a side view of the pump.
+
+I need to figure out the body's stored rotation separately: assuming the base stays upright with the body's bottom flange resting on the pedestal and its neck pointing up, I have to work out the body's axis direction from its shape by locating the neck and bottom points in the stored coordinates.
+
+Checking the dot product between these two directions gives about 0.52, so they aren't perpendicular, ruling that out. I'm reconsidering the body as a bottle shape with a neck, bulge, and flanges, and looking at how the spout and cap align against the pump body's top flange face.
+
+I'm now trying to trace the body's full outline and figure out its orientation, examining the light-fill stroke path's coordinates to map out its principal axis and flange lines.
+
+Calculating the perpendicular distance between the two long edges gives roughly 115, so this band spans about 143 long and 115 wide — likely a lighter-colored face, possibly a flange or side panel of the body.
+
+Given the body's stored rotation of 20° applies consistently to both the band and the rod, I'm reasoning that in the working upright orientation the piston rod should align vertically with the body's centerline, meaning the stored drawing's tilt reflects a single rotation applied to the whole assembly rather than independent part orientations.
+
+The rule requires every part to face the same direction as on the working object relative to the base part, within 8 degrees. Since the rod runs along the body's centreline, its orientation depends on the body being vertical, so I need to find the body's stored tilt angle to figure out the correct rotation.
+
+Checking the actual coordinates, the band's top edge runs from about (91.8,51.7) to (235,104), giving roughly +20° (down-right), while the rod axis from (13.5,136) to (315,25) runs at about -20° (up-right) — so they're mirror angles rather than parallel or perpendicular, which I need to reconcile.
+
+Let me look at the body outline more carefully. The neck sits upper-left near (66-86, 5-30), and the outline continues down to around (5,176.65), which could indicate the body's actual axis differs from what I assumed for the flange and rod.
+
+Continuing to trace the outline, I follow the neck down into the shoulder, then along the upper edge of the band sloping down-right at roughly 20°, before curving through a cluster of points that seem to form the flange shape near the top.
+
+Tracing the bottom edge further, it curves from (5,176.65) through a small arc near (21-25,184-187) before straightening out into a long diagonal line down to (194.7,215.6), forming the lower boundary of the band shape.
+
+Continuing along, the path curves through a series of points sweeping right from (196,220) to (323,293), then shoots off on a long straight segment to (384.6,125.1) — this edge runs parallel to the left side of the shape, confirming the body is a tilted parallelogram-like form.
+
+I'm checking whether the distance between these two parallel edges makes sense as a cylinder's width, but the numbers come out inconsistent (around 339), so I need to verify the perpendicular distance between the lines more carefully.
+
+That seems off, giving an oddly wide, short body like a flange rather than a typical pump shape. Let me reconsider the outline edges themselves—the left segment from (5,176) to (66,9) versus the right segment starting at (323,293)—to see if I'm pairing up the correct sides.
+
+Let me try defining a rotated body frame instead, setting "up" along the (0.341,-0.94) direction and "right" perpendicular to it along (0.94,0.341), so I can re-express the outline points in coordinates that make the body's actual width and height clearer.
+
+Continuing, the bottom-right corner comes out to roughly (338.6, -1) in local coordinates, and I'm working out the next point near (384.6, 125.1) now.
+
+Transforming further points, the top-right corner lands around v≈178, and the top-left comes out close to v≈178.7 too, so the body frame spans roughly 339 wide and 178 tall with the left edge straight from v=0 to v≈178. I'm now checking the neck's right side to see how it connects near the top-left.
+
+Continuing to trace further points along the body outline, tracking how u and v coordinates shift as the curve moves toward u≈312 near v≈150.
+
+I'm noticing this region looks messy - the top-right area between those points doesn't clearly map to a cap or flange shape, and the proportions seem off: the body's width at u≈339 seems far too large relative to its height of 178, which makes me question whether I'm reading this bulbous pump shape correctly.
+
+Now I'm checking the bottom edge of the band, tracing coordinates to pin down where it sits in u,v space - it seems to run at v≈28 from u=36 to u=192, while the flange below it drops further to v≈10-24 across a wider u range from 194 to 280, suggesting the flange flares outward as it descends.
+
+Then at the left-bottom curve near the origin point, I'm continuing to map out the coordinate transformations for that region.
+
+Putting this together, it looks like the body spans roughly 339 units wide with the bottom flange sitting around v≈-6, suggesting the overall shape is a wide, flattened rectangle in this coordinate frame rather than something narrower.
+
+But then the neck oddly sits off to one side (u≈0-22) instead of centered, which seems wrong for a symmetric pump body, so I'm reconsidering whether my assumption about "up" being the main axis is correct. Maybe the real principal axis actually runs along the 20° diagonal direction instead, meaning the body is oriented more horizontally, with the neck positioned at one end of its length rather than centered on top.
+
+Now I'm checking whether the piston rod's direction aligns with this diagonal body axis, but the angles don't match up (rod at about -20° vs body long axis at +20°, and body's perpendicular axis at -70°), so the rod isn't simply parallel or perpendicular to the body frame I'm proposing.
+
+Rechecking the cylinder edges directly, I find both pairs of long edges run at -70°, roughly 178 units long, with the sides separated by about 339 — suggesting I may have mislabeled which dimension is the body's length versus width.
+
+I should examine the fill paths instead: the light-colored path sketches the body band region, the dark-fill path marks the shaded face, and there seem to be additional small light-fill paths near the neck area that could clarify the actual geometry.
+
+Looking more carefully, the body seems made of two narrow strips on the left and right, both tilted at roughly -70° and spanning the full length, with a lighter band connecting them at a different angle around 20°. This suggests two long tilted walls forming the sides of the tube shape.
+
+So the overall body frame is 339 wide by 180 tall, with vertical side walls at u 0–22 on the left and u 317–339 on the right — maybe a neck region at top and a flange at the bottom. This doesn't quite match what a pump body should look like, so I'm second-guessing the geometry here.
+
+Actually maybe I'm looking at this from the wrong orientation — perhaps the body is really a vertical cylinder viewed from the side, and the true "vertical" axis runs along the (0.94, 0.341) direction instead, which would flip which dimension is height versus width. Let me test that assumption against the flange and neck positions to see if it makes more sense.
+
+Checking the rod's angle against this alternate vertical doesn't line up well either — the angles are off by 40-50 degrees from the body edges, so this orientation doesn't quite fit.
+
+So maybe the rod actually marks the body's centerline instead. I'm trying to estimate where the neck top and body bottom sit to figure out that true symmetry axis, but my coordinate guesses for those points keep giving inconsistent angles, so I need better reference points.
+
+Instead I'm checking the band region: its top and bottom edges and left/right ends both suggest a consistent slant around -70° (or equivalently 20°), forming a parallelogram-like shape, which could be a more reliable clue to the overall orientation than the vague neck/bottom points.
+
+Maybe the pump body, viewed in its own upright frame, has a wide bottom flange, a barrel section, a top flange, then a narrower neck leading to the spout bulge.
+
+The neck sitting off to the left side seems wrong for a pump body that should be centered, so maybe the frame's vertical axis isn't aligned with the drawing's apparent orientation at all. Perhaps the body is actually tilted diagonally, with the spout on its right side near the bulge, the cap carrying the lug holes where the link bar attaches, and the handle lever pivoting off that bar while the piston rod extends up from the cap.
+
+Rather than guessing the overall rotation visually, I should trace how each part's features relate to its neighbor—cap skirt to body flange, rod eye to handle end—and reconstruct the assembled pump (body vertical, rod vertical, handle roughly horizontal, spout angled up-right) from those connection points instead of trying to eyeball a global rotation. Looking at the piston rod specifically: it has a top eye around one end and a flatter bottom end that slides into the bore, so in the assembled pump that eye sits up top while the flat end disappears into the body.
+
+I'm calculating the rod's "up" direction from its bottom end to its top eye, finding it points at roughly -20°, and since the working orientation needs this to point straight up at -90°, that implies a rotation of about -70° is needed for the rod piece. Now I'm trying to figure out the body's own centerline direction in its stored orientation—testing whether it shares the same -20°/160° axis as the rod, which would make sense if the two pieces are meant to align—and checking what that implies for the body's width/symmetry features.
+
+I'm realizing the strips on the body run perpendicular to a 20° direction rather than matching the rod's -20° axis, so the rod and body aren't necessarily stored at the same angle—each piece's rotation needs to be solved independently based on its own feature geometry rather than assuming cross-piece alignment.
+
+Between the two possible body orientations, a pump barrel is typically tall and narrow, so I'm favoring the option giving height 339 and width 180 over the wider one, and now I'm working out which end holds the neck by computing the correct right-vector perpendicular to that chosen up-direction.
+
+I'm testing the opposite sign for up too, since the neck should land at the top, and I'm projecting each key point (neck, body corners) onto these candidate axes to see which assignment places the neck consistently at one end.
+
+Continuing to transform more coordinate points through the same rotation calculation.
+
+Continuing to compute p and q values for each coordinate pair, checking several more points along the sequence.
+
+Continuing to compute p and q values for each coordinate pair in the sequence.
+
+Still checking more coordinate points, computing p and q values for each to see where the pattern holds.
+
+Looking at the overall spread in this rotated frame, the body seems to span about 340 units along the p-direction and 190 along q, so it's longer than wide in this orientation.
+
+I'm now considering whether the body should actually be oriented vertically, with a wide flange at the bottom and a narrow neck at the top — checking the neck region around p 65-87 where q narrows to near -15 to 0.
+
+Noticing the neck sits off-center in q, which is odd for a symmetric body, so I'm reconsidering whether the true centerline runs diagonally along the rod's axis instead of straight up, and testing that alignment against the measured points.
+
+Continuing to compute right top corner projections, I notice the left strip of the body runs at roughly -70°, which doesn't match the rod's -20° orientation, meaning the rod isn't aligned with the body's edges. I'm starting to think the body might not be a single rigid piece sharing that frame.
+
+Looking at the light-colored "face" fill polygon, I'm tracing its vertices to understand its shape — it looks like a slanted plate whose long sides I need to measure for width and orientation.
+
+Tracing the remaining edges, I confirm it's a parallelogram roughly 152 × 120 with sides at 20° and -70°, flanked by two long 178-length strips acting as walls on either side, plus a neck section at the top-left. The band sits between these wall strips at u=0 and u=339 in frame A.
+
+Now I notice the strips aren't centered with the main band — they might actually be flanges, like disks viewed edge-on as thin vertical bars, rather than side walls of the barrel shape.
+
+Maybe I should focus on the remaining structure instead — the cap's skirt sits on the body's top flange, with the spout attached near the upper bulge. The thin strips are likely the top and bottom flanges viewed edge-on, which would only appear this way if they're horizontal and we're looking at the body from the side with its axis vertical.
+
+But the band's actual coordinates only span u 36-192 and v 28-150, which doesn't quite match the full barrel outline spanning u 22-317 and v 0-178 — there's a discrepancy I need to reconcile against the points I found earlier, like the neck position around u≈5, v≈185.
+
+Actually that puts the neck sticking out near the top of the left flange region, at u≈5-22, suggesting it's not really a flange but possibly a vertical wall or pipe-like structure with a protruding neck at its top end — maybe this is better interpreted as a pump body with a vertical cylinder.
+
+I want to resolve this by examining other parts that connect to the body, like the cap and link_bar, and also look at the spout's flange face and curved tube geometry to pin down which frame orientation is correct.
+
+Given the complexity, I'll settle on a reasonable assembly structure: a pedestal base at the bottom, a vertical pump body on top of it, a cap with lugs at the body's top, a handle lever pivoting on those lugs through a link bar, a rod descending from the handle into the body, and a spout jutting out from the body's side with its flange touching the body surface. Now I need to work out where the piston rod's top eye connects to the handle.
+
+I'm checking the base plate's local coordinates to figure out where the pedestal's top surface sits, since the body's bottom flange needs to rest centered on that surface. The pedestal top face spans roughly x=84 to 206 at y≈5, so I'm aligning the body's bottom flange underside to meet there at the center point around x≈145.
+
+I can translate the base plate anywhere on the canvas, so I'll pick an offset like (400, 500) to position the pedestal top near (544.7, 505.1), though I'll finalize placement once I see how the whole assembly fits together. Now I need to work out the body's bottom flange position to connect it properly to the base.
+
+The body's bottom flange needs to rest on the pedestal's top face, so I need to figure out which end of the body is the bottom and where its centerline sits locally. I'm reasoning through the body's orientation using the rod direction, since in the working position the body's axis should be vertical with the rod centered inside it — this means I need to locate the body's centerline in local coordinates by averaging its v-range, then figure out how the rod aligns along that axis.
+
+I'm wondering if that left strip near u=0-22 is actually a flange with a stub sticking up, with the opposite flange around u=317-339. If the body's axis runs along u, the neck/protrusion sticking out at v=185 near the left end would point "up" perpendicular to that axis, which doesn't quite fit the expected geometry.
+
+So maybe that protrusion is actually the spout attachment point instead, where the spout meets the upper bulge of the body. Tracing the spout's outline, I'm trying to figure out which end has the flange face versus the tube, following the diagonal edges from the top-right region down toward the lower-left to pin down its shape.
+
+The flange should be the right edge in the spout's own local frame, meaning the spout points leftward from it — but since the spout is drawn at some arbitrary rotation, I need to figure out which actual edge corresponds to "right" once I account for that rotation.
+
+So the flange face is the flat edge where the spout attaches to the body, extending outward from there. I'm checking candidate edges in the spout outline to figure out which segment has the right width for that flange connection, measuring edge lengths against the outline coordinates.
+
+Still writing path coordinates...
+
+Looking at the other path segments, I'm tracing more of the tube's bottom edges and trying to identify where the flange plate sits at the lower-left, roughly around a 37° angle.
+
+Computing the flange line's direction and its perpendicular, I find the tube axis should point up-right at roughly -53.5° from the flange center near (59,275). Projecting that direction confirms it lands near (180,120), matching the tube's visible body — so the spout axis runs from the flange center toward that upper-right region.
+
+That's about 53° above horizontal, which seems plausible for a sloping pump spout. But I'm second-guessing whether the flange face described as the "right edge" actually refers to the spout's own local frame rather than the working orientation, which would change how I map the extension direction.
+
+So the key constraint is: the spout's flange face (right edge, flat face) must coincide with the body's widest bulge point — that's the placement anchor, with orientation determined separately.
+
+For orientation, "facing the way it does on the working object" likely means the spout's tube should point in roughly the same direction as the reference drawing relative to the body, which looks horizontal or slightly upward — so I need to figure out the correct rotation to apply to the stored canonical shape so its flange normal matches that direction, within the 8-degree tolerance.
+
+So each part likely has a canonical upright orientation from how it was originally drawn, and the random rotation applied is what we need to undo to check alignment within the 8-degree tolerance. That means I need to work out the canonical pose for each piece—base upright, pump body vertical with flanges horizontal and neck up, cap with skirt down and lugs up—then compare against their current rotations.
+
+For the spout specifically, if its flange face is described as the right edge attaching to the body's widest point, that suggests the body sits to the right and the spout tube extends leftward from the flange, meaning the spout points left in its canonical orientation.
+
+I'm trying to figure out which direction the spout points in canonical orientation—if the flange face is the vertical right edge, then its normal would align with the x-axis, which tells me how the tube angles away from it.
+
+Setting up the rotation equation to map the canonical outward normal to the stored normal, I'm computing the angle difference by converting both vectors to angles and solving for θ, getting something around 127° depending on the orientation convention I use.
+
+Now I'm trying to reason through the layout of the handle and pivot on a typical hand pump — the handle sits at the top, pivots on a lug, and connects to the rod at its far end, so I need to figure out which side the spout actually falls on based on this geometry.
+
+So the handle only has rings at two spots: the big left-end hole and the small middle hole, confirming which is which. The piston's top eye is the small hole near (315,25), and I'm now checking the link bar's two hole positions to match them up.
+
+The link bar has an upper eye near (28,28) and a lower eye near (30,185) — since the bar already runs roughly vertically between these two points, its stored rotation looks close to zero. I'm matching the link bar's lower eye to the cap lug's upper hole, and its upper eye to the handle's small middle hole.
+
+The orientation gets resolved by which eye connects to the hand hole on the lug, so I'll place the link bar so that eye sits up top. Now moving to the handle lever: it looks like a bent diagonal shape running from a hole near the upper-left corner through a small midpoint hole and out to the far end.
+
+Tracing the outline further, it looks like this is one long bar running from upper-left around (70,30) down to lower-right near (378,382), roughly 500 units long and 30-40 wide, with the hole at (30,30) at its left end and another hole near (480,470) marking the right end.
+
+Now I'm working out the handle's canonical geometry - figuring out which hole is the fulcrum versus the link and rod connections, estimating the left-end-to-middle-hole distance at around 172 units.
+
+So the rod's top eye center must align exactly with the handle's left hole center, and that top eye also sits on the body's centerline above the body — meaning the handle's left hole, rod top, and link top all become fixed relative points once I lock that constraint. Now I need to work out the handle's orientation using the vector from its left hole to its middle hole, so I'm recomputing the left hole's center from its arc coordinates to get an accurate reference point.
+
+Calculating the middle hole center from its arc points gives roughly (173.3,130.2) with radius 4.5, and the vector from left to middle hole has length ~174.7 at an angle of about 34.9°, which doesn't quite match the lever's visual axis of ~44°, so I need to reconcile that discrepancy by figuring out which orientation is actually canonical for how the handle sits in its working position relative to the body, rod, and cap lugs.
+
+Given the complexity, I'll aim for a reasonable approximate solution rather than perfect precision — for each part I'll work out its canonical orientation and stored rotation, then build transformations that satisfy the constraints.
+
+I'm sketching canonical poses for each piece: pump body vertical with flange at bottom and spout to the side, cap sitting on top with its skirt facing down, link bar and piston rod vertical with the eye up top, handle roughly horizontal, and spout pointing outward. Now I need to figure out each part's stored rotation relative to these poses so I can derive the right transforms for the constraints.
+
+Working through the constraint chain: base stays fixed, body's bottom flange sits on the pedestal, cap's skirt rests on the body's top flange, the spout flange attaches at the body's bulge point, and the link bar connects to the cap's upper lug. The handle links to the rod's top eye and the link bar's upper eye, forcing the rod to stay vertical along the body's centerline with its bottom end tucked inside the body — so I'm working out the rod's length from its top eye position down to where its flat bottom edge lands.
+
+Now I'm trying to pin down the body's canonical height, since that determines where the rod's bottom end falls relative to the body's interior — I need to figure out whether the body's vertical dimension corresponds to the 180 or 340 measurement from its stored frame.
+
+I'm also checking the cap's bounding box dimensions to see how it sits relative to the body in the tilted stored view.
+
+This is going to take real effort to nail down. I think I need to compute the principal axes and key features for each part to figure out orientation, since the canonical rotation for each shape isn't obvious from the outline alone, and I'll need to reason through the body's canonical vertical direction as a starting point.
+
+Checking the flange positions, the thin strips at the ends of the u-axis frame are plates whose normal runs along u, meaning the body's axis runs along u with height 340, while flange diameter is 178 along v — this confirms the body's canonical "up" is along u, consistent with flanges being perpendicular plates at each end.
+
+Tracing the outline further, I notice the top side bulges outward between u≈220-280, peaking around u≈248, v≈166 — that's the upper bulge's widest point. I'm now following the bottom side coordinates to map out the corresponding lower boundary.
+
+I think I see it now: the bulge corresponds to where the spout attaches, which sticks out to the side of the body perpendicular to its main axis, consistent with the upper-side v-extreme in the stored frame mapping to the canonical side direction.
+
+Actually maybe canonical up is -u, placing the neck at the top and the u=339 flange as the bottom resting on the pedestal, which would put the spout bulge lower on the body rather than near the top. I should compare the two flange strips (u=0 vs u=339) to figure out which one the cap's skirt actually sits against, since that tells me which end is really the top.
+
+The cap's skirt sits against the top flange face, so the neck protrusion marks the top end (around u 5-22) while the opposite strip near u 339 is the bottom flange. That means canonical "up" runs in the negative-u direction, roughly (-0.94, -0.341).
+
+Now checking the spout position at u≈248, that's only 27% up from the bottom, which seems low for a "upper bulge" description — unless the bulge they're calling upper actually refers to the top-side v-bulge around u 220-280 rather than height along the body's main axis. I need to reconsider whether up should actually be +u instead.
+
+Looking at the rounded end shapes on both sides of the body (near u≈0 and u≈339) and the base top around v=122 for additional clues about orientation.
+
+The body's bottom flange appears to be roughly 184 wide, wider than the pedestal top at 122, which would leave an overhang — unless I'm misreading which diameter belongs to the band versus the flange. Checking the cap skirt geometry to see if it clarifies which component is 122 and which is 184.
+
+Now I'm thinking about orientation and placement: the rod's top eye sits above the body centerline with the bottom end inside the body, and with rod length 322 and body height 340, I need to work out where the top eye lands relative to the pedestal base and body top.
+
+Next I'm stacking the cap and handle above the body, trying to figure out the cap's dimensions and lug hole positions relative to its skirt, then checking the overall pump height fits within the 768px canvas with the base resting near the bottom.
+
+Given the body's 340 vs 180 dimensions, a horizontal barrel seems implausible, so the height axis must run along the taller measurement instead. Now I'm trying to pin down which direction is "up" by examining the spout's flange and tube orientation more carefully to see if it actually makes sense pointing away from the body.
+
+Checking the angle, that edge direction is actually nearly antiparallel to the tube axis vector, meaning it's a side of the tube rather than a flange edge — so the tube runs from the lower-left flange up toward the top region near the other end.
+
+Measuring perpendicular distance between the two parallel lines confirms the cross-section width is about 130, matching the flange face length, so this is a bent horn-like spout: a flat flange perpendicular to the tube axis at the lower-left, with the tube extending up and to the right.
+
+Trying to measure the spout length from far end to flange gives roughly 277 units, which seems quite long, and I'm second-guessing whether the spout is actually a horn/cone shape narrowing from the flange toward the open tip rather than a uniform tube.
+
+Now I'm trying to pin down the spout's orientation relative to the flange — figuring out whether the flange face sits on the body's right edge with the spout extending leftward, or whether it tilts upward as well, since this affects how I orient it canonically against the body's widest point.
+
+The handle's grip end extends to the far right past the link, while the spout sits at the upper left of the body. I'll commit to this as canonical: the spout's flange face is at its right edge, meaning the spout itself points outward to the left, direction (-1, 0).
+
+Now I'm solving for the rotation angle θ that maps this canonical outward direction to the stored flange normal — converting both vectors to angles and taking the difference, landing on roughly 126.87°.
+
+Working out the relation between stored and canonical coordinates: if stored = R(θ) applied to canonical, then to get the final placement upright I need to apply R(-θ) to the stored points, so the spout's rotation should be -126.87°. I'm now questioning whether the spout's canonical orientation in the working frame is really zero rotation, which depends on how the grader defines "face" alignment.
+
+Now I'm trying to pin down the spout's flange geometry from the stored path data, figuring out which edge endpoints form the flange face versus which are just outline-closing edges -- the coordinates are ambiguous between a few candidate point pairs, so I'm tracing through the path's "M" and "L" commands to see which segment actually closes the shape and represents the flange boundary.
+
+Both faces share the same direction, so I'm computing the midpoint of the outer flange face using its two endpoints to locate the flange's center position.
+
+Checking the tube outline, that right-side point is actually the bottom-right corner of the flange face, so the true flange segment runs between a different pair, giving a slightly different midpoint. I need this stored-orientation midpoint because it must align with the body's bulge widest point once the spout is transformed into working orientation.
+
+The spout's flange normal points into the tube, and in canonical orientation that means the tube extends leftward from the bulge point — so the spout sits on the body's left side, with its outward normal matching the body's surface direction at that attachment point.
+
+Now I'm working through the coordinate mapping between the stored frame and canonical orientation, trying to pin down which stored axis corresponds to canonical "left" versus "up" so the bulge location translates correctly.
+
+This confirms the y-down convention matches, so frame A's up vector is rotated about 20° clockwise from vertical relative to the stored frame, meaning the body's geometry needs to be rotated by that same offset when placed in frame A.
+
+I'm now reasoning through which stored direction corresponds to canonical "up" — since the body's long axis lies along frame A's horizontal, canonical up must align with ±u_A rather than the vector I initially assumed.
+
+Testing two options for the canonical up mapping: U1 gives θ_b=110°, U2 gives θ_b=-70°. Checking U1, I find canonical left maps to stored direction (0.341,-0.94), which matches frame A's strip direction where the spout bulge sits — so U1 looks like the correct orientation.
+
+That's odd though — the neck appearing at the bottom conflicts with the top placement. But then I realize this could actually make sense: hand pumps have a suction inlet pipe at the bottom (foot valve connection), so the protruding neck could genuinely be a bottom-facing inlet rather than a top spout.
+
+I'm working through the rotation math for the second orientation hypothesis, trying to map the canonical "up" direction onto the stored coordinates to see where the neck actually lands.
+
+Tracing it through, canonical left corresponds to the stored negative-v side, but the body's bulge sits on the positive-v side instead, so this orientation would put the spout on the wrong side relative to the flange reasoning — a contradiction I need to resolve.
+
+Checking the alternative, if U2 holds the spout would point right with its flange on the left edge, but the instruction explicitly states the flange is on the right edge, which only fits U1. I'm now examining the flange geometry at the u=0 end to see if that's actually the bottom with the neck inlet.
+
+With U1, the bottom flange sits at u=0 spanning v -6 to 185, and the top flange sits at u=317–339, with the cap resting on that top face and extending further upward. I'm also checking the rod orientation — the top eye lies above the body at the canonical top side while the rod's bottom is inside the body, but the stored direction for the rod seems to disagree slightly with the canonical up vector, which I need to reconcile.
+
+Now I'm setting up a canonical coordinate system for the body to figure out heights relative to the bottom, defining projections along the body axis so I can locate the flanges, centerline, and rod eye consistently.
+
+Now I'm working out the final placement by applying the translation (no rotation needed) to get the pedestal top center's final coordinates, then doing the same translation logic for the body so its bottom flange aligns correctly in the assembled frame.
+
+Checking with U1, canonical up (0,-1) maps to stored (0.94, 0.341) at angle 20°, meaning the forward rotation is 110°, so the inverse transform uses -110° to get from stored back to final orientation — confirming body rotation φ_b = -110°. Now I need to compute the center point.
+
+I'm applying the -110° rotation formula to map stored coordinates to final positions, verifying it against the known up vector, then using it to locate the body's bottom flange face center relative to P0.
+
+Confirming that u=0 edge runs from (5,176.65) to (66.1,8.7), the flange face. Now I'm rotating the stored bottom-face center by -110° to place it relative to the body, getting approximately (77.3, -65.1) before adding the body's translation offset.
+
+I need to pick an overall canvas layout: deciding where the pedestal top sits (maybe around Y=650-680) given the canvas is 1376×768, then working out the total pump height (body plus cap plus handle plus rod) to center everything nicely, and setting the body's translation so its face-center lands exactly at the pedestal top point.
+
+Now I'm working through the body's relative coordinates one feature at a time, starting with where the top flange face sits in the rotated/offset frame.
+
+Good, the X_rel comes out close to 0, confirming the body centreline passes vertically through P_ped as expected. Now I'm locating the spout flange position, which sits at the widest point of the upper bulge around height 248 above the bottom.
+
+Checking widths at that height: the body spans from about v=10 to v=166, giving roughly 156 in diameter, wider than the narrower band elsewhere (around 122). This confirms the upper bulge near u≈236-268 is indeed the widest part of the body.
+
+I'm verifying the widest bulge point by transforming the stored coordinate (u=250, v=166) back through the rotation and offset, and it matches an outline point at roughly (295, 105.5) — confirming the bulge location is correct.
+
+Now I'm trying to pin down the spout flange's midpoint by looking at candidate endpoints along the spout's face and bottom contour, since the exact pair of outer face points isn't fully clear yet.
+
+Checking the rotation: the stored outward direction of the spout points at -53.13°, and applying the -126.87° transform brings it to exactly -180°, confirming it points left as expected. I'm now working through the final position transform combining this rotation with the translation.
+
+Now I'm verifying the spout flange face sits exactly on the body surface at the bulge point, which checks out since both are at the same coordinates. Next I need to figure out where the cap's skirt underside should rest on the pump body's top flange face, which is at Y_rel = -339.
+
+I'm also examining the cap's stored geometry — its hole positions, bounding box, and fill segments — to work out its canonical orientation, since I need to know where the skirt underside and lug holes actually are before I can align the link bar's lower eye with the cap's lug hole.
+
+Tracing those coordinates, I realize this path actually represents the lighter-colored inner region of the cap, not its full silhouette — the outer boundary must be a separate, wider shape.
+
+Still plotting silhouette coordinates...
+
+I'm trying to locate the lugs H1 and H2 in the lower-right region, and noticing two long roughly parallel straight edges—one from (5,72.8) to (85.3,190.5) and another from (49.7,20.7) to (153.4,169.6), both around 55° angle—that might define the cap's skirt boundary.
+
+I'm measuring the perpendicular distance between these two edges (around 67 units apart) and the length along their shared direction (roughly 240 units), which suggests the cap's long axis runs diagonally at 55° from the x-axis.
+
+Trying another angle, I'm trying to isolate the cap's flat skirt edge among the outer silhouette segments, but with so many overlapping lengths and positions it's hard to pin down which lines are the true boundary versus internal shading. I think I need to shift strategy entirely and just check whether the cap's underside sits within a few pixels of the body's top flange face.
+
+Since the link bar is vertical, its lower eye aligns with the cap's upper lug hole, and tracing upward the link's top aligns with the handle's middle position. The handle's left hole sits above the body centerline where the rod attaches, so if the link is truly vertical, the cap's lug x-position should match the handle middle's x-position, letting me back out the lug's offset from center.
+
+I need to figure out the handle's canonical orientation to get that offset right — the lever axis from the rod hole to the end point runs at roughly 44°, so I'm checking the angle from the rod hole to the middle hole to see how they relate geometrically.
+
+Rotating that offset by -44° puts the middle hole roughly 27 units above the left hole in working coordinates, which fits with the middle hole sitting 28 units perpendicular from the lever's main axis.
+
+Rotating by -44° maps the axis vector to pure +X and the perpendicular to pure +Y, meaning the middle hole sits 28 units above the axis (negative Y in SVG) and 172 units along it — so canonically, with the left hole at the origin, the middle hole lands at (172, -28).
+
+Checking the right end distance from the left hole gives roughly 629 units, which seems like a reasonable lever length. So in the working orientation, the handle lies horizontal, and the middle hole at X=172 needs to line up with the cap lug position relative to the body center.
+
+I'm second-guessing whether the lever is actually horizontal in canonical form or tilted at an angle, since a typical hand pump handle pivots near the top and may angle upward from the link point rather than lying flat.
+
+I'll treat the handle as roughly horizontal, with the rod attached at the left end, the link at the middle, and the grip extending to the right. Now I'm working out the rod's vertical placement, making sure the top eye sits above the body and the rod length keeps the bottom eye properly nested inside the body given its top boundary at -339.
+
+Next I need to figure out the handle's position by working back through the link bar, which connects vertically between the cap lug's upper hole and the handle's middle eye, so I'm computing the center coordinates of that upper eye.
+
+So the link is essentially vertical, with the lower eye attaching to the cap's lug hole. That means the handle's middle point sits 157 units above the lug position along the link's vertical direction, which I can use to place the handle in canonical coordinates.
+
+Now I need to relate this to the handle's left hole position and its rotation of about -44.2° that maps the handle axis to point rightward, so I can figure out the correct sign for the perpendicular offset of 28 units placing the middle hole above the left hole.
+
+That checks out: sqrt(172.2²+28²)≈174.4, matching. So the middle hole sits 172 right and 28 above the left hole, and the link's lower eye, 157 below that, lands at (172, 129) relative to the left hole—placing the cap lug 129 below the rod's top hole in the vertical direction, at the same 172 horizontal offset from the body axis.
+
+Working out where that lands relative to the body's top flange at Y=-339, I'm testing whether a cap height around 130 units could accommodate the lug position, though the 172 horizontal offset seems wide for a cap unless the lugs are ears protruding from its sides—comparing against the stored lug coordinates to see if this geometry is consistent.
+
+Now I'm examining the pair of lug holes on the cap itself, H1 and H2, computing the vector between them to determine which is the "upper" hole in the canonical orientation, since that's the one the connecting link attaches to. I'm reasoning through how the cap's rotation and orientation get fixed once I know which hole is up versus down relative to the skirt.
+
+This assumption about lug arrangement is too shaky to rely on. Let me instead look at the cap's shape directly—checking the flat bottom edge of the skirt to figure out orientation more concretely.
+
+The top edge outline has a bumpy, fancy profile, almost like a bell cap with a bulb shape, which makes me reconsider the cap as more mushroom-like with the body starting around (5,72.8).
+
+I'm trying to pin down the cap's lower-left edge and skirt dimensions, comparing a possible 142-length skirt against the body's top flange diameter of roughly 179, wondering if the skirt sits inside the flange rather than matching it exactly. I'm also considering whether the flat skirt segment runs instead between the points (49.7, 20.7) and (153.4, 169.6).
+
+Actually that segment looks like an internal boundary between the dark and light fill regions, not the outer silhouette edge. Tracing the actual outer edge on that side instead, I'm looking at points like (46.5,16.8)-(40.5,9.3)-(37.5,7.9)-(33.1,8.3)-(29,11.2)-(27,15.6).
+
+The cap overall seems shaped like a rotated mushroom or anvil, with lobes at top-left, top-middle, top-right, and lower-right, and the lugs sitting in that lower-right lobe near (170.6,198.4) and (129,226). I'm trying to reconcile this with a canonical mushroom-cap layout where the skirt is at the bottom and the lug ears project from one side near the top.
+
+Given the complexity, I'll simplify by assuming the skirt's underside corresponds to the flat edge running from (49.4,21.3) to (153.4,169.6), with the body occupying the opposite side of that line, and I'm checking which side nearby points like (150,80) and (182,96) fall on to determine the cap's interior region.
+
+I'm testing a point like (100,100) against both boundary lines by computing dot products with their normals — it falls just barely on the upper-left side relative to the skirt line, which helps me narrow down the cap's actual silhouette region.
+
+Checking the lower-left silhouette edge against (60,150) gives a value very close to zero, meaning that point sits right near the boundary line rather than clearly inside or outside.
+
+I'm now reconsidering whether the skirt line is actually internal rather than a true silhouette edge — testing (100,100) suggests it's on the negative side of the skirt but still within the cap, which makes me question whether I identified the real outer boundary correctly.
+
+Given the trouble pinning down the cap's canonical orientation geometrically, I'm trying another angle: maybe the two lug holes have a fixed vertical arrangement in canonical form, with the link attaching to the upper one. But the H1/H2 vector in the stored image isn't aligned vertically or horizontally, so the rotation stays ambiguous — I may need to just accept a plausible orientation rather than derive it exactly.
+
+Checking the numbers more carefully, a lug sitting at X=172 seems too far outside the cap's estimated radius of ~95 given the flange diameter, which doesn't match up unless the lug juts out unusually far from the cap's side — that inconsistency is making me second-guess my assumed geometry for the handle and hole placement.
+
+Wait, maybe I'm overcomplicating this — the constraint is explicit that the piston rod's top eye attaches to the handle lever's left end hole, so that fixes the geometry directly rather than me guessing at angles.
+
+I need to work out the handle's geometry: left hole to middle hole spans length 175 at 35°, while the lever axis runs at 44°. For the link to plausibly hang vertically from the middle hole, the cap lug's X position needs to land near the cap's top region, roughly between -95 and 95.
+
+That doesn't quite work physically—a near-vertical handle doesn't match the bell-crank geometry with rod top, link midpoint, and grip. Maybe instead the link itself isn't purely vertical in canonical form; it could have its own rotation baked in, since the stored data shows it tilted slightly off vertical.
+
+So it seems the link's stored orientation is essentially canonical with near-zero rotation, while other parts like the piston rod, body, cap, handle, and spout each carry their own distinct random rotation offsets. For a realistic pump, I'd expect the handle to pivot at the cap, the rod to hang down to the piston, and the handle to extend horizontally to the grip—so I need to figure out how the link's near-zero rotation fits into that layout.
+
+Thinking through a rocking-lever design: the cap likely has side lugs (ears), with the link hanging vertically from a lug to the handle's middle hole, which would only work if the lug sits directly beneath that hole. That suggests the cap's canonical silhouette is wider than the body, with lugs extending outward to around X=170. If the handle's rod connection is at X=0 and the grip extends out to roughly X=629, that gives a lever length of about 629 units, which seems plausible for this kind of hand pump geometry.
+
+So the link attaches to the underside at the middle hole, which sits slightly above the lever axis — so from left rod hole (0,0) to middle hole (172,-28) in canonical orientation, I need to work out the link's position from there.
+
+Working out the lower eye location at roughly (172,129) relative to the left hole, putting the cap lug there. Then translating to final coordinates: the rod's top eye equals the left hole position, with its vertical placement constrained so the rod's bottom eye stays within the body envelope (between -339 and 0) while the top eye stays above the body — giving a range for where the left hole height can actually sit.
+
+Picking a small offset so the rod top sits just above the body top and the bottom sits near the body's bottom flange, which feels consistent with a pump piston resting near the bottom of its stroke when the handle is raised.
+
+Now thinking about the cap's canonical orientation, centered at X=0 with skirt underside at Y=-339, and working out the transform needed so the upper lug hole lands at (172, -231) relative to the pedestal.
+
+But without clear data on the skirt geometry in the cap's stored coordinates, I'm realizing I can't fully pin down the rotation precisely — this requires an approximation rather than exact derivation, so I'll accept that the grader check on skirt-to-flange contact will need to work within a tolerance.
+
+This crescent-shaped light region looks like it could be the cap's cylindrical skirt surface catching light at an angle, a bulging flange-like face rather than a flat plane.
+
+Since the crescent lies to the upper-right of that bottom edge, the cap's body must extend in that same direction, so I'm defining the canonical "up" direction as the outward normal pointing up-right, roughly (0.819, -0.574).
+
+Continuing to check other points near the lower-right lobe, several fall close to zero or slightly positive distance from line A, suggesting that lobe's edge nearly touches the line while others extend further out, around 44 at max so far.
+
+So the cap spans roughly -66 to +94 relative to line A, giving a total perpendicular thickness around 160, with the skirt itself running about 181 units long between its endpoints.
+
+Wait, that negative extent means line A can't be the cap's bottom edge — it must be an internal seam line instead, since the silhouette extends past it on both sides. Without a reliable way to extract the principal axis by hand, I'll have to settle for an approximate upright orientation for the cap.
+
+I'm trying another angle: scanning the cap's outline path for straight, long segments that could mark the skirt's outer edge, checking the coordinate list for a run of points forming the lower boundary.
+
+Tracing the outer silhouette further, I'm mapping the bottom edge segments and noting the short angled skirt section near the base before the path curves back up toward the top.
+
+Computing perpendicular distances of various cap points from that skirt baseline, I'm finding the cap extends roughly 160 units above the skirt at the top-right lobe, while the skirt itself spans about 142 units wide.
+
+Continuing the dot-product checks, most values cluster near zero or small positive, with one slightly negative point around (111,231), suggesting the lower-left edge line passes close to (121.8,243.6) where the value is nearly zero.
+
+Actually checking that distance gives a negative value, meaning that line isn't a true silhouette edge of the cap after all since some points fall on the wrong side. So the lower-left line isn't the skirt boundary — maybe the skirt bottom is actually near the H2 hole region around (126-137, 217-235) instead.
+
+Tracing the outer hull points around the cap shape, I'm noticing the lower-left portion looks concave rather than convex, which contradicts treating it as a hull edge.
+
+Continuing the hull edge sequence up through the top-right points, I'm tracing this long straight segment from (5,72.8) to (110,226) and checking whether it could represent the skirt's underside, verifying by testing points like (183.5,217) against the line's normal direction to confirm they fall on the cap's interior side.
+
+Checking a few more points along this edge, the max distance comes out around 160, consistent with a cap height of roughly 160 against the 186-wide skirt base — so the dome's top sits off to the upper-right rather than centered.
+
+Now I'm checking where the lugs fall relative to this skirt line. H1 projects to about 65 above the skirt and 197 along it — which puts it outside the skirt's footprint entirely — while H2 sits much lower, only around 15 above the skirt, and 70 along the direction of travel. That's odd: one lug reads near the base and the other projects beyond the skirt's length altogether, so I need to reconsider whether I've got the skirt line or lug positions right.
+
+So the canonical setup is now clear: the skirt's underside is the hull edge, cap-up points along n, and the lugs protrude from the skirt's end with H1 (upper) at height 65 and H2 (lower) at height 15.
+
+The skirt runs from (5,72.8) to (110,226), with the lugs protruding near the far end at (110,226) — so they stick out at that end, which could map to either canonical side. I'm now working out the rotation mapping between the stored cap's up vector (angle -34.6°) and canonical up (-90°) to figure out the orientation transform.
+
+Working through this, the stored right direction corresponds to canonical right, which places the lugs on the +X side of the skirt. The skirt spans roughly X=-93 to +93 centered at 0, so the lugs would fall around X≈+104, beyond the skirt edge on the right — I need to verify this placement more precisely.
+
+I'm also trying to reconcile the link's connection from this lug position up to the handle's middle point, but the handle's left hole must sit at X=0 on the body axis while its middle is at X=172 — a ~70 unit mismatch against the lug's expected X position. This suggests the handle canonical geometry might be tilted rather than aligned straight, so I need to reconsider how the middle X value is derived.
+
+Actually, maybe I shouldn't assume the link is vertical — perhaps its own geometry is canonical, and the lug and handle-middle positions just need to match the link's eye locations without forcing a vertical orientation.
+
+Since the link is a rigid bar with eyes 157 apart, the two eye positions actually fix the link's orientation as the direction between them, and the grader's 8° tolerance against the link's own vertical canonical means this orientation must stay near-vertical, forcing X_m ≈ X_lug. That means whatever canonical orientation I pick for the handle has to be consistent with this vertical constraint, so a horizontal handle canonical wouldn't work.
+
+Recomputing the lug's canonical X more carefully, I get roughly 104 relative to the skirt center rather than my earlier 172, so I must have made an error before. Working out the lug's canonical Y positions above the skirt (upper hole ~65, lower hole ~15), I can now trace through: upper eye position near Y=-404, which puts the link's top eye and thus the handle's middle around Y=-561.
+
+Using the link vector to find the handle's X offset, I get X=104 for the middle hole relative to the left hole, and from the 175-length constraint, the Y offset works out to about ±140.6 — so M sits around Y=-561, meaning L is either about 140 higher or lower than that.
+
+Now I'm working out the rotation that maps the stored axis angle (9.3° steeper than the L→M direction) onto the canonical L→M angle of ±53.5°, trying to keep the orientation consistent between the two representations.
+
+Let me check the sign convention: with ψ=18.6°, the axis canonical angle comes out to 62.8°, pointing toward the lower right, so I need to verify the perpendicular offset stays consistent with that orientation.
+
+That adds up to (103.7, 140.5), which matches the target (104, 140.6) closely enough to confirm this option: the handle lever axis runs from L down-right at 62.8° below horizontal.
+
+Checking where the grip's far end lands, it comes out to around y=-141, roughly mid-body height, which seems plausible for a handle extending down-right along the body's side.
+
+Trying another psi option where the axis angle flips to point up-right instead, I work out a different grip position up and to the right, then recompute where M would land using the perpendicular offset angle after rotation.
+
+This gives L→M = (104,-140), placing the rod top above the body top with the rod bottom still falling inside the body, which checks out nicely — this feels like the more natural pump configuration with the handle rising to a raised grip.
+
+Checking the grip position in option 1 near the lower right of the cap, versus option 2 where the grip computation puts it way too high — nearly 860px above the base, which doesn't fit a 768px canvas. That math suggests option 2's geometry is off, so I should recompute the grip coordinates more carefully using the angle and length.
+
+For option 1, mapping out the handle's extent: left end at (0,-701), middle at (104,-561), grip at (288,-141) — so the topmost point is that left end around -701, which sets the overall pump height relative to the base.
+
+Checking if the full assembly fits inside the 768px canvas: with the base plate needing room at the bottom and the pedestal top constrained, the handle top ends up around -30 beyond the top edge, exceeding the 768 height by roughly 30px — so I may need to reconsider whether strict canvas containment is actually required.
+
+The link length of 157 seems fixed, so maybe the body height isn't actually 339 — the rod's stored length of 322 is shorter than that, which could mean the body is somewhat shorter than I assumed. Still, even a 700-tall pump could work fine on a 768-tall canvas since it's landscape-oriented, so the total height might not actually be a problem.
+
+Checking which lug hole is the upper one — H1 sits 65 above the skirt versus H2 at 15, confirming H1 is the upper hole. Also verifying the link orientation: in option 1, M sits below L by 140, matching how I set up the lower lug-to-handle connection.
+
+Now I'm checking total height: adding up rod eye, handle, and base dimensions gives 792 against a 768 canvas, overshooting by 24 pixels, so something in my stacking assumption must be off — possibly the handle top isn't where I assumed.
+
+I should re-verify the body's height of 339, since it's the largest contributor, and confirm the flange orientation doesn't change this regardless of whether the body is flipped.
+
+Both flats confirm body length 339 with flange diameter 178. Stacking up body plus pedestal and other sections gives a total pump height around 784, which makes me wonder if the canvas was sized to fit the assembled pump at this scale given parts are rigid and unscaled.
+
+So my handle geometry assumption may be off somewhere, since the overall height needs to fit within the canvas. I'm testing different configurations for where the handle's link and grip points land vertically relative to the lug, trying angle options to see which keeps the top of the handle within bounds.
+
+Even if the cap's lugs sit on the opposite side, mirroring just flips the sign of X without changing the vertical offset, so the total height still works out to 701, fixed by the lug height, link length, and handle geometry.
+
+Checking the overall stack against the canvas bounds, with the rod eye positioned 701 units above the pedestal and the base extending 83 below it, I'm finding the pedestal's vertical placement needs to satisfy both constraints simultaneously, and the numbers come out close but slightly mismatched—around 16 pixels off from fitting the 768 canvas height.
+
+This overflow suggests one of my dimension estimates is slightly wrong, maybe the cap lug height or the handle's geometry, but since the canvas size might just be a loose viewBox reference rather than a strict bound, I'll proceed with my current measurements and accept a small possible overflow. I'm also double-checking that I've accounted for all the handle's ring features correctly before moving to compare the rod eye and its bracket.
+
+That seems plausible, with the lugs placed low on the cap near the skirt. But maybe I should flip my assumption and consider the cap's canonical orientation extending downward from the hull edge instead.
+
+Actually confirming the cap material stays on the positive side. Now total height comes out to about 784 against a 768 canvas, so I'll accept slight overflow rather than compress everything, positioning the pedestal top around 690 even if the handle tip clips slightly at the top.
+
+Wait, re-checking the rod placement — in option 1 the rod top sits at -701 and extends down 322 to -379, but the body top is at -339, meaning the rod's bottom end actually lands above the body rather than inside it. That breaks the requirement that the rod's bottom end be inside the body, so option 1 is invalid and I need to reconsider.
+
+Option 2's rod bottom (-99) is correctly inside the body, but its grip height (-860) falls outside the canvas. Working backward, the valid range for L_Y is roughly -661 to -339, so the chain length in option 1 needs to be about 40 units shorter, while option 2 fits the body constraint but overshoots on grip height — suggesting my assumed handle geometry is off somewhere.
+
+Let me trace the actual handle outline coordinates to figure out where the grip end really sits and whether the lever bends rather than running straight.
+
+Tracing the outer contour further, I can see it forms the lever shape with two long edges meeting at the lower-right tip, one running through the upper points and the other mirroring back through the lower set.
+
+The left end isn't actually the hole at (30,30) — that belongs to a separate second path tracing the lever's other outline, starting from around (14,16) down through a series of points that curve out toward (250,233) and beyond, forming the top edge of the shape.
+
+Tracing the lever's edges further toward the tip near (480,470), estimating the perpendicular width by comparing matching points on the top and bottom contours around x≈85.
+
+Checking a few edge-point pairs across the perpendicular direction, I get inconsistent width readings around 35-45, so I'm treating that as a rough estimate and instead trying to trace the lever's centerline from its left end near (30,30) toward the tip around (378,...).
+
+I realize there are actually two nested outlines forming the handle, with the right end landing around (485,465) rather than the earlier estimate, giving an overall length close to 629 from end to end.
+
+Checking the hole positions, the middle hole sits off the bar's centerline by roughly 28 units perpendicular distance, placing it on the upper-right side of the bar rather than dead-center. Now I need to re-examine how the link attaches to the cap's lug, since the chain's total height seems off given this geometry.
+
+Working through the lug coordinates, I confirm the lug sits at X=104 along the canonical axis and 65 units above the skirt, with the body top at Y=-339 putting the lug itself at Y=-404. From here I'm deriving that the handle's placement must satisfy a constraint keeping its Y-coordinate between -661 and -339, with the link's midpoint falling around Y=-561.
+
+Checking both orientations of the rod relative to the handle, only one keeps the handle within range—around L_Y=-420—but that solution then pushes the grip height up near Y=-859, which seems to clash with canvas bounds unless I'm misreading which end of the handle is the grip.
+
+Trying the other lug point (H2 instead of H1) instead, option 1 now lands within valid bounds: L_Y≈-651 with the rod bottom just barely inside the body, and the grip ends up at Y≈-91, which fits inside the canvas nicely. That seems like a workable configuration, so I'm checking whether the pedestal top constraint still holds with L_Y at -651.
+
+But I'm second-guessing which lug hole should actually be "upper" versus "lower" given the canonical orientation — if H1 is truly the upper hole, then H2 pairing might not be valid, and I should re-verify option 1 with H1 instead, which seems to fail the body-top constraint.
+
+Testing option 2 with H2 puts the rod bottom deep enough in the body, but then the grip extends far outside the canvas, so neither configuration is clean. This suggests the handle's canonical orientation might actually be reversed from what I assumed.
+
+Let me reconsider the body's height using its features — the spout bulge and top flange — against the rod's length to figure out how much it should protrude above the body at full stroke.
+
+Also, maybe I've been wrong assuming the link stays vertical in canonical orientation — since parts get random rotations including possibly 90°, the link could actually be horizontal in canonical form while appearing vertical in the stored version.
+
+Working through the piston rod, body, and cap, I'm trying to reconstruct each part's canonical rotation from its stored angle relative to known reference directions, though the numbers are getting messy and uncertain.
+
+These angles don't show a clear pattern, so this approach isn't yielding useful info. Let me instead check the rod's top eye position relative to its bottom in canonical form.
+
+Considering the alternative orientation where the body's top flange sits at u=0 instead doesn't change the overall chain since the height remains 339. The lug height from the body top could be either 65 or 15, so I need to double check whether the skirt identity is correct.
+
+I'm fairly convinced the skirt corresponds to the hull edge at roughly 186 length matching the body's 178-diameter top flange. The overflow in the chain makes me suspect I've misidentified the handle's hole relationship — maybe it's the middle hole linking rather than the left end hole, which would mean reconsidering the handle's canonical orientation and where the grip point sits relative to the left end.
+
+Testing both "M above" and "M below" configurations for the handle, I calculate the resulting grip positions — one places the grip too far upward-left, the other puts the rod bottom above the body, both failing. Since mirror images aren't allowed here, the sign relations between the handle axis and the L→M direction should be fixed, so I need to recheck that perpendicular offset more carefully.
+
+Solving the phase equation gives a - 9.23° = ±53.4°, so a equals either 62.6° or -44.2°, giving two candidate rotation options to check against the original configuration.
+
+Checking the y-offset relation, a=62.6° places M below L (matching option 1, grip down-right), while a=-44.2° places M above L (matching option 2, grip up-right). Computing the grip point coordinates for each: option 2 gives roughly (450, -439), while option 1 gives roughly (288, 560), and I need to figure out which is actually consistent with the setup.
+
+Working through option 1's vertical chain, I find the rod bottom ends up about 40px above the body top, violating the "inside body" constraint well beyond tolerance — so something in my assumed dimensions is off and needs rechecking.
+
+Maybe the body height or lug height is larger than assumed, or perhaps I'm misreading the rod's actual geometry — I'm now reexamining the rod's end-face coordinates to figure out its true width and where its centerline endpoint actually falls.
+
+Checking the end face orientation against the rod axis, it seems perpendicular at roughly 70°, giving an end-face length of about 48, but that conflicts with the ~17 gap I measured between the rod's long edges, so I need to recheck those edge distances.
+
+Now I'm tracing the two long edges of the rod from the path coordinates and computing the perpendicular distance between them using the direction vector and normal, trying to pin down the actual rod width.
+
+There's a fork-like head region at the bottom end with a face length around 46, which doesn't match the rod's 18-width cleanly—suggesting the bottom end might actually be a forked/eye piece rather than a simple rectangular terminus. I'll estimate the rod centerline end near (13.5,136) for now, acknowledging some uncertainty in the exact endpoint.
+
+Given the roughly 40px discrepancy, I'm now accepting I need to converge on an answer rather than chase perfect consistency. Weighing which configuration satisfies the most constraints—rod top above body top, rod bottom inside body depth, canvas fit, vertical link, upright cap—I'll go with the lug-at-H2 option, working out the resulting heights for lug, midpoint, and lower positions along with the rod bottom offset.
+
+The canvas dimensions check out with this choice: pedestal top and base bottom both land where expected. The remaining uncertainty is whether the rod's bottom end just needs to be "inside" the body (below the top) or whether the grader expects it at a precise target depth near the bore centerline—without knowing which, I'll treat the 10px inset as passing the "inside body" condition.
+
+Since the rod has fixed length, its bottom position is entirely determined once the top eye is placed at the handle hole, so the real question becomes whether that whole chain of placements lands the bottom correctly on the centerline inside the body.
+
+Testing the possible height/option combinations, I'm narrowing down which handle-height and layout-option pair actually satisfies both the geometric constraint and the canvas constraint, since several nearly work but fail one check or the other.
+
+Good, that clears the cap without collision. Now I need to check the link connecting from the lower eye at lug H1 up to its other end.
+
+Using H2 as the lower lug for the chain works well: the link runs from H2 up to M, giving a sensible assembly overall — body, cap, link attached right at the cap's bottom edge, handle sloping down-right, and rod extending from the left end down into the body.
+
+But checking the rod geometry, the rod sits mostly above the body (top at -651, bottom at -329) when the body's top is at -339 — that's physically wrong, since most of the rod should be inside the body with just a short protrusion above to meet the handle. I need to reconsider whether the body's proportions or the pedestal placement are off, since the rod should penetrate deep into the 339-tall body rather than barely entering it.
+
+Testing option 2 instead: rod top at -419, bottom at -97, which puts the rod mostly inside the body (0 to -339) with just 80px protruding above — that's physically sensible. But then tracing the handle geometry from there, the grip ends up around height 860, which combined with the base height would make the whole assembly 943px tall — way beyond the 768 canvas. So this configuration can't be what's intended either, meaning the handle angle or length must be different to keep everything within the canvas bounds.
+
+I'm reconsidering whether the lug might be positioned directly above the rod at X=0 instead, which would make the lug-to-handle connection vertical and change the whole geometry calculation.
+
+Working through this, I find two possible angles for the handle depending on which direction the vertical constraint resolves, but neither feels physically right for a lever that should rest horizontally with the grip extending to one side. I'm now suspecting the actual design has the cap lugs mounted on top of the cap rather than on its side, which would let the handle lie more horizontally as expected.
+
+But my stored geometry says the lug holes sit above the skirt at a lateral offset, implying a side position — unless the cap isn't centered on the body axis the way I assumed, or the skirt's "up" direction is actually rotated 90° from what I picked. I need to reconsider whether the cap's contact center is offset from the body axis.
+
+Wait, I should double check which end is actually "left" — the left hole is confirmed to be the rod end, grip on the right, so that's not the source of the inconsistency. Something else in my geometry assumptions must be off.
+
+Maybe the handle's middle hole position or the 9° offset I computed is throwing things off, or perhaps I have the body's orientation backwards — maybe the neck and cap are actually at the top rather than where I assumed, which would shift the flange positions entirely.
+
+Given the amount of uncertainty here, I think the best move is to just accept a configuration that satisfies the most robust constraints — base upright, body on pedestal, cap on body top, spout on bulge, link lower eye on cap lug upper hole, handle middle aligned — rather than trying to nail every canvas detail perfectly.
+
+Testing H1 option 2 against the chain of positions, it actually satisfies all the positional requirements: rod bottom lands inside the body, rod top sits above it correctly, and everything lines up through the handle and link. The only remaining worry is whether the handle's grip ends up placed too far up relative to the canvas.
+
+Since the puzzle specifies a 1376x768 canvas, the real solution must fit within that height, so if my current chain pushes things outside that range, something in my assumptions is likely off. I should work backward from the canvas limit — pedestal top position constrained so the base bottom stays at or under 768 — to figure out what the true body placement needs to be.
+
+So estimating pedestal top around 600-650, the body-to-rod chain must keep the rod bottom inside the body range, suggesting L_Y around -420 is more physically plausible, and the handle's grip point must then satisfy its own canvas constraint, requiring the handle angle's sine value to stay above roughly -0.35.
+
+But comparing that to the fixed lug offset of 104 along X forces the angle to -44°, which conflicts with the earlier constraint — so I suspect the lug X value itself isn't actually 104, and I need to test alternate geometries, like a lug X around 150-172, to see if a horizontal handle angle becomes consistent with the rest of the measurements.
+
+Checking the skirt span of 0 to 186 with lugs at 197, which puts them 11 beyond the skirt's edge — that's a 68 unit gap compared to the 104 offset from skirt center I had assumed.
+
+Wait, maybe I'm wrong to assume the body is horizontally centered on the pedestal. The grader only checks that the flange underside sits on the pedestal top within tolerance — it doesn't necessarily require horizontal centering, so the body could be offset sideways on the pedestal.
+
+But since M's offset from L stays fixed at 104 regardless of where the body sits horizontally, the vertical stacking problem I identified doesn't actually resolve from shifting the body left or right.
+
+Summing the vertical chain — pedestal to body (339), cap lug (65 or 15), link (157), and handle M to L (140) — gives either 701 or 651 depending on which lug height I use, and checking the 651 case puts the rod bottom just above the body top, which is physically implausible.
+
+This tells me my body height assumption is probably wrong. Maybe the relevant measurement isn't the full 339, but the flange section between roughly 317 and 339, with the flange thickness being 22 and the outer face at 339 being what actually matters for the pedestal interface.
+
+Trying this configuration where the piston sits at the bottom of the bore with the rod top barely above the body top, but I can't fully pin down all the values this way. I think I need to step back and reconsider what the grader is actually checking for, rather than trying to reverse-engineer exact physical placement.
+
+Since the canonical configuration may differ from mine and perfect accuracy isn't guaranteed, I'll pick H1-opt2 (L=-420) since it satisfies all the explicit positional constraints I trust: rod bottom inside the bore, rod top above, link vertical, cap upright, spout correct. With handle angle at -44° (grip up-right), this covers the positional checks even though the overall canvas height ends up overflowing past 768px.
+
+This seems contradictory unless the lug X isn't actually 104, meaning my assumed canonical position for the link might be wrong.
+
+Let me test with the lug X treated as free, keeping the handle canonical fixed by geometry. I need to check whether the rod bottom stays inside its valid range and the grip stays within canvas bounds for a given lug Y position, assuming the link is vertical with the known length.
+
+This works out so L_Y stays in range for any X_l, which means the M-above-L configuration is valid regardless of how the link tilts horizontally — I'm now checking specific X_l values like 104 and 0 to see what grip angle each implies.
+
+For X_l=0, M sits directly above L, so solving for the angle gives roughly -80.8°, but tracing that through to the grip point lands the grip Y way too low at -1007, which is worse than what I need. This suggests the handle direction is nearly locked to the angle from L to M plus about 9°, so the grip always extends further in that same direction — meaning if M is above L, the grip shoots up proportionally to the sine of that angle, and I need to find how large that angle can be while keeping the grip Y within bounds.
+
+Testing X_l=172 instead, I get a much cleaner result: the handle angle works out to essentially zero, meaning the handle sits horizontal with the grip landing right at L's height of about -531.6. That keeps the rod bottom comfortably inside bounds and fits under the pedestal with the ring clearance, which matches the "horizontal handle" configuration I'd suspected earlier — lugs positioned at X=172 outside the center, with the link running vertically and the grip extending rightward past the cap.
+
+But reconciling this with my measured lug offset of 104 is tricky — that number assumed the cap's skirt center aligns with the hull midpoint, and pushing to X=172 would place the lug implausibly far outside the skirt (around 265 along), which doesn't match. So either the skirt isn't centered the way I assumed, or something else about the cap's geometry is off.
+
+At this point I'll just commit to the configuration that best fits the measured geometry: X_l=104 with the H1 lug, link vertical, and the handle in option 2 (angle -44°, grip up-right), accepting some uncertainty about whether this fully satisfies canvas constraints.
+
+Actually, with grip at that height relative to the pedestal, the pedestal would land around y≈900, which is off the 768-tall canvas entirely — so this configuration can't be right unless the canvas is meant to be exceeded, which seems unlikely.
+
+So I'm testing other configurations against a target height near 700. The horizontal-handle scenario comes out to roughly 673, which fits comfortably, while the vertical options give 784 and 734 — both too tall, confirming the horizontal-handle layout is the better fit.
+
+I have three candidate configurations left, each with tradeoffs: one satisfies positional constraints but overflows the canvas with the handle, one puts the rod bottom above the body which seems physically wrong, and one barely keeps the rod inside while fitting the canvas size. I need to just commit to the most physically sensible option despite imperfect fit.
+
+Checking configuration A more closely: the rod sits deep inside the body (98 above base top) with the top extending 81 above the body, which looks physically correct. The handle pivots near the midpoint, but the lines from that pivot to the link and to the grip aren't quite collinear — close, but not exact, so the lever geometry isn't perfectly consistent.
+
+That's a classic pump lever setup: the rod at L pushes down when the grip end is lifted, with M as the fulcrum between them.
+
+Checking coordinates: L sits below M, so the short arm hangs down from the pivot to L, with the rod continuing down to the body, while the grip extends up and to the right past the pivot — a sensible pump layout with the pivot at top.
+
+Though now I'm worried about overall scale — a pump roughly 943 tall wouldn't fit a 768-height canvas, so I need to double-check my estimate of the handle's length and the grip's far endpoint.
+
+So maybe the link isn't perfectly vertical in the ground truth, or the canonical handle orientation is actually the mirrored option where the grip sits below the lug instead of above, which would change where everything lands relative to canvas bounds.
+
+Let me check the projections of a few candidate corner points onto the rod axis to find which one is actually the farthest bottom point — the values are coming out close to 312-322, so I need to compare them carefully to pin down the true extremity.
+
+I verify the rod top eye ring center by averaging its arc points, confirming it's at roughly (315.8, 25.4). With the rod and body geometry fixed, I now want to nail down the body height along u, starting from the top flange face at u=339 and bottom flange face at u=0.
+
+Checking the coordinates, (5,176.65) sits at the bottom flange's u=0 endpoint, and projecting (323.5,293) onto the u-direction gives about 339.1, confirming the body length is 339. Next I'm working out the lug height above the skirt — the skirt contacts the body top at u=339, and the lug's H1 height of 65 above that puts it at Y=-404.
+
+Now I'm verifying the skirt hull edge by checking collinearity of the points along the cap's lower-left silhouette — (5.6,76.75), (85.3,190.5), and (110.4,225.8) all give nearly identical slopes around 1.42-1.43, confirming they lie on one straight line of length ~186 representing the skirt underside, though I still need to determine whether this is a true flat skirt edge or just a shading silhouette line.
+
+I'm then working out the lug geometry: the skirt ends around (110,226), and the lug region sits in the lower-right lobe near x=145-195, y=170-245, with H1 at height 65 and H2 at height 15 above the skirt, suggesting a lobe structure extending upward from the skirt's end.
+
+Tracing the vertical chain from body top through skirt, lobe, link, and rod shows a contradiction with option 1's measurements, so I'm testing option 2 instead, where L sits 81 above the body top and M sits 140 above L, meaning the handle rises rather than descends — though this makes the grip position awkward unless it isn't located at the far end.
+
+Trying the mirrored M offset case now, solving for angle a using both offset signs to see if that resolves the contradiction, but it leads to the same impossible result where the rod top ends up above the body.
+
+Checking the projection confirms the along-axis component matches at 172.4, validating my earlier offset calculation.
+
+Both options are indeed constrained by that 104 X offset I found. Verifying L and M coordinates again, the difference vector matches (143.2,100.1), so the chain of reasoning holds and I'm settling on the physically valid solution.
+
+Given X_l=104 conflicts with a vertical link under a horizontal handle, I'm reconsidering whether the link truly stays vertical—likely yes per the grader's tolerance—so the handle must instead be tilted, perhaps with the grip positioned down-right and the rod extending above the body, which changes where the top of the rod falls relative to -701.
+
+Checking option 1: if the rod's top eye sits at L with the rod extending downward, the bottom would land above the body's top surface, which doesn't physically make sense—so that configuration must be wrong unless the flange or skirt geometry differs from what I assumed. Option 2 seems physically sound but pushes outside the canvas bounds by roughly 200px, which makes me wonder whether the stated canvas dimensions are even accurate for this case.
+
+So I'm reconsidering whether the lug's horizontal position on the cap is really at 104 as I assumed—maybe the cap's axis of symmetry doesn't align with the skirt's midpoint if the skirt only makes partial contact rather than being a full symmetric ring.
+
+If that offset doesn't work, perhaps the link itself isn't vertical but horizontal, which would put M at the same height as the lug rather than above it, shifting M's X coordinate by ±157 instead. I'm testing whether M sitting to the left of the lug at X=-53 produces a consistent result.
+
+Working through the distance constraints, this gives two possible handle angles, each leading to different L_Y values and rod bottom positions. Checking these against the body geometry, one case places the rod bottom outside the body (invalid) while the other keeps it inside but pushes the rod top far above the body, and testing the grip position from there still lands outside acceptable bounds.
+
+This grip position seems physically awkward for a handle, so I'm not satisfied with this configuration. Given the time constraints, I should just pick a reasonable configuration and finalize rather than continuing to iterate.
+
+Checking the pedestal height constraint: if the base bottom needs to stay within the canvas at 768, the pedestal top can't go below about 685, which pushes the grip position further up, so I need to verify it still fits on-canvas.
+
+Comparing other configurations, the H2 options either violate the canvas bounds by placing the grip too high, or they place the rod implausibly deep or far above the body, so none of the handle-length-629 combinations seem to satisfy both canvas fit and physical plausibility simultaneously.
+
+I'm starting to wonder if my assumption about handle angle is wrong — maybe the handle needs to sit closer to horizontal for the geometry to make sense, which would mean reconsidering whether the link itself is tilted rather than the handle, and reworking where the link's upper eye actually attaches.
+
+Solving that gives ΔY=±141.3, so M_Y is either -545.3 or -262.7, putting L_Y at -517 or -234.5. The -517 option checks out nicely: rod bottom sits at -195 inside the body and the rod top at 178 clears above it, with the handle horizontal at that height.
+
+Checking the grip position at X=629, the fit works within the canvas bounds for both top and bottom pedestals. But the link from the lug to M comes out tilted around 25° off vertical, which is a problem if the link's canonical orientation is meant to be vertical — I need to figure out whether that's actually a fixed assumption or if rotation was randomized.
+
+I'll likely fail some constraints regardless, so I should go with what's physically plausible and matches the measured data: option A satisfies all position constraints exactly, with body and cap upright, link vertical, spout horizontal, rod vertical, and the handle set by whichever option seems canonical.
+
+But checking canvas fit, A actually requires the pedestal to sit beyond the canvas edge, which is impossible—so A is off-canvas and must be ruled out. Comparing to option C's second configuration, it fits the canvas but has the handle sloping down-right, the rod extending well above the body, and the link positioned at the lower hole rather than the upper one, which conflicts with my earlier analysis of where it should attach.
+
+Verifying which hole counts as "upper" using the canonical up vector, I confirm H1 sits higher than H2, so H1 is the correct upper attachment point. That pushes me back toward option B, where the rod bottom ends up 40 units above the body top—almost fitting the canvas perfectly except for that gap, which would only work if the body were taller.
+
+Actually (B) is worse — the rod eye sits 362 above the body and the bottom is 40 above it too, meaning the rod never enters the body at all, which is physically nonsensical. (A) is at least mechanically sound even if slightly off-canvas, so it's the better option given the requirement that the rod bottom must actually engage with the body.
+
+Given this contradiction, I suspect the error lies in one of the measured quantities — likely X_l or H1, which depend on the cap's canonical center, lug positions, and up-direction. Another possibility is that I have the link's canonical orientation backwards, with the lug-attached eye actually being the one I assumed was lower.
+
+Checking the distance between M and L confirms it's about 174.7, matching the target closely. Now I'm verifying H1's position along the skirt line relative to its midpoint, using endpoints A and B to compute the along-coordinate, which comes out to 197.3.
+
+But I'm uncertain whether the cap's center truly aligns with the skirt midpoint, since the cap mass looks skewed to one side rather than symmetric around the body axis. Given the ambiguity, I'll settle on the configuration that best satisfies the explicit positional constraints I've measured, accepting it as the most physically coherent option available.
+
+I need to check the canonical orientations for the spout, cap, body, rod, and link against the handle's -44° axis under option A, since all parts must maintain their correct relative facing within 8° of the working object. Now I'm setting up the actual coordinate transforms, placing the base at a fixed rotation and working out the pedestal top center position relative to canvas center to anchor everything else.
+
+Since fitting the full pump height within the canvas conflicts with other positioning constraints, I'll accept that the grip may fall outside the visible canvas and focus on correctness within my model rather than forcing a visually fitted result.
+
+Let me verify the handle's canonical orientation using its stored geometry, noting the grip end sits lower-right while the rod hole is upper-left, with differing ring sizes on each end, before moving on to confirm the spout placement logic.
+
+I'm working out the spout's flange face position by checking collinearity of its outline points and computing the midpoint (settling on roughly (58,274)), then determining the canonical rotation angle needed so the stored flange normal direction maps to pointing leftward, verifying the rotation math checks out.
+
+Now I'm setting up the final transform for the spout, relating its position to the bulge point and pedestal position, cross-checking the computed offset values against an earlier calculation. I'm then moving to the body transform, figuring out the translation needed so the bottom face center aligns with the pedestal point.
+
+I'm verifying the rotation matrix for -110°, applying it to the stored centre coordinates to confirm the numbers line up with what was used earlier. I'm also double-checking how that centre was originally derived from the pedestal base point plus an offset vector, and starting to verify the top centre point the same way.
+
+Now I'm transitioning to the cap geometry — finding the stored skirt midpoint and up-vector, then computing the rotation angle needed to align that vector with the canonical downward direction.
+
+Applying the rotation to H1's offset gives roughly (104.65, -64.87) relative to S, so I now have the final transformed position for that lug point.
+
+Checking against the skirt centre of (0,-339), H1 lands at X≈104.7, Y≈-404, which confirms it matches and keeps the canonical right-side convention consistent with earlier.
+
+With the cap's transform now pinned to the skirt contact point, I move on to the link: its lower eye sits at this same H1 position relative to S, and since the link is canonically vertical, I need to work out where its upper eye ends up.
+
+Stored data shows the link's lower-to-upper eye direction is nearly straight up, off by about 0.84°, so I'm applying that small rotation to map the stored geometry onto the vertical canonical direction and compute the final upper eye position relative to the lower eye at (104.7, -404).
+
+With that rotation applied, the upper eye lands at (104.7, -561.0). Now I'm working out the handle transform, where the grip angle in canonical space is -44.2° and the stored angle requires a rotation of -88.4° to match it.
+
+Checking this against the second grip point confirms the rotation is consistent, so I apply the same -88.4° rotation to the handle's other stored point relative to the middle hole, computing its new coordinates to verify everything lines up correctly.
+
+Now I turn to the rod itself, setting up its axis using the stored top eye center and bottom endpoint coordinates to work out the direction vector and length.
+
+Using that to compute the needed rotation angle (-69.9°) so the rod points correctly from top to bottom, I can then place the bottom end at (0.7, -98.8) by applying this rotation to the stored rod points relative to the top eye, then adding the final top position.
+
+Checking the rod's position confirms it stays inside the body with the bottom end on the centerline, and the top eye stays above the body as required. For the spout, I'm verifying its flange face center aligns with the bulge point on the pump body, using the stored rotation to recompute the final spout position from its reference points.
+
+Now I'm working on the pedestal base placement, picking a centre X around 688 and testing a few Y values to keep the base, grip, and overall assembly within the canvas bounds without clipping the top.
+
+Writing the use transforms...
+
+Computing each part's translation by anchoring to its parent's attachment point: for the base, the pedestal top lands at (688, 684); for the body rotated at -110°, I'm solving for the translation that keeps its anchor point matched to the pedestal, giving roughly (610, ...).
+
+Verifying the body's top lands near (688, 345), then similarly computing the cap's rotation (-55.4°) and translation so its mounting point matches, arriving at roughly (532, 307), and double-checking the cap's internal points stay consistent with that transform.
+
+Now I'm applying the same rotation-and-translation check to the link, using the lower eye position to pin it against the cap's H1 point at (792.6, 280.1), confirming the match, then starting to rotate the link's own anchor coordinates by its small 0.84° tilt.
+
+Applying the rotation to the handle's middle anchor point to verify it lands at the expected transformed coordinates.
+
+Good, that matches the expected position. Now I'm moving to the rod at angle -69.9°, computing the rotated position of the top eye anchor to line up with the handle's left hole, working through the rotation matrix math for the x-coordinate.
+
+Checking the bottom midpoint of the rod against the expected value (688.7, 585.2) — the computed result (688.9, 585.3) confirms the rotation is correct, though I'm now second-guessing whether that bottom midpoint actually sits on the rod's true centerline.
+
+Now computing the spout's transform with its own rotation angle, applying the rotation matrix to the anchor point and solving for the translation offset, then double-checking by verifying the spout's tube direction maps correctly under the same rotation.
+
+I confirm the spout flange sits flush against the body surface at its left edge, matching the body radius there, and move on to checking the body's bulge at another sample point.
+
+That's the widest point as expected. Checking orientation consistency, the cap and body up-vectors both align, and the body's left side correctly matches the spout's placement.
+
+Now I'm starting to assemble the final transform list for each component.
+
+I'm computing the remaining transforms for pump body, cap, link bar, handle lever, piston rod, and spout, then verifying the base sits upright with no rotation and its bottom edge stays within canvas bounds. I notice the handle grip position seems to fall off the top of the canvas, so I'm checking that calculation more closely.
+
+Weighing two placement options: one puts the rod's bottom end inside the body but leaves the handle grip off-canvas, while the other has the rod bottom incorrectly positioned relative to the body. Since the rod-inside-body rule is explicitly graded and off-canvas isn't, I'll go with the version that satisfies the body-containment constraint even if it pushes the handle out of frame, then double-check how the rod top connects to the handle's stored ring geometry.
+
+Now I'm assembling the final SVG, using transform-based placements to position each kit part exactly once, then formatting the output with a brief note on assumptions alongside the markup.
+
+
+````
+
+## Answer
+
+````text
+I could not verify this layout against the kit's intended geometry. The positions follow from measured feature coordinates, but the handle chain puts the handle grip above the 768 px canvas (the piston top is at about y=264 and the grip at about y=-175). Treat the orientations of the cap, handle and spout as best estimates.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768">
+  <use href="#kit-base_plate" transform="translate(543.3,678.9)"/>
+  <use href="#kit-pump_body" transform="translate(610.7,749.1) rotate(-110)"/>
+  <use href="#kit-cap" transform="translate(532.4,307.4) rotate(-55.4)"/>
+  <use href="#kit-link_bar" transform="translate(765.0,94.9) rotate(0.84)"/>
+  <use href="#kit-handle_lever" transform="translate(657.7,292.8) rotate(-88.4)"/>
+  <use href="#kit-piston_rod" transform="translate(556.3,551.1) rotate(-69.9)"/>
+  <use href="#kit-spout" transform="translate(424.4,644.9) rotate(-126.87)"/>
+</svg>
+````
+
+## Prompt
+
+````text
+Below is a kit of 7 SVG parts for a hand water pump (side view). Each part is a <g id="kit-..."> drawn in its own local coordinate system, stored at an arbitrary rotation. Each part's id names the part.
+
+Assemble the parts into one complete, working hand water pump (side view) on a 1376 x 768 canvas. Parts are rigid: translate and rotate only, no scaling and no mirroring. Use every part exactly once. The base part, kit-base_plate, stays upright exactly as stored (at most 3 degrees of rotation).
+
+Grading is done by code on where the parts land:
+- The base plate upright: rotated at most 3 deg from how it is stored.
+- Pump body: its bottom flange underside on the base plate's pedestal top face (within 6 px)
+- Cap: its skirt underside on the pump body's top flange face (within 6 px)
+- Spout: its flange face (right edge) on the pump body's widest point of upper bulge (within 6 px)
+- Link bar: its lower eye hole on the cap's lug upper hole (within 6 px)
+- Handle lever: its small middle hole on the link bar's upper eye hole (within 6 px)
+- Piston rod: its top eye hole on the handle lever's end hole (left) (within 6 px)
+- Piston rod: the hole in its top eye on the pump body's centre line, above the body (within 6 px)
+- Piston rod: its bottom end on the pump body's centre line, inside the body (it slides in the bore) (within 6 px)
+- every other part must face the way it does on the working object, relative to the base part, within 8 degrees; parts that turn in use (wheels, gears, sprockets, cranks, connecting rods, pedals, rotors) may sit at any angle;
+- a missing, duplicated, scaled, skewed or mirrored part fails the assembly.
+
+Reply with one <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768"> that contains exactly one <use href="#kit-ID" transform="..."/> per part. You may wrap <use> elements in <g transform="..."> groups. Do not copy the part drawings: the kit's <defs> are inserted automatically.
+
+KIT:
+<svg xmlns="http://www.w3.org/2000/svg"><defs>
+<g id="kit-base_plate" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 84.1,10.3 L 83.9,48.9 L 82,57.4 L 77.9,63.7 L 213.3,63.7 L 208.9,57.3 L 207,49.6 L 206.9,10.4 L 205.1,8.4 L 86.9,8.3 L 85.4,8.7 Z" fill="#dae7f7" stroke="none"/>
+  <path d="M 282.7,72.6 L 281.3,69 L 278.3,67.3 L 271.1,67.2 L 270.8,71.3 L 269.6,72.8 L 268.3,72.7 L 267.5,71.7 L 267.1,67.3 L 256.4,67.3 L 255.9,71.9 L 254.6,72.8 L 253.1,71.9 L 252.7,67.4 L 38.3,67.4 L 37.9,71.6 L 36.3,72.8 L 34.9,71.6 L 34.7,67.5 L 23.6,67.5 L 23.4,72 L 22,72.8 L 21,72.6 L 20.3,71.5 L 20.1,67.4 L 12.6,67.4 L 10.4,68.5 L 8.9,70.8 L 8.8,83 L 10.4,84.3 L 20.3,84.2 L 20.3,76.9 L 21.9,75.3 L 23.7,76.7 L 23.9,84.3 L 34.6,84.3 L 35.2,75.9 L 36.7,75.4 L 38.1,76.6 L 38.4,84.5 L 252.7,84.5 L 253.1,76.2 L 254.6,75.4 L 256.2,76.5 L 256.4,84.5 L 267,84.5 L 267.4,76.4 L 269.1,75.4 L 270.9,77.2 L 271.1,84.2 L 280.7,84.3 L 282.7,82.8 Z" fill="#d9e7f7" stroke="none"/>
+  <path d="M 5,73.1 L 5.3,84.5 L 7.4,86.8 L 11.1,88.1 L 279.6,88.1 L 283.7,86.8 L 285.4,85.3 L 286.2,83.3 L 286.2,71.5 L 285.1,68 L 281.8,64.8 L 278.6,63.6 L 245.9,63.5 L 242.4,61.9 L 217.5,37.6 L 212.3,31.4 L 210.4,24.4 L 210.3,9.4 L 208,5.9 L 206,5 L 84.4,5.3 L 81.9,7.3 L 80.7,9.7 L 80.5,25.7 L 78.6,31.9 L 73.4,38 L 50.3,60.8 L 46.9,63 L 44.9,63.5 L 12.2,63.6 L 9.4,64.8 L 6.6,67.4 Z M 84.4,9.8 L 86.9,8.3 L 205.1,8.4 L 206.9,10.6 L 207,49.5 L 208.9,57.3 L 213.5,63.6 L 78,63.7 L 82,57.4 L 83.9,48.9 Z M 210.4,35.6 L 210.9,35.5 L 238.8,63.7 L 222,63.6 L 217.4,62 L 215.6,60.7 L 212.9,57.4 L 211.3,53.6 Z M 80.3,36.5 L 79.8,53.2 L 78.1,57.5 L 76.1,60.1 L 73.4,62.2 L 69.2,63.5 L 52.5,63.7 L 79.6,36.5 Z M 282.7,72.5 L 282.7,82.8 L 280.7,84.3 L 271.1,84.3 L 270.8,77.4 L 269.5,75.4 L 267.4,76.3 L 267.3,84 L 266.3,84.5 L 256.3,84.4 L 256.2,76.9 L 254.6,75.4 L 253.1,76.2 L 252.8,84.5 L 38.5,84.5 L 37.9,76.2 L 36.7,75.4 L 34.9,76.8 L 34.8,84.2 L 24,84.4 L 23.5,76.2 L 21.5,75.4 L 21.3,76.6 L 20.5,76.3 L 20.3,84.2 L 10.2,84.3 L 8.8,83.1 L 8.9,70.9 L 11.1,68 L 13.1,67.3 L 20,67.4 L 20.4,71.8 L 22,72.8 L 23.5,71.6 L 23.6,67.5 L 34.6,67.4 L 34.9,71.6 L 36,72.8 L 37.1,72.7 L 37.9,71.7 L 38.1,67.6 L 252.8,67.4 L 253.3,72.2 L 254.6,72.8 L 255.8,72.2 L 256.3,67.4 L 267.4,67.5 L 267.5,71.8 L 269,72.8 L 270.6,71.7 L 271.1,67.2 L 278.3,67.3 L 281,68.7 Z" fill="#1b2a45" stroke="none"/>
+  <path d="M 210.5,35.4 L 211.3,53.6 L 213.2,58 L 215.6,60.7 L 219.2,62.8 L 223.4,63.7 L 238.8,63.7 Z" fill="#d5e4f6" stroke="none"/>
+  <path d="M 80.1,36.3 L 52.4,63.6 L 67.9,63.7 L 72,62.8 L 76.1,60.1 L 78.6,56.5 L 79.9,53.1 Z" fill="#dde9f8" stroke="none"/>
+</g>
+<g id="kit-cap" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 49.7228115273,20.7018893868 L 49.4033932316,21.2917808619 L 153.360001059,169.582858439 L 162.501363862,160.4963032 L 170.847962175,150.623395999 L 177.736061837,138.841881536 L 180.028837535,131.132589766 L 180.41334598,127.323107746 L 179.855914577,124.783566404 L 100.694123838,11.3801233913 L 97.883939311,9.80758947377 L 91.6985763526,8.64514159441 L 78.9022993855,9.54807890197 L 66.860084313,13.0970303174 Z" fill="#febca6" stroke="none"/>
+  <path d="M 33.0988674433,8.29284095059 L 29.0031072218,11.1607231323 L 26.9966097267,15.6176242757 L 27.6936539884,20.6230342787 L 36.6496889175,33.7622670701 L 30.6207638726,38.2279207516 L 28.7123266153,40.907074953 L 28.1883753166,43.4713438618 L 28.8770070509,46.8956374144 L 31.9252046856,51.5976041497 L 6.72812180436,69.4849464418 L 5,72.7703071571 L 5.59040149114,76.7516921019 L 85.2601685003,190.531911054 L 87.2184009006,192.456833355 L 90.7084646242,193.431233275 L 93.3299211713,192.816444229 L 118.568046657,175.51075089 L 122.197893245,180.17167502 L 124.647616872,181.75245146 L 127.793534734,182.235360154 L 130.193803229,181.65337119 L 137.304110975,177.162989942 L 144.244385855,187.074729678 L 144.523101556,188.34450035 L 117.598236881,211.958514456 L 113.404416422,216.60414358 L 111.758209822,219.832146652 L 110.423689012,225.771763997 L 111.014260509,230.973804491 L 113.759524892,236.986584503 L 117.880862706,241.303362772 L 121.788914979,243.572090924 L 125.893427739,244.726636292 L 132.963372902,244.53722829 L 142.793537444,240.095622154 L 183.489759028,216.971229214 L 188.166998197,212.841648878 L 192.540624093,205.140259619 L 193.572211652,200.51145555 L 193.603991703,193.408710304 L 195.862607274,175.712986083 L 195.623064119,161.597653318 L 193.671714198,150.267947519 L 189.016482509,135.948421762 L 182.026242481,120.211949973 L 188.6859316,115.426707991 L 190.356695761,112.059432071 L 189.848209474,108.020689482 L 188.143795204,105.063499601 L 192.042074907,95.9858669053 L 193.286267986,88.5224907534 L 193.41661829,83.3039652147 L 191.956759596,71.6301135542 L 188.776681608,61.16077241 L 184.335075472,51.3306078678 L 176.706338863,39.215230129 L 169.372973005,30.3112004124 L 164.014494597,25.2736703481 L 155.854074183,19.0240672667 L 145.768561463,13.512041036 L 137.412020574,10.8179318386 L 129.620983604,9.8031693347 L 121.895716806,10.4514384855 L 118.986962024,6.99468486076 L 115.570570983,5.60246639617 L 112.007004582,6.2665405697 L 105.232600176,10.8879521433 L 101.381735541,7.48048364552 L 97.6294411596,5.95723485491 L 88.5358334359,5 L 80.3681905324,5.71386931651 L 65.4833308604,9.91040986136 L 48.288700431,17.4333537263 L 46.4699108841,16.7536445355 L 40.5294435122,9.31584597654 L 37.4735133715,7.9153849899 Z M 185.972277263,101.090527183 L 184.300833081,99.5751809042 L 124.362095482,13.973792276 L 131.120694866,13.5140811001 L 137.633718642,14.447098405 L 150.406288075,19.7867116941 L 158.238877666,25.0450898003 L 164.523150889,30.5330684863 L 174.552155992,42.0664572614 L 182.893911891,56.246200155 L 186.573553621,65.5112007882 L 188.794866706,74.0882497085 L 189.721681553,81.8626316285 L 189.607986298,89.0227345181 L 188.060689962,96.5762683964 Z M 185.638073976,113.166052355 L 179.346918274,117.082857166 L 110.345672981,18.5388662381 L 107.600578603,13.7467417763 L 114.653528706,9.17444532425 L 115.849626695,9.31354816696 L 117.922574383,11.4023008772 L 186.694389101,109.618630987 L 186.923989681,111.166947355 Z M 153.360001059,169.582858439 L 49.4033932316,21.2917808619 L 49.7228115273,20.7018893868 L 67.9332244927,12.7118418507 L 78.9022993855,9.54807890197 L 91.6985763526,8.64514159441 L 95.7620465072,9.21803800937 L 100.325420416,11.0279050128 L 179.855914577,124.783566404 L 180.356158342,128.461848092 L 179.169152901,134.786483898 L 176.548546381,141.504550693 L 172.756399433,147.944241798 L 167.530651404,154.777363891 Z M 183.412428493,132.303620178 L 189.067127679,146.655776013 L 191.985485025,160.238234936 L 192.380786073,175.099047063 L 190.743842027,186.011444334 L 184.983690108,179.179852289 L 178.912702426,175.739923719 L 173.022200202,174.126857213 L 167.779117103,174.135779756 L 158.686019395,176.84051155 L 155.769022092,173.023297025 L 156.612561692,171.089792191 L 167.809877122,159.709101212 L 175.468353717,150.073867108 L 180.644646613,141.077979611 Z M 186.664056833,185.938281668 L 189.950267575,193.769681221 L 190.270365892,198.062411945 L 189.672911917,202.265154947 L 185.799019769,209.982859245 L 179.925852616,215.193992289 L 133.184050938,240.842461558 L 129.260023637,241.514778254 L 124.836092582,240.950124361 L 120.600379491,238.910826783 L 116.569199403,234.897151771 L 114.56151187,230.809464067 L 113.913752736,226.746163917 L 114.560321833,222.264875218 L 116.869922585,217.717816349 L 158.727572016,181.084127153 L 165.952765055,177.978231864 L 173.882904868,177.796896379 L 181.780754613,181.05633949 Z M 147.897939977,185.493103212 L 30.929389566,18.9677351299 L 30.6831339367,15.4778414116 L 32.157437611,13.2247482765 L 36.2779253986,11.4382487964 L 39.391213183,12.9206249875 L 153.303493442,175.604220983 L 155.212780726,179.028344531 Z M 131.790554696,176.262602715 L 128.759692132,178.384835529 L 126.629726812,178.655478714 L 125.114040522,177.885611797 L 32.0799425457,45.0191502132 L 31.8420994437,43.1103729452 L 32.9887423004,41.0867103846 L 38.8620794585,37.0962328909 L 134.747574572,173.337532895 Z M 116.494928965,172.20134263 L 91.5927068182,189.638066295 L 88.6679770088,189.122357518 L 9.71930180613,76.5463090721 L 8.44094860206,74.0232527736 L 9.01418502771,72.4010937184 L 33.5887463564,55.1938006279 L 34.8339594669,55.0543577745 Z" fill="#1b2945" stroke="none"/>
+  <path d="M 34.080237583,54.8496547661 L 9.259930641,72.2290207875 L 8.71142178149,74.9325625444 L 88.3811887906,188.712781496 L 89.708487111,189.736636549 L 91.2896035612,189.728224021 L 116.568601647,171.783524086 L 34.8339594669,55.0543577745 Z" fill="#febca6" stroke="none"/>
+  <path d="M 186.664056833,185.938281668 L 181.780754613,181.05633949 L 173.800989663,177.854254022 L 165.952765055,177.978231864 L 158.727572016,181.084127153 L 116.869922585,217.717816349 L 114.486649151,222.682693763 L 113.913752736,226.746163917 L 114.53695431,230.948736915 L 116.511841759,234.815236567 L 120.207118507,238.697881253 L 124.836092582,240.950124361 L 128.760289888,241.498463215 L 133.323323786,240.867019119 L 179.925852616,215.193992289 L 185.880934974,209.925501602 L 187.707457026,207.303705044 L 189.672911917,202.265154947 L 189.950267575,193.769681221 Z M 179.021895277,195.073782023 L 179.415496271,197.728038653 L 178.318308546,201.914466617 L 176.024852828,204.741136188 L 172.297626024,206.740581199 L 167.85737993,206.675661055 L 165.448698908,205.676533568 L 162.671144458,203.104532153 L 161.245275884,200.196457393 L 161.400183749,194.838659007 L 162.407553758,192.790438885 L 164.954997612,190.152157283 L 168.141618068,188.775403831 L 171.049862833,188.570190806 L 174.458011352,189.60194837 L 176.432558791,191.027136923 Z M 137.744534756,221.901184216 L 138.777312352,225.816968995 L 137.524536741,230.478573147 L 134.821505,233.592030937 L 132.601551958,234.780226414 L 129.644192072,235.263985135 L 125.097303207,234.175039933 L 123.180113412,232.831766584 L 121.115238241,229.882819225 L 120.451334073,227.539908374 L 120.639212026,223.623953589 L 121.990557891,220.846569145 L 125.447311516,217.937814364 L 130.280648588,216.995024489 L 133.041547989,217.625448553 L 136.195878378,219.689473697 Z" fill="#febaa5" stroke="none"/>
+  <path d="M 33.6319112908,12.192310691 L 30.6831339367,15.4778414116 L 30.929389566,18.9677351299 L 147.250690858,185.091769712 L 148.471346408,185.091599706 L 155.286453409,178.610525986 L 39.5632861139,13.1663706007 L 37.9246420146,11.872212374 L 36.1386525506,11.4136912356 Z" fill="#ffbda9" stroke="none"/>
+  <path d="M 124.853586709,13.6296464142 L 124.362095482,13.973792276 L 182.408030841,96.871979158 L 185.447985953,101.213484993 L 186.136107672,100.975811896 L 188.445538418,95.2080974765 L 189.607986298,89.0227345181 L 189.844639362,82.386922938 L 188.794866706,74.0882497085 L 186.901384445,66.5024257634 L 182.893911891,56.246200155 L 174.552155992,42.0664572614 L 167.505578352,33.5720035669 L 162.056942218,28.2313702456 L 149.8163966,19.4672933985 L 137.633718642,14.447098405 L 131.259967714,13.5386386609 Z" fill="#ffb9a5" stroke="none"/>
+  <path d="M 32.5546087175,41.5127714508 L 31.7847418001,43.0284577408 L 31.9652272584,44.8553198044 L 125.114040522,177.885611797 L 127.489921461,178.663551231 L 128.841607337,178.327477886 L 133.183113171,175.287522773 L 134.747574572,173.337532895 L 39.4191708507,37.1944631341 Z" fill="#ffbba6" stroke="none"/>
+  <path d="M 113.719661375,9.58419135174 L 107.576021043,13.8860146244 L 107.592506087,14.6069364255 L 178.060492553,115.419995517 L 179.985924871,117.123729766 L 186.539141225,112.535118275 L 186.727189184,109.83981904 L 117.865216739,11.3203856728 L 115.906984339,9.39546337139 Z" fill="#ffb9a4" stroke="none"/>
+  <path d="M 183.551701341,132.328177739 L 180.349785878,141.528598238 L 175.763214452,149.623248481 L 168.678144287,158.856979079 L 157.210525683,170.549015837 L 155.826379735,173.105212229 L 158.268200851,176.766838868 L 169.163603061,174.020894463 L 174.357571039,174.290517616 L 178.912702426,175.739923719 L 185.606381666,179.720458637 L 190.661926822,186.068801978 L 192.421658672,174.460040467 L 191.985485025,160.238234936 L 189.067127679,146.655776013 Z" fill="#febeaa" stroke="none"/>
+  <path d="M 178.235203305,193.427235412 L 175.75250959,190.404615371 L 171.467681377,188.643863489 L 167.453496349,189.013076927 L 164.954997612,190.152157283 L 162.006220257,193.437688004 L 160.974632699,198.066492073 L 161.48294898,200.884579112 L 162.671144458,203.104532153 L 166.038590383,205.995951864 L 170.192218264,206.871951536 L 173.288850999,206.412750376 L 176.950477637,203.97092926 L 178.318308546,201.914466617 L 179.45636887,197.089032056 Z M 175.425528793,195.516668144 L 175.254135884,200.15354473 L 173.173625695,202.586953318 L 169.306956038,203.341185218 L 167.406251287,202.718833671 L 165.02195782,200.359777786 L 164.808332268,195.870416571 L 165.684671951,194.158099789 L 168.305958493,192.322655193 L 172.361186125,192.535090707 Z" fill="#1b2943" stroke="none"/>
+  <path d="M 136.195878378,219.689473697 L 133.57408182,217.862951644 L 130.280648588,216.995024489 L 126.684282105,217.43791061 L 124.161225806,218.716263814 L 121.376278861,221.887079247 L 120.352763819,225.655688667 L 120.549734321,228.203472531 L 122.696694702,232.315717797 L 126.637547058,234.805634002 L 130.201283464,235.362215378 L 132.601551958,234.780226414 L 136.017432984,232.51047823 L 137.524536741,230.478573147 L 138.801869913,225.677696147 L 137.744534756,221.901184216 Z M 134.820144957,223.826786539 L 134.943612783,228.013044498 L 132.052193072,231.380490423 L 128.898202694,231.757776378 L 127.194128434,231.241897596 L 124.21170097,228.202962515 L 123.891942664,226.351542891 L 124.653397054,223.254740151 L 128.200308405,220.649088626 L 132.009790424,221.033597072 Z" fill="#1d2a45" stroke="none"/>
+  <path d="M 133.672992085,222.18848245 L 132.009790424,221.033597072 L 128.781957358,220.608046022 L 125.161203319,222.41086054 L 123.891942664,226.351542891 L 124.21170097,228.202962515 L 125.760357349,230.414673035 L 128.898202694,231.757776378 L 132.052193072,231.380490423 L 133.821527487,229.89743421 L 135.197430913,226.980776918 L 134.820144957,223.826786539 Z" fill="#fdfaf6" stroke="none"/>
+  <path d="M 174.10630299,193.632618442 L 170.214735761,192.084812091 L 168.305958493,192.322655193 L 165.684671951,194.158099789 L 164.505569022,198.401885397 L 165.997037762,201.752336262 L 169.806689787,203.357500257 L 173.935420096,201.931461677 L 174.934717588,200.743436205 L 175.704244495,196.786438815 Z" fill="#fbf9f4" stroke="none"/>
+  <path d="M 173.032636341,202.002041357 A 5.03,5.03 55 0,1 166.027212083,200.766796049 A 5.03,5.03 55 0,1 167.262457391,193.761371792 A 5.03,5.03 55 0,1 174.267881649,194.996617099 A 5.03,5.03 55 0,1 173.032636341,202.002041357 Z" fill="#F8F7F2" stroke="#1F2A3A" stroke-width="2.3"/>
+  <path d="M 132.426411252,230.154048107 A 4.8,4.8 55 0,1 125.741314545,228.975285189 A 4.8,4.8 55 0,1 126.920077463,222.290188482 A 4.8,4.8 55 0,1 133.60517417,223.4689514 A 4.8,4.8 55 0,1 132.426411252,230.154048107 Z" fill="#F8F7F2" stroke="#1F2A3A" stroke-width="2.3"/>
+</g>
+<g id="kit-handle_lever" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 68.9241971972,31.2289281853 L 64.6223739246,37.3725685175 L 62.0888650344,52.3231983605 L 82.0036922701,57.3560560152 L 92.6940514615,61.7895896352 L 104.997987175,68.4516588296 L 121.471015782,80.8407398495 L 136.395218006,96.6621869386 L 143.652191096,106.870827474 L 148.640096022,115.612726835 L 185.257804715,188.496699079 L 202.45727756,220.072293038 L 225.399057236,255.302461151 L 237.832663233,272.065678083 L 252.322391863,289.902375205 L 277.960490807,317.620562061 L 306.253186391,343.291038811 L 337.659169759,367.479139371 L 360.038505612,382.416854282 L 372.522586774,389.693372512 L 376.750567359,384.352569186 L 378.422351551,380.395911807 L 378.382158973,374.874283011 L 376.547564404,371.392291804 L 336.818860261,342.353179091 L 309.238673951,318.280303836 L 293.077501139,301.958952992 L 276.359576945,283.294521293 L 264.376249565,268.677754726 L 251.459394863,251.209931031 L 235.053666475,226.171918409 L 219.197296974,197.734169795 L 208.337414932,175.236548542 L 188.821458856,129.709112216 L 177.756873806,106.457769079 L 168.984894447,92.1363732626 L 159.770198973,80.1906883799 L 148.130677443,67.5237416853 L 139.00562968,58.9369201948 L 123.187922708,47.0067003241 L 108.92626461,38.6075867818 L 94.2138178798,31.7239895242 L 84.1950953626,28.2490508019 L 77.0514775172,27.641824256 L 73.3975833847,28.5015088891 Z M 179.49944059,123.67007459 L 181.489793052,126.406586435 L 182.152677188,131.387608883 L 181.398615293,134.03362299 L 179.62052834,136.572994328 L 174.958754183,139.046425489 L 172.46008544,139.128000682 L 169.510968075,138.283781061 L 166.701293564,136.19434833 L 164.809341351,132.794272327 L 164.449390466,129.124063156 L 165.408325375,126.011115382 L 167.210969888,123.611016893 L 172.118489659,121.309658663 L 174.699073606,121.285441113 Z" fill="#e9ddf5" stroke="none"/>
+  <path d="M 13.8739497193,15.8770471075 L 10.4816062228,21.0705050694 L 8.73580933693,27.0506550034 L 8.45675362476,30.7617367742 L 9.62744402616,36.5866388321 L 12.0598325822,41.8300619423 L 15.4099434364,45.7628417816 L 23.101900136,50.2942656341 L 29.9259296804,51.5322562547 L 43.5334561805,50.9279197997 L 57.8862920371,51.6999967866 L 60.9030496317,37.4539737059 L 64.5249937081,30.7121993766 L 67.7614093071,27.4848763264 L 70.9402972572,25.5601240303 L 75.8313319835,23.9796876014 L 81.2136879311,23.9640525841 L 96.6882690728,29.061830383 L 114.906754555,37.9120725683 L 134.746719071,51.0717005268 L 150.736158962,65.1974858838 L 166.315512816,82.6984496717 L 178.527760755,100.649522071 L 186.259230012,115.585196918 L 212.613660612,176.27756866 L 227.789810906,206.558494377 L 237.741063199,223.903020251 L 249.764753163,242.820760064 L 272.453224726,273.356693948 L 297.493189672,301.75476 L 319.478414515,323.00869819 L 346.018430734,345.254541377 L 378.260221196,368.074641022 L 381.028683097,371.966378257 L 382.084998222,375.513799624 L 382.158160888,379.593584817 L 380.256776116,385.098558563 L 375.856552595,391.905763053 L 392.428321461,401.189968816 L 409.917302609,412.825497957 L 423.318426047,423.673995116 L 437.538361519,437.53737981 L 446.245250728,448.639185082 L 447.866559756,454.169226405 L 447.185320517,463.336336806 L 448.126750349,468.268244132 L 450.804884519,473.683740173 L 453.966607403,477.362531877 L 460.372478393,481.115506279 L 468.834982031,482.279994223 L 476.486916158,480.06913373 L 482.189370422,475.760767989 L 485.45875611,471.091601336 L 487.2864682,465.168809046 L 487.311875788,459.204804145 L 485.797039524,453.871393314 L 482.160480463,447.906878397 L 472.19223311,434.945240973 L 453.688659463,414.298019313 L 440.541694166,402.040478635 L 423.700132141,388.782960444 L 410.864002607,379.917083241 L 371.978328048,356.473442012 L 354.284643891,344.084190987 L 338.016488298,331.228176301 L 319.414004387,314.906485447 L 306.602942429,302.517914444 L 291.056218653,286.016418153 L 274.068161291,265.819985125 L 261.683670415,249.335313889 L 250.274089477,232.678739727 L 230.568045378,199.103870763 L 220.559775452,179.399948994 L 189.659986035,108.810622506 L 184.369147857,98.7579098682 L 170.576123478,78.3571138424 L 153.776284081,59.6353244993 L 140.694748943,48.1560632663 L 121.22348785,34.6442169292 L 107.469636017,27.0889829974 L 85.5318262424,18.3201460005 L 68.656274098,13.8284047101 L 54.6231965478,11.2049080988 L 30.325140851,8.59636648352 L 22.1326003761,10.1845354184 L 17.5855415062,12.4941361705 Z M 38.7533143584,20.9679424272 L 41.857509594,25.9493048853 L 42.4060184535,28.6528466422 L 41.6596890648,34.6003664987 L 39.0703525792,38.6470115986 L 35.5718763282,41.2025279692 L 30.2139079361,42.5780913844 L 24.6350915021,41.4795436172 L 21.6042289383,39.3573108027 L 18.4016334542,35.0395125021 L 17.4191610171,30.6892541292 L 18.402993497,25.2742681042 L 21.6723791842,20.6051014517 L 23.6469266232,19.1799128989 L 29.3162407943,17.5340463097 L 34.3216507972,18.2310905714 Z" fill="#e9ddf6" stroke="none"/>
+  <path d="M 11.9246398625,12.5588863094 L 7.71297431634,18.3994233847 L 6.30342078091,21.8072318932 L 5,27.8529819929 L 5.10579274383,32.9322346835 L 5.98179241571,37.0858625646 L 9.3150782151,44.1808753046 L 16.0728275725,50.743864229 L 20.4308184513,53.0628975406 L 25.8866770759,54.6857366172 L 46.1954453164,54.6230265424 L 56.5012960624,55.2470781431 L 70.4279008474,57.6739442627 L 84.0347473261,61.9522300066 L 97.2644778547,68.1638505794 L 111.181990091,77.0544553482 L 121.65872373,85.9773501837 L 132.167917442,97.1203680663 L 137.311750266,103.896132516 L 144.167219851,114.678179482 L 185.805463548,197.303518584 L 198.43485001,220.0635405 L 208.83672093,237.113205639 L 224.243321831,259.74253724 L 238.863910781,279.135793251 L 255.147531387,298.594819434 L 273.454644547,318.12785831 L 298.773835211,341.594187042 L 325.469609322,363.094550867 L 359.726649817,386.349124105 L 400.676689531,410.505784624 L 420.549114119,425.88553563 L 434.850964795,439.806277968 L 443.254750747,450.817925514 L 444.032690181,453.193806453 L 443.662626716,463.311269229 L 444.538456382,468.68555266 L 447.765269417,475.583934908 L 453.843139578,481.548789835 L 461.223920504,485.129861312 L 469.448921051,485.761815424 L 477.461316078,483.559197454 L 481.68071413,481.020166127 L 484.769614359,478.177861538 L 487.571896375,474.524477422 L 490.235245554,468.454339767 L 491.071902675,460.983061103 L 490.220630569,455.748050521 L 487.452508678,449.415002187 L 472.127482971,429.28433933 L 461.470943895,417.305684359 L 444.212073342,400.459872201 L 430.483289086,389.381944468 L 412.543859316,376.820620512 L 370.160388528,351.049873454 L 341.252733892,329.221508801 L 310.650097545,301.44528428 L 292.121796332,281.879445321 L 276.649085249,263.354456475 L 267.491747419,251.326856388 L 253.821510844,231.622424602 L 233.845163571,197.736209859 L 219.504480359,168.528594328 L 193.36299529,108.229483569 L 186.499623194,95.3665864038 L 172.755713937,75.2443360741 L 155.05480729,55.891612651 L 141.612811252,44.404108896 L 122.329938129,31.1462506942 L 102.972882307,21.1325405975 L 85.5077786977,14.5189065032 L 63.6022589895,9.19084810304 L 46.7428518785,6.41949611097 L 30.7680269721,5 L 25.6805317594,5.46625364438 L 19.6753142485,7.24315055963 Z M 13.8739497193,15.8770471075 L 18.5686939647,11.9617723444 L 22.1326003761,10.1845354184 L 30.325140851,8.59636648352 L 54.6231965478,11.2049080988 L 68.656274098,13.8284047101 L 85.5318262424,18.3201460005 L 107.469636017,27.0889829974 L 121.22348785,34.6442169292 L 140.694748943,48.1560632663 L 154.89029686,60.6595195627 L 170.576123478,78.3571138424 L 184.369147857,98.7579098682 L 189.74190124,108.867980149 L 219.028284139,176.008115513 L 230.568045378,199.103870763 L 250.274089477,232.678739727 L 261.683670415,249.335313889 L 274.068161291,265.819985125 L 291.056218653,286.016418153 L 306.602942429,302.517914444 L 319.414004387,314.906485447 L 338.016488298,331.228176301 L 354.284643891,344.084190987 L 371.978328048,356.473442012 L 410.864002607,379.917083241 L 425.666097048,390.159543891 L 440.541694166,402.040478635 L 456.834067309,417.477077268 L 475.886319821,439.607185136 L 483.561111455,449.742152988 L 486.190130502,454.879103333 L 487.622881556,461.375812071 L 486.966709894,467.02022867 L 485.45875611,471.091601336 L 481.025902511,476.899338329 L 474.553411324,480.91267333 L 468.834982031,482.279994223 L 460.372478393,481.115506279 L 453.966607403,477.362531877 L 450.804884519,473.683740173 L 448.126750349,468.268244132 L 447.185320517,463.336336806 L 447.866559756,454.169226405 L 446.245250728,448.639185082 L 437.538361519,437.53737981 L 423.318426047,423.673995116 L 409.917302609,412.825497957 L 392.428321461,401.189968816 L 375.856552595,391.905763053 L 380.256776116,385.098558563 L 382.158160888,379.593584817 L 382.084998222,375.513799624 L 381.028683097,371.966378257 L 378.260221196,368.074641022 L 346.018430734,345.254541377 L 319.478414515,323.00869819 L 297.493189672,301.75476 L 272.453224726,273.356693948 L 249.764753163,242.820760064 L 237.741063199,223.903020251 L 227.789810906,206.558494377 L 212.613660612,176.27756866 L 186.259230012,115.585196918 L 178.527760755,100.649522071 L 166.798761521,83.4030564341 L 151.874729302,66.3609537952 L 134.746719071,51.0717005268 L 122.459438406,42.4680539816 L 111.89220703,36.2895735024 L 99.1622102498,30.0616378909 L 88.0540325142,25.7017769532 L 81.2136879311,23.9640525841 L 75.8313319835,23.9796876014 L 70.9402972572,25.5601240303 L 67.7614093071,27.4848763264 L 64.5249937081,30.7121993766 L 60.9030496317,37.4539737059 L 57.8862920371,51.6999967866 L 43.5334561805,50.9279197997 L 29.9259296804,51.5322562547 L 23.101900136,50.2942656341 L 15.4099434364,45.7628417816 L 11.6830566429,41.3220856716 L 9.54552882173,36.5292811884 L 8.66952914986,32.3756533073 L 8.71125177614,26.9113821553 L 10.4816062228,21.0705050694 Z M 68.9241971972,31.2289281853 L 73.3975833847,28.5015088891 L 77.0514775172,27.641824256 L 84.1950953626,28.2490508019 L 94.2138178798,31.7239895242 L 108.92626461,38.6075867818 L 121.959194642,46.1463356695 L 130.887951925,52.3983188258 L 145.853536764,65.1968058624 L 158.394125542,78.4946866369 L 168.984894447,92.1363732626 L 177.756873806,106.457769079 L 188.821458856,129.709112216 L 208.337414932,175.236548542 L 219.197296974,197.734169795 L 235.053666475,226.171918409 L 251.459394863,251.209931031 L 264.376249565,268.677754726 L 279.439384625,286.915955353 L 297.222206476,306.32603642 L 307.772442793,316.88740535 L 336.818860261,342.353179091 L 376.547564404,371.392291804 L 378.382158973,374.874283011 L 378.422351551,380.395911807 L 376.750567359,384.352569186 L 372.661859622,389.668814951 L 362.143743367,383.768880168 L 346.260266224,373.501691952 L 328.951600529,361.259956297 L 311.208971256,347.371504026 L 297.054295939,335.507054326 L 280.4833771,320.119570815 L 264.600749984,303.74910485 L 252.322391863,289.902375205 L 237.832663233,272.065678083 L 225.399057236,255.302461151 L 202.45727756,220.072293038 L 184.618968124,187.316916129 L 148.640096022,115.612726835 L 143.652191096,106.870827474 L 136.395218006,96.6621869386 L 121.471015782,80.8407398495 L 104.997987175,68.4516588296 L 92.6940514615,61.7895896352 L 82.0036922701,57.3560560152 L 62.0888650344,52.3231983605 L 64.6223739246,37.3725685175 Z" fill="#1c2a44" stroke="none"/>
+  <path d="M 32.1420603391,21.3438683397 L 26.4155585297,21.8509945837 L 23.7118467675,23.6201589929 L 21.4912137045,27.3145857142 L 21.0893701883,30.3293032447 L 22.1620003519,34.3764583606 L 24.5128137142,37.1212127277 L 27.5273612393,38.7437117936 L 32.60661393,38.6379190498 L 35.5560713055,37.0408275714 L 38.5551538186,32.06031514 L 38.8257970034,29.9303498195 L 37.728609279,25.7439218555 L 36.6310815439,23.998804991 Z" fill="#fbf9f5" stroke="none"/>
+  <path d="M 35.4193485376,18.7555518862 L 30.1764354435,17.525973793 L 23.6469266232,19.1799128989 L 21.6150215406,20.6870166562 L 18.402993497,25.2742681042 L 17.4191610171,30.6892541292 L 18.4016334542,35.0395125021 L 20.0315250154,37.767781825 L 24.1436002756,41.1353977554 L 29.2717980824,42.5288062575 L 34.6460815133,41.6529765909 L 38.2182304467,39.5152787644 L 41.0778701064,35.7799794435 L 42.3812908873,29.7342293439 L 41.3825034115,24.8842372224 L 39.6706966459,22.0986102558 Z M 35.8692871433,23.3433133503 L 37.728609279,25.7439218555 L 38.8257970034,29.9303498195 L 37.4406310234,34.6980867258 L 35.5560713055,37.0408275714 L 32.60661393,38.6379190498 L 27.5273612393,38.7437117936 L 24.5128137142,37.1212127277 L 22.1620003519,34.3764583606 L 21.0893701883,30.3293032447 L 21.7616868839,26.4052759435 L 23.7118467675,23.6201589929 L 26.4155585297,21.8509945837 L 30.7330168197,21.089710199 Z" fill="#1d2a43" stroke="none"/>
+  <path d="M 178.000409349,122.498364157 L 175.223364916,121.408398922 L 172.118489659,121.309658663 L 168.538268209,122.58716184 L 165.293610087,126.174945791 L 164.498165577,131.843919951 L 165.783911277,135.063680501 L 169.510968075,138.283781061 L 173.541468142,139.152728249 L 176.662828443,138.530546707 L 179.62052834,136.572994328 L 181.398615293,134.03362299 L 182.128459638,128.807024935 L 180.285792551,124.464839079 Z M 177.541038184,126.815652441 L 178.662783469,131.141353253 L 176.589665777,134.450761513 L 172.5179531,135.384118829 L 170.101369567,134.302396116 L 168.774411257,132.88494007 L 167.996471823,130.50905913 L 168.324472651,128.297178606 L 169.873129029,126.085468086 L 172.675071035,124.873395069 L 174.559290742,124.971965323 Z" fill="#1d2a45" stroke="none"/>
+  <path d="M 174.837836438,124.922850201 L 172.675071035,124.873395069 L 169.873129029,126.085468086 L 168.324472651,128.297178606 L 168.479550522,132.434321443 L 170.101369567,134.302396116 L 172.5179531,135.384118829 L 176.589665777,134.450761513 L 178.662783469,131.141353253 L 177.541038184,126.815652441 Z" fill="#faf7f4" stroke="none"/>
+  <path d="M 36.9531590546,34.9061037436 A 8.4,8.4 35 0,1 25.2542398172,36.9689388503 A 8.4,8.4 35 0,1 23.1914047106,25.2700196129 A 8.4,8.4 35 0,1 34.8903239479,23.2071845062 A 8.4,8.4 35 0,1 36.9531590546,34.9061037436 Z" fill="#F8F7F2" stroke="#1F2A3A" stroke-width="2.3"/>
+  <path d="M 177.035559897,132.785325104 A 4.51,4.51 35 0,1 170.75435445,133.892871096 A 4.51,4.51 35 0,1 169.646808458,127.611665648 A 4.51,4.51 35 0,1 175.928013906,126.504119656 A 4.51,4.51 35 0,1 177.035559897,132.785325104 Z" fill="#F8F7F2" stroke="#1F2A3A" stroke-width="2.3"/>
+</g>
+<g id="kit-link_bar" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 42.3765716027,165.31638359 L 42.2950534189,120.650587338 L 40.9408134087,47.9280596455 L 40.3852895078,47.2789115918 L 35.8920384898,49.5528278809 L 27.0071071689,50.8711584248 L 21.3509876637,49.9501198032 L 15.839622778,47.3801281501 L 17.5486519773,164.349736251 L 18.1128126591,165.314994105 L 25.0323360386,162.690075782 L 31.9439128559,162.089987539 L 36.8054394692,162.874563213 Z" fill="#ebe9e4" stroke="none"/>
+  <path d="M 28.1384892801,208.064097116 L 33.888232938,207.780463783 L 39.3899257148,206.522935815 L 43.7463686754,203.873142478 L 46.7102011573,201.198129017 L 50.5874708079,196.06229607 L 52.3718514593,191.901047977 L 53.2932351903,187.415398412 L 53.078005886,181.853593278 L 51.4273273077,175.856488957 L 47.6492126067,169.569530288 L 46.7426866722,166.494109873 L 45.7359795075,142.384432549 L 44.5040439148,49.8236831208 L 45.6897167607,43.4327379715 L 48.9430584818,37.459818447 L 50.7101655714,32.6663507529 L 51.0076213728,27.3436146101 L 49.9034848052,20.5090786024 L 47.979880331,16.1011600656 L 44.6381001447,11.8901619433 L 38.2803216816,7.28704853881 L 29.3601530183,5 L 22.3888089533,5.72825951928 L 16.443180209,8.10512696072 L 13.3083376554,10.3102941118 L 7.82529887787,16.8819214418 L 5,25.7851616526 L 6.3611693391,35.0801720361 L 11.490436161,45.6641515273 L 12.6733390849,58.8550855607 L 12.2304384452,63.4858348546 L 13.3953685413,102.649248111 L 12.9427957927,103.452477784 L 13.6510118281,129.37348143 L 13.1825459551,134.226371263 L 13.9342910044,162.898393852 L 13.5255923791,167.623112408 L 9.1111077175,176.253426723 L 7.43002332772,183.037522483 L 7.87568484208,187.77053271 L 9.59511255831,195.126045495 L 13.9370428318,201.207792078 L 20.0384787421,205.691370987 Z M 28.7012695245,204.34747521 L 26.163754339,204.100459657 L 21.4984579214,202.393119815 L 15.6789297974,197.806934863 L 12.1571576492,191.639510689 L 10.9331414767,183.890847294 L 11.6410214501,179.695742296 L 13.3314328395,175.568696218 L 18.6949371215,169.253411441 L 26.2294065403,165.978999955 L 31.5604343547,165.422095617 L 38.2505608521,167.137382021 L 41.7540241105,169.161176773 L 45.1296612018,172.295674217 L 48.4804232783,177.99325208 L 49.7220581219,187.544605016 L 47.9808613751,193.286402112 L 46.1705703808,196.499320803 L 39.7219286398,202.464638875 L 37.3042930592,203.131750709 Z M 42.3765716027,165.31638359 L 36.8054394692,162.874563213 L 31.9439128559,162.089987539 L 25.0323360386,162.690075782 L 17.6001275535,165.075925114 L 15.839622778,47.3801281501 L 21.3509876637,49.9501198032 L 27.6393267701,50.8538848629 L 35.8920384898,49.5528278809 L 40.7013993083,47.2702748109 L 42.2950534189,120.650587338 Z M 25.331553576,47.4371345231 L 18.0772663967,44.7565902648 L 12.026615844,38.6582603387 L 10.2315277555,35.4805789898 L 8.86310207286,30.5513385665 L 9.11737396962,23.6480534208 L 11.7212225277,17.060187857 L 16.2137833269,12.4453316875 L 21.4245864272,9.80383002168 L 25.6704767825,8.89695897785 L 31.0443433922,8.75013370222 L 34.6414308033,9.56925649949 L 38.7771136628,11.5757776894 L 44.4004115911,17.0847268097 L 46.7600054707,22.3981359529 L 47.2070474224,31.8130259413 L 44.0822220871,39.0161826538 L 39.6238633022,43.7250080853 L 35.0708450365,46.1270956508 Z" fill="#1c2a44" stroke="none"/>
+  <path d="M 39.7219286398,202.464638875 L 46.1705703808,196.499320803 L 49.1931347825,190.184726245 L 49.6705825458,186.818416153 L 49.3790026506,183.093502575 L 47.6084444675,176.182270867 L 42.4632845212,169.647951535 L 36.8748788259,166.573911558 L 32.4489965086,165.52435655 L 28.2113978248,165.576867455 L 21.496741422,167.595131409 L 18.6949371215,169.253411441 L 15.278531891,172.731654575 L 11.6410214501,179.695742296 L 10.9676886004,185.155286496 L 11.9519455632,191.075695117 L 13.5079646606,194.766061571 L 16.396826989,198.609819426 L 19.3109094415,201.060966803 L 26.163754339,204.100459657 L 33.5624510285,203.961580943 Z M 28.399672411,195.62457207 L 24.6571401617,194.113462424 L 21.5720476375,191.192468738 L 20.3069182166,188.886075981 L 19.7925075642,182.794657289 L 21.1840827149,179.308467592 L 24.2588129114,176.061001777 L 26.6336096967,174.983810881 L 32.5028878502,174.443834995 L 35.1858478739,175.382837397 L 39.4331186667,179.157846114 L 40.3479362727,181.378906389 L 40.9221141728,187.342153805 L 39.8891425087,190.059315843 L 36.3276375493,194.016042069 L 32.380928542,195.452526671 Z" fill="#ece9e3" stroke="none"/>
+  <path d="M 36.1045069194,45.7508734932 L 41.9385477305,41.6055185247 L 46.097380058,35.1966095948 L 47.2070474224,31.8130259413 L 47.3680402758,27.2848826904 L 45.6057737643,19.5192908428 L 40.6485523421,12.9165674826 L 34.6414308033,9.56925649949 L 28.447060959,8.63128942542 L 21.4245864272,9.80383002168 L 18.3578027929,11.0264657567 L 12.7289740678,15.7356362976 L 9.5353995945,21.5803845457 L 8.61470608227,28.4069739912 L 10.2315277555,35.4805789898 L 15.0350126678,42.2456756408 L 20.6748939393,46.0459044818 L 26.5959927783,47.4025873994 Z M 24.9273504195,38.4323235974 L 21.133342594,36.195025088 L 18.9112469904,33.5984328735 L 17.6198621174,29.1732407749 L 17.8150569851,24.739066786 L 19.9839514657,20.7571204363 L 22.7087149567,18.5947920805 L 28.8084253202,17.2260212885 L 30.9016594287,17.4219063749 L 34.9775750404,19.5565988413 L 37.5586192399,22.5546333375 L 38.8244388795,27.2019659746 L 38.5777684356,30.9099511003 L 36.9298507322,34.2766063013 L 33.5987779828,37.4045376207 L 27.3111290951,38.8417124413 Z" fill="#eceae5" stroke="none"/>
+  <path d="M 35.6442874813,194.477596708 L 38.1811124481,192.38367238 L 40.8454184726,188.008575421 L 40.7158667588,183.266928412 L 39.4331186667,179.157846114 L 37.3136291061,176.843161686 L 32.5968571123,174.409632981 L 28.8035395055,174.513274352 L 24.2588129114,176.061001777 L 21.1840827149,179.308467592 L 19.7925075642,182.794657289 L 20.3069182166,188.886075981 L 21.5720476375,191.192468738 L 23.947879751,193.626687661 L 27.6050795191,195.488109122 L 31.150691354,195.581043056 Z M 28.8087161456,192.070323455 L 25.7923727595,190.507738232 L 23.664246418,187.876944003 L 23.4576538946,182.63124867 L 26.7030490534,178.683159225 L 32.1878133777,177.963881596 L 36.4178106086,181.106670712 L 37.332973324,184.498200928 L 37.0348273039,187.47999719 L 33.7552301308,191.334117373 Z" fill="#1d2a44" stroke="none"/>
+  <path d="M 33.5987779828,37.4045376207 L 36.9298507322,34.2766063013 L 38.5777684356,30.9099511003 L 38.8244388795,27.2019659746 L 37.5586192399,22.5546333375 L 34.9775750404,19.5565988413 L 30.9016594287,17.4219063749 L 28.8084253202,17.2260212885 L 22.7087149567,18.5947920805 L 19.8899822037,20.7913224507 L 17.8150569851,24.739066786 L 17.6198621174,29.1732407749 L 18.9112469904,33.5984328735 L 21.133342594,36.195025088 L 24.9273504195,38.4323235974 L 27.3111290951,38.8417124413 Z M 26.7376414137,35.2194049062 L 24.1486506521,34.2462004898 L 21.9009898151,31.8717488137 L 21.2338779809,29.4541132331 L 21.224205872,25.6265936119 L 22.1549166025,23.7979937278 L 24.3756317687,21.7127061816 L 30.0825366314,21.018993786 L 32.7143661883,22.4022772651 L 34.4749071531,24.3155194116 L 35.1344175344,29.9284550123 L 33.9988398272,32.3637092641 L 31.8378919087,34.3208255339 Z" fill="#1d2b44" stroke="none"/>
+  <path d="M 31.8378919087,34.3208255339 L 33.9988398272,32.3637092641 L 35.0404482723,29.9626570266 L 34.1843625859,24.1020156541 L 30.0825366314,21.018993786 L 24.3756317687,21.7127061816 L 21.224205872,25.6265936119 L 21.7983837721,31.5898410275 L 24.1486506521,34.2462004898 L 26.7376414137,35.2194049062 Z" fill="#fbfaf6" stroke="none"/>
+  <path d="M 33.6612608687,191.368319387 L 36.9750600562,187.608168467 L 37.332973324,184.498200928 L 36.3152045656,180.824762926 L 32.1878133777,177.963881596 L 26.7030490534,178.683159225 L 23.4576538946,182.63124867 L 23.664246418,187.876944003 L 25.0147083201,189.833024945 L 27.8175479487,191.686154735 L 30.4234671628,192.121108812 Z" fill="#faf8f3" stroke="none"/>
+  <path d="M 24.0339396759,187.05067111 A 6.63,6.63 160 0,1 27.9965082015,178.552915483 A 6.63,6.63 160 0,1 36.4942638276,182.515484009 A 6.63,6.63 160 0,1 32.531695302,191.013239635 A 6.63,6.63 160 0,1 24.0339396759,187.05067111 Z" fill="#F8F7F2" stroke="#1F2A3A" stroke-width="2.3"/>
+  <path d="M 21.8508964858,30.0383119704 A 6.51,6.51 160 0,1 25.741744314,21.6943618761 A 6.51,6.51 160 0,1 34.0856944084,25.5852097043 A 6.51,6.51 160 0,1 30.1948465801,33.9291597987 A 6.51,6.51 160 0,1 21.8508964858,30.0383119704 Z" fill="#F8F7F2" stroke="#1F2A3A" stroke-width="2.3"/>
+</g>
+<g id="kit-piston_rod" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 331.0802416,18.2641786402 L 329.50729405,15.1120625247 L 327.422006503,12.8913473585 L 323.106676791,10.0988700576 L 317.877564801,8.59674230174 L 310.752484226,9.48737511177 L 305.516115893,12.3510173161 L 299.75082422,17.8547807489 L 292.464750791,23.2735568099 L 284.033427547,27.3000675015 L 59.9167374897,108.871871685 L 65.8509595311,125.760773625 L 292.419487183,43.6158268702 L 304.097931133,41.4935764348 L 315.819904097,42.1223449425 L 322.586036076,40.8302698508 L 327.805130848,37.3344080453 L 331.579794456,31.9166673124 L 332.970334278,24.9190677953 Z M 326.084667804,26.4674854398 L 324.881031177,29.8852711077 L 322.745993601,32.7907167792 L 316.176782037,35.5009675831 L 312.075646301,34.7588855954 L 308.503779014,32.5471523194 L 307.290125169,30.966948426 L 305.622518139,25.5080944445 L 306.407438921,21.8170377713 L 309.362289513,17.6554445691 L 312.514405629,16.0824970191 L 316.478388198,15.2782320183 L 319.947304332,16.0375875678 L 323.36543511,18.4116941345 L 325.930241075,24.2889188502 Z" fill="#daeafb" stroke="none"/>
+  <path d="M 334.58266953,16.7765635714 L 333.274701314,14.060091752 L 329.428872803,9.92613443924 L 323.131206697,6.36531969855 L 317.526217658,5 L 309.401677215,6.36082422976 L 304.840022168,8.4468019947 L 292.694147673,18.9333520831 L 287.491981354,21.8909635495 L 58.9929379934,105.164231668 L 55.3084474451,97.6726010448 L 53.1378274177,95.8021976935 L 49.4979012113,94.5729958336 L 41.4676751394,97.0700879892 L 40.9553351431,98.0014889384 L 43.5035577655,105.587433933 L 43.1193890456,106.57860213 L 23.5140152855,113.820792388 L 21.2159142004,114.231561669 L 19.891362641,113.223810129 L 16.2925496832,106.552337631 L 6.22920185991,109.895843364 L 5.36655004871,110.741911832 L 5,113.53576957 L 20.9809774742,157.735524762 L 21.9040867519,159.102224897 L 23.6984846216,159.938966366 L 33.3773186157,156.41615889 L 34.3764333749,154.77549753 L 32.6404223155,149.128705024 L 33.3572841791,146.420179767 L 53.5862407594,138.844606147 L 55.7990093634,138.784148681 L 58.637776553,146.583597433 L 59.6887119977,146.839594877 L 65.8906832949,144.582261931 L 68.4188714808,142.172227803 L 69.7672627268,137.105489104 L 67.2618788996,129.929623171 L 294.846794873,46.7762346571 L 306.123796541,45.0129328176 L 319.135773941,45.3850136632 L 325.218210742,43.38402327 L 328.549628601,41.4265618908 L 331.752530074,38.2388633237 L 335.603544272,30.9842310351 L 336.498672551,24.3797821282 Z M 331.78984712,19.9214233433 L 332.944769045,25.1412083337 L 331.340725465,32.429352418 L 327.805130848,37.3344080453 L 322.586036076,40.8302698508 L 316.358154436,42.139273395 L 299.809201983,41.990368416 L 291.479794563,43.9578470135 L 66.2354733603,125.940075369 L 59.8656070229,109.316152762 L 283.657550499,27.4368755588 L 293.028566364,23.0683447239 L 305.516115893,12.3510173161 L 310.564545702,9.55577914043 L 316.39098506,8.60572419201 L 323.525392635,10.3721410629 L 329.079941425,14.5226817189 Z M 65.4280933281,140.387502042 L 60.840873048,142.695620345 L 55.2745814928,127.694740427 L 53.9673034952,127.319208488 L 52.4979973163,127.96040998 L 52.2077978585,128.917376162 L 54.1659494564,134.589733901 L 30.6909074986,143.772457086 L 21.3195555714,118.024879276 L 29.1362778858,115.818331688 L 45.0426484105,109.816050727 L 50.078636189,122.775172113 L 50.8563006283,123.4498854 L 52.2744763404,123.252964985 L 53.0258853277,121.808878931 L 45.0823812217,99.6919003278 L 49.123059491,98.2212137115 L 51.096759104,98.6734413507 L 52.7291287924,100.52691625 L 66.0423491487,137.397068999 Z M 24.6713439287,156.179505664 L 24.0304875467,155.880669425 L 8.70798512566,113.782440014 L 9.02374981689,112.603333293 L 14.6363403082,110.773352972 L 30.3350648868,153.905244266 Z" fill="#1c2b44" stroke="none"/>
+  <path d="M 51.0027898419,98.7076433651 L 49.123059491,98.2212137115 L 45.116583236,99.7858695899 L 52.9916833134,121.714909669 L 52.1805070784,123.287167 L 50.078636189,122.775172113 L 45.0426484105,109.816050727 L 29.1362778858,115.818331688 L 21.3195555714,118.024879276 L 30.6909074986,143.772457086 L 35.5600355648,141.361732739 L 53.8584764367,134.914480483 L 52.1735958442,128.8234069 L 52.7457030882,127.763834675 L 53.9673034952,127.319208488 L 55.2745814928,127.694740427 L 60.840873048,142.695620345 L 64.411705007,141.395943801 L 66.0002005721,139.327929816 L 66.1449551917,137.678976785 L 52.6351595303,100.561118264 Z" fill="#ddeafb" stroke="none"/>
+  <path d="M 14.0638879548,110.662455257 L 10.2709154573,111.936566568 L 8.639581097,113.59450149 L 23.7910734463,155.222884591 L 24.6713439287,156.179505664 L 30.3350648868,153.905244266 Z" fill="#d4e6fb" stroke="none"/>
+  <path d="M 323.792787734,19.0010749404 L 321.263219111,16.7292293073 L 317.332748337,15.2865236898 L 312.514405629,16.0824970191 L 309.208553003,17.8178178598 L 307.218615156,20.24478044 L 305.605244577,24.8758748433 L 306.50347884,28.8056553981 L 308.503779014,32.5471523194 L 312.075646301,34.7588855954 L 316.176782037,35.5009675831 L 322.745993601,32.7907167792 L 324.881031177,29.8852711077 L 326.084667804,26.4674854398 Z M 322.324861992,24.3241561925 L 321.616982019,28.5192611904 L 320.515261217,29.8780147641 L 317.243610606,31.7073048669 L 315.065044016,31.8617315954 L 311.057532433,29.9149776532 L 309.723998984,27.4206463723 L 309.330158155,24.5842949481 L 311.251346864,20.7989239036 L 314.087353178,19.2346131345 L 316.419656278,18.9178131153 L 319.068414287,19.7628462553 L 320.914287733,21.3257765869 Z" fill="#1d2944" stroke="none"/>
+  <path d="M 320.683510414,20.984101553 L 319.068414287,19.7628462553 L 315.6592654,18.8753194294 L 311.191579616,20.92709518 L 309.330158155,24.5842949481 L 309.587190926,27.044769324 L 311.057532433,29.9149776532 L 315.065044016,31.8617315954 L 318.277272489,31.3310827093 L 320.549463231,29.9719840262 L 322.333843883,25.8107359333 Z" fill="#f6f4ee" stroke="none"/>
+  <path d="M 317.757677959,30.8391258778 A 5.77,5.77 70 0,1 310.36219531,27.3905556829 A 5.77,5.77 70 0,1 313.810765505,19.9950730339 A 5.77,5.77 70 0,1 321.206248153,23.4436432289 A 5.77,5.77 70 0,1 317.757677959,30.8391258778 Z" fill="#F8F7F2" stroke="#1F2A3A" stroke-width="2.3"/>
+</g>
+<g id="kit-pump_body" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 235.040159425,103.9481892 L 91.7712367697,51.6961480809 L 88.3116476346,49.7984539494 L 83.3406037441,45.3286975089 L 78.9772495493,37.142664271 L 33.2149543723,162.873536932 L 42.4515779455,159.424655234 L 47.6119407976,159.280935943 L 52.9001298167,160.247919343 L 195.742044957,211.918871328 Z" fill="#dfefe2" stroke="none"/>
+  <path d="M 357.280346921,137.372530046 L 351.658084321,139.370069346 L 345.190443471,139.889320576 L 339.594781432,138.597590594 L 336.100990283,136.793865724 L 333.068753772,134.306790787 L 322.204937151,122.052098281 L 314.628664265,115.676356037 L 305.26663029,109.821245462 L 295.22919281,105.529410327 L 287.224531971,103.25445871 L 278.655710451,101.944764947 L 267.711401926,101.898820168 L 252.084523422,104.192434831 L 245.242040853,101.063468184 L 243.03790903,100.686900917 L 241.08977465,101.361269095 L 238.901881061,103.863892047 L 198.569069382,214.969761838 L 199.16605164,218.592414483 L 200.63501271,220.404085914 L 209.81843516,223.53374278 L 216.497164002,231.498325698 L 222.971370977,237.685784309 L 230.445382929,243.172964398 L 239.927296509,248.113947587 L 250.486055876,251.85060393 L 263.745048828,254.01603827 L 274.27927829,254.019144254 L 291.273202039,251.478168928 L 296.980106902,252.171881323 L 301.951841011,254.300697883 L 306.043304638,257.386135517 L 310.680274948,264.820414658 Z" fill="#dfefe2" stroke="none"/>
+  <path d="M 384.710035401,121.070929208 L 382.088223062,117.456223125 L 371.56366571,113.62559752 L 368.872414014,113.710239783 L 366.274786472,114.999554 L 364.736386046,116.887230913 L 360.546811844,127.813230547 L 356.521336481,132.733143971 L 351.095304076,135.653447439 L 343.491395301,136.078384298 L 339.228576493,134.633262915 L 336.127935954,132.334126502 L 325.383653828,120.335776549 L 315.612231009,112.096887298 L 307.46316066,107.002512709 L 295.204662904,101.795859968 L 287.447707838,99.7174836559 L 276.478179189,98.2789283978 L 265.875545699,98.4637609379 L 252.999686138,100.800904616 L 246.755221155,97.783180792 L 243.29528691,97.0559566008 L 239.920340038,97.8495141646 L 236.88672309,100.044318988 L 235.810222412,100.078175893 L 96.3854027205,49.544527162 L 90.790085791,47.0823272394 L 88.0908875335,45.1421394221 L 84.4526868739,40.518991581 L 82.6769430034,36.0416336875 L 82.2260958015,29.3860543138 L 86.8951884219,14.8035451297 L 85.7088253573,10.7535398608 L 82.4202462939,8.38599941892 L 73.1172893481,5 L 71.1864285303,5.04214857656 L 67.5634307765,6.80960077553 L 66.1189996123,8.73147970301 L 5,176.654551037 L 5.1357727293,179.79008381 L 8.34696587378,183.832142516 L 18.4956461783,187.525960064 L 21.5714117028,187.262016059 L 24.98954248,184.887909492 L 29.4527327957,173.210155761 L 33.2989064161,167.905728508 L 39.4172707788,163.960399938 L 44.2874341731,162.859714464 L 48.619002119,162.946427382 L 194.724276199,215.59230933 L 195.987334964,220.308736215 L 197.669799791,222.410952214 L 200.941450402,224.240242316 L 207.596339557,226.130334995 L 214.454370142,234.479431742 L 222.261075238,241.683968892 L 230.862718335,247.581573154 L 241.668838365,252.685274742 L 251.988528741,255.90924598 L 261.24933711,257.364384581 L 274.150071686,257.590321322 L 292.690342423,255.186499163 L 296.124711434,255.691582815 L 301.156212791,257.948570652 L 305.64013681,262.879536622 L 307.756865496,269.928611715 L 307.362679557,273.93543308 L 303.446376362,285.280148558 L 303.616351105,288.321712068 L 306.579838478,292.16719547 L 317.702413417,296.109063899 L 320.120394107,295.605705793 L 323.512959651,293.009458688 L 384.631959263,125.086387353 Z M 317.233602435,292.426644006 L 308.186988042,288.921110092 L 306.846543358,285.879201473 L 367.854300147,118.554147725 L 370.802239504,117.179501027 L 380.199165712,120.59970246 L 381.411439119,123.701378327 L 320.207107026,291.274137847 Z M 357.032641149,137.175954741 L 310.902415486,264.794849425 L 307.631800203,259.454149501 L 303.942123967,255.557190523 L 296.980106902,252.171881323 L 290.700749686,251.589066642 L 276.372512399,253.823259167 L 264.787347492,254.076150627 L 251.963998836,252.175695621 L 239.833327247,248.079745572 L 230.539352191,243.207166413 L 223.92799205,238.566054791 L 219.016715407,234.224469627 L 208.733642811,222.713239546 L 202.668134461,221.250499492 L 199.926097409,219.720390737 L 198.611217958,216.900622656 L 198.569069382,214.969761838 L 238.901881061,103.863892047 L 241.08977465,101.361269095 L 243.03790903,100.686900917 L 245.242040853,101.063468184 L 252.084523422,104.192434831 L 265.618167818,102.094705254 L 278.245631388,101.901926152 L 285.430479211,102.920730238 L 295.22919281,105.529410327 L 305.26663029,109.821245462 L 314.628664265,115.676356037 L 322.572177418,122.505016139 L 333.28225753,134.597335354 L 337.032046123,137.451995668 L 341.884245737,139.324469676 L 347.087102275,139.941141262 L 351.307772506,139.455401827 Z M 195.99838751,211.799336833 L 52.9001298167,160.247919343 L 47.6119407976,159.280935943 L 42.4173759311,159.518624496 L 33.180752358,162.967506194 L 78.9772495493,37.142664271 L 83.3406037441,45.3286975089 L 88.3116476346,49.7984539494 L 91.7712367697,51.6961480809 L 235.040159425,103.9481892 Z M 19.103335874,183.809683267 L 9.9883174524,180.492087877 L 8.61367075424,177.544148519 L 70.2197902388,9.15986765553 L 72.2618938804,8.51970149216 L 82.2226356608,12.1451150114 L 83.3837786013,14.8025098017 L 22.3418197986,182.221532811 L 20.6838848769,183.852867172 Z" fill="#1b2b45" stroke="none"/>
+  <path d="M 82.2226356608,12.1451150114 L 72.2618938804,8.51970149216 L 69.6984683522,9.71504644708 L 8.6820747829,177.356209995 L 8.72422335947,179.287070813 L 10.5521330249,180.697299963 L 19.5731821844,183.980693339 L 22.1963749604,182.91351966 L 83.3837786013,14.8025098017 Z" fill="#deefe2" stroke="none"/>
+  <path d="M 380.199165712,120.59970246 L 370.802239504,117.179501027 L 367.854300147,118.554147725 L 306.846543358,285.879201473 L 307.298770997,287.852901086 L 309.092478649,289.357099497 L 317.233602435,292.426644006 L 320.574692403,290.556585765 L 381.411439119,123.701378327 Z" fill="#dfefe2" stroke="none"/>
+</g>
+<g id="kit-spout" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 108.27357532,285.640563556 L 107.127952496,276.292967697 L 108.013384727,271.541545829 L 109.947399577,267.036039581 L 165.420483495,187.463575997 L 174.213028025,171.768316819 L 180.802104559,154.163940362 L 184.860052277,134.421016052 L 185.754577057,123.205855535 L 185.093222969,107.23893314 L 181.843382422,89.2153780962 L 177.052958014,74.2637282211 L 169.403573968,58.1647554679 L 160.991885504,45.0722577231 L 148.967515519,31.0371401087 L 138.859485302,21.7620268946 L 90.6980997727,71.5400435678 L 97.0217155471,77.676971426 L 105.687732156,88.1397701017 L 109.242376014,94.0469273747 L 113.566376772,105.131737587 L 115.269090989,114.381103203 L 115.17757322,124.449450858 L 113.537909088,133.067542383 L 109.792667192,142.774919121 L 105.294043422,150.245687768 L 52.5823689217,225.525760638 L 49.3131532398,228.974271741 L 44.6922516822,232.086709498 L 34.9021097128,234.387387707 Z" fill="#feedc6" stroke="none"/>
+  <path d="M 113.873039192,314.953461815 L 116.96159941,314.552468326 L 119.018062054,313.184637417 L 125.188130005,304.19852249 L 125.983234505,300.970859429 L 124.058652214,296.57131593 L 116.850114225,291.52384329 L 112.304245392,285.288855194 L 110.617676209,277.759878876 L 110.888489399,274.409258006 L 112.289970418,270.141254848 L 118.189905201,259.623138593 L 139.174390244,231.223290222 L 139.354875702,229.396428159 L 140.321543116,229.584986134 L 152.768151785,211.809386773 L 153.579571323,209.08145746 L 169.893529671,187.1774678 L 174.605268977,178.879304587 L 179.448378619,168.475733614 L 184.611586578,153.779431917 L 187.833217187,139.06647517 L 189.605271687,121.019042587 L 191.236013275,117.644034161 L 193.767822111,114.899959816 L 197.339971045,112.762261989 L 205.122935498,110.887304836 L 209.637194285,108.798892137 L 213.103210464,104.023252719 L 214.013200256,99.4111036994 L 212.793224727,94.5283114951 L 208.640446873,89.3010334183 L 197.082160526,81.5740665663 L 181.001712882,73.854662215 L 173.188498426,57.6409741745 L 164.916082811,44.523918869 L 154.530016914,31.6359541273 L 141.833670243,19.0835527146 L 143.12060598,13.758724416 L 141.433696786,8.671059198 L 138.443876827,5.96717743045 L 134.970468153,5 L 131.046270846,5.54833885416 L 126.302411479,9.18506792118 L 77.4609767488,59.5856061469 L 74.6586947327,63.2389902634 L 73.9619904817,65.8030891668 L 74.7641474658,70.7595540535 L 78.556634425,74.7579340585 L 82.9721529528,75.7743966159 L 87.715672309,74.5789786483 L 94.850367611,80.4292882938 L 103.426226494,91.1951902263 L 108.184700846,100.264750405 L 111.214373372,110.931572068 L 111.778007233,122.679436422 L 109.810342274,133.509408472 L 105.27857841,143.642676271 L 50.7560168741,221.683308531 L 47.0196975211,226.147602169 L 41.8171470105,229.218997322 L 37.4668886377,230.201469759 L 33.8049219885,230.200959743 L 26.85810464,228.266604882 L 19.1498329017,223.235447281 L 14.7178293298,222.939906525 L 12.3009057858,224.299494912 L 5,235.423647676 L 5.18804795895,238.11894691 L 6.24453308913,240.445712728 L 108.359992929,312.191882393 Z M 116.380460473,310.849459072 L 114.143852382,311.602840945 L 8.93192981259,238.17681457 L 8.76843941443,235.620788183 L 14.2830157254,227.396467658 L 15.6922292502,226.429970248 L 17.8221945707,226.700613433 L 122.231280135,300.052797121 L 122.493170781,301.94525935 Z M 108.330932964,285.558648352 L 34.8201945084,234.330030063 L 44.0204450027,232.348770151 L 49.1984379525,229.13810215 L 52.5823689217,225.525760638 L 105.236685779,150.327602972 L 109.792667192,142.774919121 L 113.537909088,133.067542383 L 115.251415908,123.646613852 L 115.269090989,114.381103203 L 113.566376772,105.131737587 L 109.242376014,94.0469273747 L 106.170980861,88.844376864 L 100.32271128,81.3312055692 L 90.6980997727,71.5400435678 L 139.138030998,21.712911773 L 152.678087274,34.9781624701 L 162.335158853,46.9894475185 L 170.68124715,60.5243213683 L 177.077515575,74.4030010691 L 181.843382422,89.2153780962 L 185.093222969,107.23893314 L 185.80403219,121.043090132 L 184.860052277,134.421016052 L 180.802104559,154.163940362 L 177.261565671,164.625038984 L 172.32005578,175.692174115 L 164.961622345,188.118897633 L 110.004757221,266.954124376 L 107.956027083,271.623461034 L 107.127952496,276.292967697 Z M 207.990987685,105.570889065 L 205.73789455,107.045192739 L 195.579049158,109.698089326 L 189.180230653,114.129242872 L 186.962657686,95.8518696977 L 182.696864598,78.5818665324 L 196.033067892,84.9901175969 L 207.771499686,93.3315334848 L 210.040227838,97.239585758 L 210.269148397,100.573891589 L 209.539644063,103.359178545 Z M 138.664384858,10.8825997122 L 139.58159714,13.2339230906 L 139.310953956,15.3638884111 L 137.844212782,17.6329565743 L 87.5525219216,69.5816411621 L 84.8651251981,71.85053932 L 82.939862886,72.3336180192 L 80.7853400047,71.9237019863 L 78.3033263111,70.0636998292 L 77.3861140289,67.7123764509 L 77.8698727495,64.755016564 L 80.0412206856,62.0026996963 L 130.472184394,10.0294575477 L 132.274658902,8.85001460816 L 135.166588629,8.55549388398 Z" fill="#1c2b45" stroke="none"/>
+  <path d="M 122.411255577,301.887901706 L 122.231280135,300.052797121 L 17.4126185485,226.413825215 L 14.2830157254,227.396467658 L 8.53076631784,236.308909902 L 9.09576022145,238.291529857 L 113.840749125,311.512683219 L 116.437818117,310.767543867 Z" fill="#feeec6" stroke="none"/>
+  <path d="M 137.959948101,10.145192867 L 136.075898399,8.82596706341 L 134.085205927,8.53076631784 L 131.684767427,9.16943290383 L 80.0412206856,62.0026996963 L 77.8698727495,64.755016564 L 77.4024290677,68.2121101995 L 78.2214111066,70.0063421856 L 82.1370258805,72.2597753314 L 85.3157438251,71.5556785851 L 138.647219793,16.4861437123 L 139.58159714,13.2339230906 Z" fill="#fdeec3" stroke="none"/>
+  <path d="M 207.368296127,106.111495413 L 209.539644063,103.359178545 L 210.269148397,100.573891589 L 209.991112717,96.9610400618 L 208.123718064,93.7002369074 L 196.114983096,85.0474752405 L 182.975410294,78.5327514109 L 182.467434023,78.9095273502 L 186.962657686,95.8518696977 L 189.180230653,114.129242872 L 196.758832108,109.059252735 Z" fill="#fef0cc" stroke="none"/>
+  <path d="M 168.525188746,188.782971806 L 166.886544647,190.077130033 L 160.003627411,199.906954564 L 152.719206669,210.310185527 L 152.80919439,211.22773782 Z" fill="#121c2c" stroke="none"/>
+  <path d="M 127.752146644,246.664221255 L 115.666168881,263.227407588 L 114.690918934,265.840621613 L 126.98176971,248.810501614 Z" fill="#0c1729" stroke="none"/>
+  <path d="M 132.422673339,240.168362544 L 132.095012521,239.938931969 L 130.316925568,242.478303307 L 130.587228743,242.789649086 Z" fill="#0e1829" stroke="none"/>
+  <path d="M 146.590011317,219.93530705 L 145.778931789,220.221925263 L 144.041717436,223.400303197 Z" fill="#11192b" stroke="none"/>
+</g>
+</defs></svg>
+````

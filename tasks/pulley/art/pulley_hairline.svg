@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" width="1376" height="768">
+  <rect width="1376" height="768" fill="#F8F7F2"/>
+  <g fill="none" stroke="#1F2A3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ceiling beam -->
+    <g id="beam">
+      <rect x="398" y="41" width="578" height="47" fill="#ECEAE4" stroke="none"/>
+      <line x1="398" y1="41" x2="976" y2="41"/>
+      <line x1="398" y1="88" x2="976" y2="88"/>
+    </g>
+
+    <!-- rope: anchored at the bracket collar, down to the movable pulley, round under it, up the left, over the fixed pulley, free end down-right.
+         Drawn behind both pulleys, so it sits in their grooves. Outline stroke under a coral stroke. -->
+    <g id="rope">
+      <path id="rope_path" d="M692 275 L718 329 A57.5 57.5 0 1 1 630.5 378 L630.5 194 A57.5 57.5 0 1 1 749 197 L862 606"
+            stroke="#1F2A3A" stroke-width="17"/>
+      <path d="M692 275 L718 329 A57.5 57.5 0 1 1 630.5 378 L630.5 194 A57.5 57.5 0 1 1 749 197 L862 606"
+            stroke="#FEB8A7" stroke-width="9"/>
+    </g>
+
+    <!-- fixed pulley: wheel turns about its axle (688, 194) -->
+    <g id="fixed_wheel" data-pivot="688 194">
+      <circle cx="688" cy="194" r="64" fill="#DBEAF7"/>
+      <circle cx="688" cy="194" r="50" fill="#DBEAF7"/>
+    </g>
+
+    <!-- bracket holding the fixed pulley, in front of the wheel -->
+    <g id="bracket">
+      <path d="M614 88 H761 V96 Q761 102 754 102 H720 L700 262 H676 L656 102 H622 Q614 102 614 96 Z" fill="#EBE3F7"/>
+      <circle cx="688" cy="191" r="9" fill="#ECEAE4"/>
+      <rect x="676" y="262" width="31" height="13" rx="6" fill="#FEB8A7"/>
+    </g>
+
+    <!-- movable block: wheel, strap, hook, shackle and box move up together; the wheel also turns about (688, 378) -->
+    <g id="movable_block">
+      <g id="movable_wheel" data-pivot="688 378">
+        <circle cx="688" cy="378" r="63" fill="#FDF1C9"/>
+        <circle cx="688" cy="378" r="49" fill="#FDF1C9"/>
+      </g>
+      <path id="strap" d="M667 456 V379 A20.5 20.5 0 0 1 708 379 V456 Q708 462 702 462 H673 Q667 462 667 456 Z" fill="#FDF1C9"/>
+      <circle cx="688" cy="381" r="9" fill="#ECEAE4"/>
+
+      <g id="hook">
+        <path d="M688 462 V476 C688 488 713 492 713 509 C713 526 697 532 684 530 C670 528 662 518 662 503" stroke="#1F2A3A" stroke-width="17"/>
+        <path d="M688 462 V476 C688 488 713 492 713 509 C713 526 697 532 684 530 C670 528 662 518 662 503" stroke="#ECEAE4" stroke-width="9"/>
+      </g>
+
+      <g id="shackle">
+        <path d="M659.5 561 V531 C659.5 508 716.5 508 716.5 531 V561" stroke="#1F2A3A" stroke-width="17"/>
+        <path d="M659.5 561 V531 C659.5 508 716.5 508 716.5 531 V561" stroke="#ECEAE4" stroke-width="9"/>
+      </g>
+
+      <g id="box">
+        <rect x="568" y="561" width="240" height="166" rx="10" fill="#DFF1E3"/>
+        <path d="M568 561 H599 A31 31 0 0 1 568 592 Z" fill="#DBEAF7"/>
+        <path d="M808 561 H777 A31 31 0 0 0 808 592 Z" fill="#DBEAF7"/>
+        <path d="M568 727 H599 A31 31 0 0 0 568 696 Z" fill="#DBEAF7"/>
+        <path d="M808 727 H777 A31 31 0 0 1 808 696 Z" fill="#DBEAF7"/>
+        <path d="M657 561 A31 31 0 0 0 719 561 Z" fill="#DBEAF7"/>
+        <path d="M657 727 A31 31 0 0 1 719 727 Z" fill="#DBEAF7"/>
+        <rect x="614" y="561" width="26" height="46" fill="#DBEAF7"/>
+        <line x1="688" y1="561" x2="688" y2="727"/>
+      </g>
+    </g>
+  </g>
+</svg>

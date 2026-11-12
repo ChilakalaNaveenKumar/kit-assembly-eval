@@ -1,0 +1,10 @@
+# System dependency for figures only: rsvg-convert (librsvg) 2.62.1
+numpy==2.4.1
+svgelements==1.9.6
+pytest==9.0.2
+anthropic[vertex]==0.105.2
+google-auth==2.49.2
+google-genai==1.75.0
+# Only for kitmaking/ (building the kits), not needed to run or grade:
+opencv-python-headless==4.13.0.90
+Pillow==12.3.0

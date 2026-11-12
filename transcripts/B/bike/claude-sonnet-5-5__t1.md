@@ -1,0 +1,474 @@
+# B · bike · claude-sonnet-5-5 · trial 1
+
+- Result: **FAIL**, score 0.81, tags: fail, wrong connection (far off), failed:joint, failed:orient
+- Model version: `claude-sonnet-5-5`, response id: `msg_vrtx_011CgrVRACrhD5jgcPMFTDxn`
+- Started 2026-11-08T20:31:35-0500, finished 2026-11-08T20:37:27-0500, 352.8 s, attempts 1
+- Tokens: input 30,705, output 39,492 (thinking not reported separately by this provider)
+- Settings: `{"provider": "anthropic", "route": "vertex", "max_tokens": 128000, "thinking": {"type": "adaptive", "display": "summarized"}, "output_config": {"effort": "high"}}`, prompt sha256 `61c524f0c6b5bca64bf3c87a79352356a32888b1c544776eaa6ebf180455b035`
+
+## Failed checks
+
+- Handlebar: the centre of the bottom edge of its green headset spacer on the centre of the top edge of the frame's head tube (within 8 px): error 440.3 (tolerance 8)
+- Saddle: the bottom edge of its seatpost collar sits on the top edge of the frame's seat tube, centred on it (within 8 px): error 550.44 (tolerance 8)
+- Saddle faces the way it does on the working object (within 8 deg): error 25.0 (tolerance 8.0)
+
+## Thinking summary (as returned by the provider)
+
+````text
+I'm trying to identify the wheel parts - p01 and p05 both look like wheels with similar radius and center, but p05 has an extra hub shape suggesting it's the rear wheel with a sprocket, while p01 is plainer and likely the front wheel.
+
+Now I'm examining p02, which seems to be the frame assembly. It contains multiple overlapping shapes spanning a wide coordinate range, including what looks like a fork leg, chainstay, and seat tube area, and I'm trying to piece together how these irregular polygon pieces fit into head tube, top tube, and dropout locations.
+
+Tracing the fourth shape further, it seems to extend down like a leg or chainstay piece toward (240,485), which is puzzling for a bike frame. The salmon shape forms a seat stay running from the seat cluster down to the rear dropout, and another grayish diagonal piece runs from around (195,167) to (291,333), suggesting more overlapping frame tubes than I initially mapped.
+
+Now matching the eleven parts to shapes: two wheels, the frame, a chainring with teeth, a salmon drop-bar-shaped handlebar, a small rectangular pedal with a hole, and a larger toothed cassette or crank spider with five arms, plus a smaller geared circle that looks like another sprocket component.
+
+I'm also working out p08, a long rounded rectangle with a hole near the bottom — this looks like a crank arm, possibly connecting to a bolt or pedal at one end.
+
+Moving through the rest: p06 is a rotated rectangle with an axle hole, likely a pedal; p09 is a long thin tapered piece which could be either a seatpost or fork blade depending on length; p10 appears to be the chain.
+
+p11's shape with rails strongly suggests a saddle. I'm now reconsidering whether p02's frame shape actually includes the fork, or whether p09 serves that role based on its tapering width.
+
+I'm estimating the wheel radius at roughly 253px, which puts the fork length and chainstay geometry into rough proportion against the 768px canvas, and trying to pin down where the rear axle and bottom bracket actually sit so the frame reads as upright.
+
+Now I'm second-guessing shape 4 — that near-vertical piece around x=270 looked like it might belong to the fork, but its position relative to the bottom bracket doesn't fit. I'm reconsidering the orientation entirely and suspecting the head tube is actually the slanted shape around x=615-680, y=5-115, with the tapered top matching the head tube's top edge.
+
+Looking at p09, it leans slightly from top near (27,5) to bottom near (35,292), connecting toward the front axle around (40,285). Given fork rake typically angles forward, I need to check if this near-vertical shape with an 8-degree tolerance actually matches the expected fork orientation, especially since p09 seems to be stored at an arbitrary rotation that I still need to resolve.
+
+This confirms the forward-curving fork tip with the crown positioned top-left, consistent with the bike facing right. I'm now trying to identify the other shapes — mapping the seat stay from around (244,85) down to the dropout near (35,365), plus another lighter-colored piece that might belong to the rear triangle.
+
+Looking at the diagonal bars running from roughly (183,185) to (270,333), I'm wondering if these represent a rider's leg rather than frame tubing, since the wheel radius of 253 seems disproportionately large compared to the rest of the frame geometry. I'm checking how the wheel's bottom edge and center align against the frame's base points to figure out the actual scale.
+
+Now I'm trying to pin down the wheelbase by estimating front and rear axle positions, getting roughly 695 between them with a 189 gap between the wheels themselves, which seems plausible. But the BB drop comes out too small at only 20 compared to the usual 70 on a real bike, and there's inconsistency between where the down tube and seat tube endpoints suggest the BB should sit versus my estimate of (390,360) — the numbers don't quite line up.
+
+Tracing shape 4 more carefully, I see it's the chainstay: a wedge-shaped horizontal bar running from x=70 to x=270 around y=365-413, with a vertical segment at x=270-293 connecting up to y=339, and then a leg descending further down to around (240,485) that doesn't fit neatly into the chainstay and might be a separate component like a kickstand.
+
+I'm wondering if the whole bike is actually rendered as a set of layered shapes in different fill colors representing near/far sides of the frame in perspective, rather than discrete named parts like chainstay or fork.
+
+I'm tracing the top tube and head tube coordinates together — the head tube forms a tall vertical segment at the right, while the top tube connects to it at a slant, so I'm checking whether it rises or falls toward the front to match standard bike geometry.
+
+Now I'm estimating where the down tube, seat tube, and bottom bracket converge, cross-checking x and y values for each line segment to see if they plausibly meet at a shared BB point as expected in a real frame.
+
+Let me reconsider which parts belong to the crank, pedal, and chainring versus other components. I'm spotting a circle that looks like the rear axle hole at around (38.5, 365), which helps anchor the rear dropout location, and there's another shape in the lower-left area worth examining too.
+
+Tracing the chainstay slope from the top edge down to the bottom bracket region, I'm estimating the BB center sits around (270-275, 400), with the shell piece slightly offset above it—trying to reconcile that against the seat tube position and the leg-like shape extending below, which seems too far forward to be the actual chainstay.
+
+Tracing chainstay edges, I see the top running from around (270,386) to (77,363) and bottom from (69.5,375) to (264,413.5), with the bar thickening near the BB to about 27 units versus 12 at the far end. I'm now wondering whether the lower continuation toward (238,482) is actually the seat tube rather than part of this chainstay, and considering if this shape could instead represent the BB shell itself.
+
+There's a vertical piece around x 270-293 running from y339 down to roughly 486, which seems too long to be the BB shell and might actually be the seat tube, except the labeled seat tube (C) sits separately around x314-338, y331-344 ending near the BB top. The three tube endpoints — seat tube around y326, shell top around y281, down tube end around y390 — don't align as I'd expect, so something about my shape assignments must be off.
+
+I'm starting to think this is more like a loosely traced hand-drawn picture rather than a precise schematic, with the BB center somewhere near (320,350) and small irregular path commands reflecting imprecise raster tracing rather than deliberate geometry.
+
+Since grading likely depends on matching pink connection points between parts, I'm trying to track which pieces share axle/hub markers — the rear axle at (38.5,365) shows up in one part, but I need to figure out whether the fork piece actually carries the front axle point or if that's elsewhere, and whether another part's pink circle corresponds to a hand or pedal connection.
+
+Looking at hub shapes, p05 seems to have a freehub-style hub (suggesting rear wheel) while p01's hub is plain, pointing to it being the front wheel instead.
+
+Now I'm tracing which part is the fork versus seatpost, checking p09, and examining how the handlebar in p04 connects to the head tube top in p02 — following the path coordinates to see the head tube's front edge leaning back at the top.
+
+That matches a head angle around 73°, roughly 17° off vertical, running from the head tube's top point down to the bottom. So the fork p09 would need to be rotated counterclockwise by about that amount from its stored near-vertical orientation so its axis aligns along the head tube and the front axle lands at the correct position below.
+
+Next I need to figure out the handlebar/stem placement, attaching p04 at the top of the head tube and finding where its clamp center sits along the bar shape.
+
+Tracing the geometry further, it looks like a classic drop-bar side profile: a long slanted tops section runs from the left tip toward the hoods, then curves down into the drop with a bulging blob near the bottom before curving back up, consistent with a stem clamp, tops, hood bend, and drop end shape.
+
+Maybe p04 is actually the handlebar combined with stem, with the straight rising section forming the stem and the loop at the right forming the bar's drop and hood area—trying to map a typical side-view drop bar silhouette onto these coordinates.
+
+I'm uncertain how much tolerance there is for orientation accuracy, since the reference "working object" angle isn't given directly. I'll assume parts like p02 are stored upright correctly, while p09's fork might already reflect the correct lean—top tilted back, bottom forward—consistent with how a bike fork sits when the bike faces right.
+
+Tracing the blade's edge coordinates confirms the upper straight section leans around 2.9°, well short of the 17° needed, so I'm figuring out the extra rotation to apply to p09 to match the real bike's head tube angle.
+
+Then I need to locate where the fork crown meets the head tube bottom versus where the dropout tip sits, so the rake and axle position line up correctly once rotated.
+
+Computing the fork's top-center point and axis angle, I get about a 16.3° lean from top to bottom. Now I'm rotating the fork by -14° around its top point to find where the front axle lands, working through the coordinate transformation to get the new tip position.
+
+Front axle comes out around (742,374), rear axle around (38.5,365) — close enough to level given my ±10px uncertainty on the fork tip estimate, so I'll treat both wheels as sitting at the same ground height and nudge the front axle to roughly (742,368) as a reasonable compromise.
+
+For the dropout hole on the fork foot, I'm locating it near (42,283-284) based on the foot's bounding region, which seems consistent enough to use as the axle hub point for translation calculations.
+
+Working out the rear hub position by translating from p05's wheel center, and front hub from p01's wheel center, both relative to the 258.3 reference origin. For the cassette, I'm pinpointing its hub circle center around (52.4,52.4) and translating it to sit at the rear wheel hub location, though I need to double-check which part number actually corresponds to the rear wheel.
+
+I'll tentatively assign p05 as the rear wheel since cassette p03 shows six sprocket layers, though the distinction isn't fully certain. Moving on, I need to place the chainring at the BB, crank attaching from BB center to pedal, chain wrapping the chainring and cassette, saddle atop the seat tube, and handlebar on the head tube — next figuring out the BB's exact position.
+
+Now I'm calculating the chain loop's geometry, working out the center and radius of the big arc around the chainring by measuring the chord between its endpoints, and doing the same for the small arc near the cassette to pin down its center.
+
+I'm checking whether the chainstay geometry lines up—comparing axle and bottom bracket positions against the chain's slope to see if the proportions make sense for a real bike frame.
+
+Now I'm trying to pin down the small sprocket's actual center by working out where a circle of radius 24 could pass through both known arc endpoints, computing the perpendicular offset from their midpoint to locate it precisely.
+
+Not a perfect tangent, but close enough for hand-drawn geometry. Checking the center-to-center line slope of 24° against the differing radii (76 vs 24) gives a tangent angle offset of about 9.6°, landing the top run slope near 14.4°, matching what I found before. So the center distance is 310 with that 24° angle—now I need to figure out what BB-to-axle distance and angle that corresponds to on the actual bike.
+
+Looking at where the seat tube and down tube converge, around (350,350), that lines up suspiciously well with the 310 chain distance, suggesting the BB is roughly there—though the chainstay shape I identified earlier seems to end short of that point, so I may have mislabeled which shape is the chainstay.
+
+I'm testing whether a BB drop around 52px (scaled from a typical 70mm drop on a 700c wheel) matches the chain's stored slope angle.
+
+That gives a chain center-line slope of roughly 9.7°, so I'm rotating the stored chain by about 14° counterclockwise to align its chainring and cassette ends correctly, keeping the cassette side left and chainring side right. Then I need to place the chain so its small-arc center sits at the cassette center and solve for where the BB falls, given the chain's fixed 310px length between centers.
+
+I'm now working out the BB location geometrically by intersecting the down tube and seat tube centerlines — estimating the down tube running from the head tube junction down to around (395,368), and the seat tube from its top near (246,70) down toward (326,338), then solving for where these two lines cross to pinpoint the bottom bracket position.
+
+Checking shape 4's chainstay trace against x≈270, it lines up with the expected taper, but it stops short of x=351 rather than reaching the BB point I calculated. That mismatch suggests the down tube and seat tube endpoints also don't actually converge at (351,421), meaning the BB shell itself might just be missing from these shapes rather than drawn separately.
+
+Actually, I wonder if the frame art is designed with a gap there deliberately — the chainring, roughly radius 76 centered near (330,380), would cover x≈254-406 and y≈304-456, which spans exactly where all these tube ends terminate. So the BB junction is likely just hidden behind the crank/chainring graphic rather than being an error in the frame geometry.
+
+Tracing the chainstay slope to estimate BB around (347, 411), I'm checking the chainring radius of 76 against the seat tube, down tube, and chainstay endpoints—down tube fits cleanly at distance 63, while seat tube and chainstay are both borderline around 76-78, close enough to be plausible given the generator's likely intent.
+
+Averaging my estimates, I'll settle on BB≈(346,415), checking the distance to the axle comes out close to the known chainstay length. Now I need to rotate the chain graphic so its small-sprocket center lands on the axle and big-sprocket center lands on BB, computing the rotation angle from the difference between the chain's stored orientation and the target orientation.
+
+Completing the rotation and translation calculation confirms the big center maps to roughly (345,414.5), matching my BB estimate well enough. Now I'm moving on to computing the chainring center from its arc points.
+
+Next I check the crank's pedal-end hole, locating its circle center around (20.1,138.6) with radius 9.5, trying to figure out whether this is the pedal axle or the bottom bracket end based on the pink fill pattern seen in the other crank piece.
+
+Comparing widths at the top versus bottom of the crank shape, the bottom appears wider, which matches a real crank arm being broader at the BB spindle end and narrower toward the pedal — so I'm concluding the pink circle marks the BB spindle bore.
+
+Checking the crank's length in pixels against the wheel radius scale gives roughly 122px, which lines up well with a typical 170mm crank arm relative to a 340 wheel radius, confirming the geometry is consistent. Now I'm turning to examine the rotated rectangle for the pedal piece.
+
+I'll rotate the crank 180° so it points downward from the BB, putting the tip well clear of the wheel's bottom edge, and check it doesn't awkwardly overlap the other leg shape nearby — seems fine since they're at different x positions.
+
+Working out the crank's rounded tip center precisely from the arc endpoints, estimating it around (19.3, 17.5) with roughly an 11-radius cap.
+
+After rotating 180°, the tip lands at roughly (345.8, 535.6), so I'm positioning the pedal by translating its center (21.75, 35.2) there, giving an offset of (324.05, 500.4). I'm also checking the pedal's long-axis orientation—roughly a steep 73° angle from horizontal based on its rectangle corners—though since pedal angle isn't strictly graded, I could still rotate it closer to horizontal for realism.
+
+Moving on, I'm computing the cassette's translation at (-13.9, 312.6) by aligning its center to the hub position, and now figuring out the saddle's placement, which needs to attach at the top of the seat tube/seatpost.
+
+Looking closer at the saddle outline, it's a shape roughly 220 units wide with two overlapping colored regions, and I'm tracing the polygon points to understand which lobes form the nose versus the rail area.
+
+Tracing through these coordinates, shape 2 looks like it could be a shoe and shape 1 a calf — this might actually depict a rider's leg rather than a saddle component. I'm reconsidering whether p11 is really the saddle or perhaps the rear derailleur instead.
+
+Checking the scale, a 275mm saddle length converts to roughly 205px given the drawing's ratio, which lines up closely with the bounding box diagonal I measured from point to point — this supports the saddle interpretation after all.
+
+Tracing the edges, I notice a thin tapering slab about 130 long and 35 wide running at roughly a 24° angle, which could be the saddle's nose narrowing toward the front, with a separate bulge region forming the body behind it. I'm leaning toward this being a saddle viewed at an angle, possibly connecting to the seatpost area.
+
+Tracing shape 2's outline further, it winds down from the shell edge through a narrow stem-like neck before widening into what looks like a seatpost clamp assembly, then curves back up toward the frame attachment point.
+
+I'm trying to figure out the saddle shape's orientation by tracing its contour points — testing whether the nose, tail, and thick body regions fit a plausible rotated saddle profile, but the coordinates aren't clearly resolving into that shape yet.
+
+The rear lobe rounds out at the bottom, so the saddle's long axis runs from nose to tail at roughly a 30° angle rather than horizontal. I need to figure out the right rotation to orient the nose forward-right, and then work out where the seatpost clamp and post attach once that rotation is applied.
+
+Tracing the post's edges, it looks nearly vertical with just a slight taper, widening into the clamp region above. That means the saddle should sit above the clamp, but shape 1 is positioned left and below it, which doesn't quite line up with how I'd expect the saddle to rest on the post.
+
+I try rotating the stored orientation 90° clockwise to see if that maps the post pointing down to pointing up in real-world terms, but that sends the post leftward instead, which still doesn't match where the saddle shape actually sits.
+
+Maybe shape 2 isn't a seatpost at all — could be a shoe or saddle rail instead. I consider that shape 1 might be the saddle in side profile, expecting a long thin form with a concave top, raised nose and tail, and rails underneath, but the bounding dimensions I measured don't fit that thin-profile expectation at all.
+
+Looking closer, though, the thin slab part with its tilt actually does match a saddle's length and thickness. I wonder if the extra lower bulge is something else entirely, maybe part of a rear derailleur, so I'm reconsidering whether shape 1 could instead represent that linkage, or whether it's combined with the rider's form, and I start tracing the outline coordinates in order to figure out which interpretation actually fits.
+
+Tracing the nose and underside contours, I'm estimating slab thickness at different points — roughly 25 units thick around x=40 and 37 units around x=100 — then following the lower bulge curve back toward the tail region.
+
+I'm trying to figure out what this second lower blob represents, wondering if it's a bottom slab beneath the saddle shape, maybe suggesting a seatpost, springs, or some other structural feature, but nothing is clicking yet so I'm still weighing possibilities.
+
+Checking the essential parts list — wheels, frame, fork, handlebar, chainring/crank, pedal, cassette, chain — p11 must be the saddle since that's the only remaining necessary component. That means the second shape is likely the seatpost inserted into the seat tube, and I'm now examining a third shape near the nose end to see if it's some additional detail there.
+
+I'm puzzling over the saddle's orientation — nose appears up-left, tail down-right, with the post positioned near the tail, which doesn't match how a real saddle mounts (post should be under the middle/rear with nose pointing forward). Rotating the shape to point the nose correctly seems to force the post into an awkward position, and mirroring isn't an option, so I need to reconsider which end is actually the nose.
+
+Let me rotate the coordinates by the axis angle to check whether the top edge actually rises toward the nose as expected for this saddle orientation, working through the perpendicular projections point by point.
+
+This is getting overly convoluted though — maybe I should step back and treat p11 as a seatpost-clamp feature instead, placing the saddle so the post descends into the seat tube along its 17° backward-leaning axis rather than chasing exact pixel coordinates.
+
+Applying that same -32° rotation to the saddle shape, I need to figure out which end is the nose versus the tail so the saddle orientation stays anatomically correct after rotating — tracing the slab direction vector to confirm it tilts correctly rather than ending up backward.
+
+Let me try aligning the post's bottom end with the seat tube top, inserting it slightly so the clamp sits just above the frame, positioning the saddle accordingly above that point.
+
+I realize that placement puts the saddle off-canvas above y=0, so I need to translate the whole frame (p02) downward instead, keeping it upright, while checking that the wheels still fit within the canvas height and the handlebar clears the top.
+
+Now I'm centering the frame horizontally: computing the combined wheel span and solving for the translate offset so the bike sits centered on the 1376-wide canvas, landing on roughly tx=300, ty=110. Then I'm working through the saddle's rotation and position relative to the seat post clamp, rotating the saddle around the post's bottom pivot to figure out its true offset coordinates.
+
+Rotating the shell's stored position gives it centered 124 left and 27 up from the post bottom, meaning it would extend mostly backward behind the post — which doesn't match how saddles normally sit, since the clamp should sit roughly centered under the shell rather than at one end. That makes me doubt this shape is actually the post after all.
+
+Maybe shape 2 isn't the seatpost clamp but the rider's shoe hanging near the bottom bracket instead — p02 has odd leg-like shapes that could be components I'm misreading. I'm starting to wonder if the kit generator names parts differently than I assumed, so I should reconsider what shape 11 actually represents, possibly revisiting it as something other than the saddle entirely.
+
+Shifting focus to p04, I notice its salmon color matches the seat stay and hub shapes elsewhere, suggesting it's part of the same drivetrain family rather than a handlebar — though a drop-bar interpretation still seems plausible if I reorient the curve: clamp point, forward sweep to the hood, then the drop curling back underneath.
+
+I'm tracing how the bar widens from the narrow left tip up toward the top-right point, with top and bottom edges diverging to form a wedge shape, plus a second connecting tube piece branching through the middle coordinates.
+
+Now I'm trying to figure out if this traced shape is actually the handlebar assembly, with the stem as the long angled piece rising from the left tip toward where it would clamp onto the steerer tube near the head tube.
+
+I'm trying to work out the bar's orientation from the diagonal segments, measuring the perpendicular distance between parallel lines to figure out the drop bar's thickness and ramp angle.
+
+Actually maybe the left portion (x 5-80) is the stem itself, thickening from the steerer clamp toward the bar clamp rather than part of the handlebar — the top edge rises while the bottom edge stays flatter, which fits a typical stem shape.
+
+I'm trying to figure out the saddle's original stored orientation versus its rotated placement — checking whether the nose points right in a real bike and testing if the stored shape was drawn upright (post down, rails and shell above) before rotation was applied, comparing against the ~24° slab angle to see which end was meant as the nose.
+
+Trying to rotate the saddle's coordinate points by -24° to see if that reveals a recognizable profile, computing the transformed x and y values one point at a time.
+
+Continuing through more coordinate transformations, computing rotated x and y values for each point along the path.
+
+After rotating all the points, the top edge comes out flat and thin, forming a saddle-like slab about 25 thick and 140 long. But beyond that, there's a bulging region extending further right and down that looks like some kind of attachment or hanging component — maybe a stalk or clamp-like structure beneath the main shape.
+
+I'm starting to suspect these parts are generator-produced "organic" bike-part outlines with intentional distortions, similar to the odd leg-like shape I noticed in another frame. Taking that interpretation, shape 1 reads as a saddle shell: thicker/rounded on one side, tapering to a thinner nose on the other after the rotation.
+
+Now I'm working through shape 2's rotated coordinates, mapping each point to its new x'/y' position to see the overall extent of the shape — it spans roughly x' 158 to 241 and y' -11 to 94, with a tall segment forming near the right end.
+
+This looks like a post descending from the right side of what resembles a slab, suggesting the overall object could be a saddle sitting atop a seat post, with the post positioned under the rear half of the slab.
+
+But if the bike faces right with no mirroring, the saddle's nose needs to point right too, which doesn't match a post rising straight up on this side — so maybe shape 2 isn't actually a post, or the slab isn't the saddle at all. I'm now trying a different rotation angle to see if the pieces line up better that way.
+
+Comparing the two slab ends, the thinner side (24 vs 34) is probably the nose, so I'm testing a -24° rotation placing the nose to the right. That puts shape 2 and the blob sitting ahead of the nose, which makes me reconsider whether this aligns with the saddle resting on the seat tube clamp point.
+
+Without an explicit seatpost, I'm trying to position the saddle's underside directly at the seat tube top, estimating the attachment point near (246,50) based on the clamp geometry rather than any visible post structure.
+
+Maybe the saddle includes an attached seatpost, with the bottom end being the actual connection point to the seat tube. Checking the stored lean of that post against the real required angle of 17°, it looks like I need roughly a -12° rotation to align it correctly, since the post's current direction already points down-right slightly and its top sits back-left as expected.
+
+I'm second-guessing which end of the slab is the nose—if the saddle looks level in the real photo with the post leaning 17°, the geometry only works if the nose is actually on the left, not the right, which would flip my assumption about where the thicker end sits. Let me try assuming the stored p11 orientation is meant to be roughly upright with the nose pointing left and see if that resolves the inconsistency.
+
+The 73° computed post-to-nose angle roughly matches the stored 71°, so the stored piece needs about a -24° rotation to align the slab axis properly. But recalculating the post's lean angle after that rotation gives roughly 29° from vertical, which doesn't quite match my earlier estimate, so I need to double-check the math.
+
+Instead of trusting the loose estimate, I'm now tracing the actual coordinates of the post's left and right edges point by point to nail down its true lean direction before deciding on the correct rotation to apply.
+
+Trying -20° instead, I'm questioning which end is the nose versus where the post sits—if the thin edge is actually the nose and the post appears beyond it, that placement doesn't make sense for a normal saddle orientation, so maybe the whole shape, slab plus the bulge underneath, together forms the saddle's side profile rather than separate post and seat pieces.
+
+That lower blob is confusing me—it could overlap the seat tube and top tube awkwardly, or maybe it's actually a seatpost clamp rather than part of the saddle itself, but the width doesn't quite match either interpretation. I'm starting to wonder if I'm misreading the whole view entirely, but I need to just commit to an anchor point and move forward.
+
+I'll go with anchoring the slab's underside at the seat tube top, which keeps the saddle nose spanning roughly ±70px around that point rather than mostly hidden behind the tube—this seems more bike-like than the alternative anchor I tested. Settling on that position with a -22° rotation.
+
+Now I'm building the transform by translating to position, rotating -22°, then shifting back by the anchor point.
+
+Switching to the handlebar: I need to work out its real orientation too, since the stem, tops, and drops all seem to be sloped by different angles in the stored shape, and I'm trying to figure out which segments correspond to a realistic drop-bar geometry.
+
+I'm trying to figure out the stem and bar orientation together—checking whether rotating the stored shape by around 20° would align the tops horizontally, versus whether the stem's natural downward slope already accounts for the hood/drop angle without extra rotation.
+
+I'm locating the rounded stem end near the steerer, settling on a center point there, and estimating the head tube top position to anchor the steerer clamp. Now I'm setting up the base translate offset for the whole group and planning to wrap all the part coordinates inside a single outer transform.
+
+Verifying bounds: checking the front wheel's center and radius keep it within frame limits, confirming the rear wheel's left edge lines up correctly, and computing the handlebar's transform so its anchor point lands at the expected coordinates with the top and right extents checking out. Now I'm working through the saddle's position, checking its rotated shape extents against the anchor point.
+
+Next I'm positioning the fork, applying a rotation around its top point and figuring out the right translation so the fork crown sits flush against the head tube bottom without overlapping the steerer tube. I'm nudging the anchor coordinates slightly and then computing the rotated vector for the front axle position.
+
+Checking the resulting front axle y-coordinate against the rear axle's y to make sure the wheels sit level on the ground, I'm within a small tolerance so I settle on specific coordinates for both wheel centers, then consider tweaking the fork's rotation angle slightly to tighten the fit further.
+
+I'm computing translation offsets for the front wheel, rear wheel, and cassette based on their final axle positions, then recalculating the chain geometry and setting the chainring center at the bottom bracket location.
+
+Now I'm working out the crank and pedal transforms with their rotation angles, then planning the draw order—wheels, frame, chain, chainring—all wrapped in an outer group translated to (300,110).
+
+
+````
+
+## Answer
+
+````text
+This is my best-guess assembly. I could not confirm every part's identity or attachment point from the drawings alone, and the saddle is the least certain.
+
+**What I took each part to be**
+- p02 is the frame. It includes the rear derailleur and the rear axle hole at about (38.5, 365). The bottom bracket falls near (345, 415), where the chainstay line meets the down-tube and seat-tube lines.
+- p01 and p05 are the two wheels. I made p05 the rear because it has a hub drawn, and p01 the front.
+- p03 is the rear cassette, centred on the rear hub.
+- p07 is the chainring, centred on the bottom bracket.
+- p08 is the crank arm, with its wide, pink-marked end at the bottom bracket.
+- p06 is the pedal, centred on the crank tip.
+- p10 is the chain. Its centre-to-centre distance matches the rear axle to bottom bracket distance, so I rotated it to fit.
+- p09 is the fork. I rotated it about 14° to follow the head-tube line, and the front axle lands about 5 px lower than the rear axle, within the 8 px level tolerance.
+- p04 is the handlebar with its stem. I anchored its left end at the head-tube top and left it unrotated.
+- p11 is the saddle. I could not read its drawing with confidence, so I rotated it about 22° and set it on the seat-tube top.
+
+All parts sit inside one group translated by (300, 110) so the bike fits the canvas.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768">
+<g transform="translate(300,110)">
+<use href="#kit-p05" transform="translate(-219.8,107.2)"/>
+<use href="#kit-p01" transform="translate(483.7,112.7)"/>
+<use href="#kit-p02"/>
+<use href="#kit-p09" transform="translate(660,108) rotate(-14) translate(-27,-6)"/>
+<use href="#kit-p04" transform="translate(615,-73)"/>
+<use href="#kit-p03" transform="translate(-13.9,313.1)"/>
+<use href="#kit-p10" transform="translate(-12,348.95) rotate(-14.8)"/>
+<use href="#kit-p07" transform="translate(263.9,333.95)"/>
+<use href="#kit-p08" transform="translate(345,415) rotate(180) translate(-20.1,-138.6)"/>
+<use href="#kit-p06" transform="translate(345.8,536.1) rotate(73) translate(-21.75,-35.2)"/>
+<use href="#kit-p11" transform="translate(246,52) rotate(-22) translate(-72,-57)"/>
+</g>
+</svg>
+````
+
+## Prompt
+
+````text
+Below is a kit of 11 SVG parts for a road bike (side view). Each part is a <g id="kit-..."> drawn in its own local coordinate system, stored at an arbitrary rotation. The parts are unlabelled (ids p01 to p11); work out what each one is from its drawing.
+
+Assemble the parts into one complete, working road bike (side view) on a 1376 x 768 canvas. Parts are rigid: translate and rotate only, no scaling and no mirroring. Use every part exactly once. The base part, kit-p02, stays upright exactly as stored (at most 3 degrees of rotation).
+
+Nobody will tell you which part connects to which, at which hole or feature, or which way round a part goes. Work that out from the parts, as a practitioner who knows this object would.
+
+Grading is done by code on where the parts land:
+- every connection the real object has must be made: the matching features of the two connected parts (pin holes, axle holes, bolt holes, hub centres, the centres of rounded ends, seats) must coincide within 8 px;
+- a part that slides along a guide (such as a piston in its bore) must sit on the guide's centre line, within 8 px;
+- every part must face the way it does on the working object, relative to the base part, within 8 degrees; parts that turn in use (wheels, gears, sprockets, cranks, connecting rods, pedals, rotors) may sit at any angle;
+- anything that stands on the ground must stand level, within 8 px;
+- a missing, duplicated, scaled, skewed or mirrored part fails the assembly.
+
+Reply with one <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768"> that contains exactly one <use href="#kit-ID" transform="..."/> per part. You may wrap <use> elements in <g transform="..."> groups. Do not copy the part drawings: the kit's <defs> are inserted automatically.
+
+KIT:
+<svg xmlns="http://www.w3.org/2000/svg"><defs>
+<g id="kit-p01" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 500.5,258.3 A 242.2,242.2 0 0,1 258.3,500.5 A 242.2,242.2 0 0,1 16.1,258.3 A 242.2,242.2 0 0,1 258.3,16.1 A 242.2,242.2 0 0,1 500.5,258.3 Z" fill="none" stroke="#ECEAE4" stroke-width="22.3"/>
+  <path d="M 511.6,258.3 A 253.3,253.3 0 0,1 258.3,511.6 A 253.3,253.3 0 0,1 5,258.3 A 253.3,253.3 0 0,1 258.3,5 A 253.3,253.3 0 0,1 511.6,258.3 Z" fill="none"/>
+  <path d="M 489.3,258.3 A 231,231 0 0,1 258.3,489.3 A 231,231 0 0,1 27.3,258.3 A 231,231 0 0,1 258.3,27.3 A 231,231 0 0,1 489.3,258.3 Z" fill="none"/>
+  <path d="M 482.05,258.3 A 223.75,223.75 0 0,1 258.3,482.05 A 223.75,223.75 0 0,1 34.55,258.3 A 223.75,223.75 0 0,1 258.3,34.55 A 223.75,223.75 0 0,1 482.05,258.3 Z" fill="none" stroke="#DBEAF7" stroke-width="12.5"/>
+  <path d="M 474.8,258.3 A 216.5,216.5 0 0,1 258.3,474.8 A 216.5,216.5 0 0,1 41.8,258.3 A 216.5,216.5 0 0,1 258.3,41.8 A 216.5,216.5 0 0,1 474.8,258.3 Z" fill="none"/>
+  <path d="M 257.7,258.3 L 41.9,240.9" stroke-width="1.6"/>
+  <path d="M 252.1,275.3 L 456.6,344.1" stroke-width="1.6"/>
+  <path d="M 252.1,275.3 L 47.6,206.4" stroke-width="1.6"/>
+  <path d="M 248.6,278 L 443.6,369.5" stroke-width="1.6"/>
+  <path d="M 263.1,248.2 L 72,147.2" stroke-width="1.6"/>
+  <path d="M 247.6,277 L 58.6,173.5" stroke-width="1.6"/>
+  <path d="M 274.2,231.4 L 457.2,342.6" stroke-width="1.6"/>
+  <path d="M 260.8,254.6 L 90.8,120.6" stroke-width="1.6"/>
+  <path d="M 267.6,248.6 L 420.4,401.3" stroke-width="1.6"/>
+  <path d="M 242.1,270.2 L 112.9,97.6" stroke-width="1.6"/>
+  <path d="M 245.2,267.2 L 369.2,444.1" stroke-width="1.6"/>
+  <path d="M 272.8,248.3 L 393.9,426.8" stroke-width="1.6"/>
+  <path d="M 272.8,248.3 L 151.7,69.7" stroke-width="1.6"/>
+  <path d="M 241.9,267.4 L 135.8,79.6" stroke-width="1.6"/>
+  <path d="M 240.4,267.9 L 137.5,78.4" stroke-width="1.6"/>
+  <path d="M 274.4,250.4 L 180.1,56.4" stroke-width="1.6"/>
+  <path d="M 245.5,264.4 L 339.9,458.8" stroke-width="1.6"/>
+  <path d="M 269.4,256.4 L 306.8,469.3" stroke-width="1.6"/>
+  <path d="M 248.4,260.1 L 211.2,47" stroke-width="1.6"/>
+  <path d="M 244.1,258.5 L 244.1,474.6" stroke-width="1.6"/>
+  <path d="M 244.1,258.5 L 244.1,42.4" stroke-width="1.6"/>
+  <path d="M 273.7,258.5 L 273.7,474.4" stroke-width="1.6"/>
+  <path d="M 273.7,258.5 L 273.7,42.6" stroke-width="1.6"/>
+  <path d="M 271.4,260.8 L 307.5,47.8" stroke-width="1.6"/>
+  <path d="M 247.5,256.7 L 210.2,469.7" stroke-width="1.6"/>
+  <path d="M 270.1,264.4 L 177.8,459.7" stroke-width="1.6"/>
+  <path d="M 244.1,251.8 L 339.6,58.1" stroke-width="1.6"/>
+  <path d="M 244.2,249.1 L 120.5,426" stroke-width="1.6"/>
+  <path d="M 244.2,249.1 L 368,72.2" stroke-width="1.6"/>
+  <path d="M 269.4,266.7 L 145.4,443.6" stroke-width="1.6"/>
+  <path d="M 280.2,274.4 L 404.1,99" stroke-width="1.6"/>
+  <path d="M 248.1,248.9 L 95.3,401.7" stroke-width="1.6"/>
+  <path d="M 258.9,259.9 L 425.5,121.7" stroke-width="1.6"/>
+  <path d="M 234.3,224.4 L 59,344.6" stroke-width="1.6"/>
+  <path d="M 263.6,269.6 L 72.6,370.8" stroke-width="1.6"/>
+  <path d="M 249,239.7 L 444.3,148.7" stroke-width="1.6"/>
+  <path d="M 248.2,237.5 L 444.4,148.9" stroke-width="1.6"/>
+  <path d="M 243.2,225.6 L 47.8,311.6" stroke-width="1.6"/>
+  <path d="M 262,270.7 L 58.2,342.7" stroke-width="1.6"/>
+  <path d="M 252.1,241.4 L 457,173.9" stroke-width="1.6"/>
+  <path d="M 261.2,269.9 L 467.9,206.6" stroke-width="1.6"/>
+  <path d="M 256.5,249.1 L 41.9,276.1" stroke-width="1.6"/>
+  <path d="M 258.3,263.5 L 473.4,239.6" stroke-width="1.6"/>
+</g>
+<g id="kit-p02" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 681.5,107.5 L 648,5 L 648.5,7.5 C 648.3,8.2 652.5,7.7 647,9.5 L 615.5,18.5 L 616.5,26 C 616.2,27.6 670.9,21.3 614,28 C 557.1,34.7 333.7,59.7 275,66 C 216.3,72.3 264.7,65.8 262,66 C 259.3,66.2 259.8,65.9 259,67 C 258.2,68.1 257.8,70.2 257.5,72.5 C 257.2,74.8 256.6,77.7 257.5,80.5 C 258.4,83.3 262.2,87.7 263,89.5 C 263.8,91.3 263,91 262.5,91.5 L 260,92.5 L 565,62 C 625.7,56.2 613.3,57.2 624,57.5 C 634.7,57.8 627,62.1 629,64 C 631,65.9 634,66.6 636,69 C 638,71.4 639.9,75.7 641,78.5 C 642.1,81.3 642.5,81.2 642.5,86 C 642.5,90.8 640.7,102.2 641,107 L 644.5,115 L 678,105 C 684,103.4 679.9,105.1 680.5,105.5 L 681.5,107.5 Z" fill="#DBEAF7"/>
+  <path d="M 641,47.5 L 373.5,358.5 L 388.5,342.5 C 391.8,339.8 391.9,341.6 393.5,342.5 C 395.1,343.4 396.4,346.8 398,348 C 399.6,349.2 401.8,348.3 403,349.5 C 404.2,350.7 403.8,353 405.5,355 L 413.5,361.5 L 402.5,378.5 L 629.5,116 C 669.1,70.7 637.8,109.1 640,106.5 C 642.2,103.9 642.2,104.6 642.5,100.5 C 642.8,96.4 642.7,86.6 642,82 C 641.3,77.4 640,75.6 638.5,73 C 637,70.4 634.5,67.8 633,66.5 C 631.5,65.2 630.2,65.7 629.5,65 C 628.8,64.3 627.1,65.4 629,62.5 L 641,47.5 Z" fill="#EBE3F7"/>
+  <path d="M 236.5,57.5 L 233.5,60 L 236,72 L 240,84 L 244,84 C 245.2,84.6 246.4,85.3 247,87.5 C 247.6,89.7 247.8,94.8 247.5,97 C 247.2,99.2 233.9,59.5 245,100.5 C 256.1,141.5 302.4,302.4 314,343 L 314.5,344 L 313.5,334 C 313.8,331.9 314.7,331.7 316.5,331.5 C 318.3,331.3 322.1,333.1 324.5,333 C 326.9,332.9 329.3,331.2 331,331 L 334.5,331.5 L 338.5,342 L 268,97.5 C 256.2,55.7 268.5,93.3 268,91 L 265,83.5 L 264.5,87 C 264.1,87.8 263.2,88.1 262.5,88 C 261.8,87.9 260.8,87.6 260,86.5 C 259.2,85.4 257.9,83.8 257.5,81.5 C 257.1,79.2 257.1,75.8 257.5,73 C 257.9,70.2 260.4,67.9 260,64.5 L 255,52.5 L 236.5,57.5 Z" fill="#DFF1E3"/>
+  <path d="M 293,344 L 291.5,339 L 287.5,339 C 286.2,339.3 286.1,340.9 284,341 C 281.9,341.1 277.3,339.4 275,339.5 L 270,341.5 L 270,386 C 269.6,393.8 294.6,390.9 267.5,388 C 240.4,385.1 139.2,372.6 107.5,368.5 C 75.8,364.4 83.7,364.1 77.5,363.5 L 70.5,365 L 72.5,366 C 73,366.9 74,369 73.5,370.5 L 69.5,375 L 264,413.5 L 264,422 C 262.6,427.9 259.8,438.9 255.5,449 C 251.2,459.1 241.2,476.6 238.5,482.5 L 239.5,484.5 L 247,484.5 C 248.9,484.8 248.3,486.4 251,486.5 C 253.7,486.6 258,492 263,485 C 268,478 278,451.8 281,444.5 C 284,437.2 281.8,442.8 281,441.5 L 276,437 L 277.5,430 L 272.5,425 L 276,420 C 276.7,418.6 275.9,417.3 276.5,416.5 L 279.5,415 L 275,412.5 L 276,406 L 272.5,401 L 277.5,396.5 C 278.5,395.1 277.8,393.3 278.5,392.5 L 281.5,391.5 L 279,389 L 281.5,385 L 280.5,377.5 L 285,376 C 286.1,375.3 286.6,375.1 287,373.5 L 287.5,366.5 L 293.5,365.5 L 293,344 Z" fill="#ECEAE4"/>
+  <path d="M 244.5,85.5 C 243.5,84.8 243.8,83 241.5,85 C 239.2,87 233.7,93.3 230.5,97.5 C 227.3,101.7 224.2,107.7 222.5,110 C 220.8,112.3 224.6,105.8 220,111.5 C 215.4,117.2 199.6,137.5 195,144 C 190.4,150.5 194.2,148.2 192.5,150.5 C 190.8,152.8 205,131.2 184.5,157.5 C 164,183.8 90.8,280.2 69.5,308.5 C 48.2,336.8 60,323.4 57,327.5 C 54,331.6 52.5,331.7 51.5,333 C 50.5,334.3 55.1,331.2 51,335.5 C 46.9,339.8 31.2,354.2 27,358.5 C 22.8,362.8 25.8,358.2 25.5,361.5 L 25.5,378.5 L 29,378 C 30.2,378.2 31.8,379.9 33,380 L 36.5,378.5 L 37,374 C 36.2,372.3 32.8,370.3 32,368.5 C 31.2,366.7 31.1,364.7 32,363 C 32.9,361.3 35.8,359.2 37.5,358.5 C 39.2,357.8 41.3,358.6 42.5,359 C 43.7,359.4 44,359.5 44.5,361 C 45,362.5 44.7,366.2 45.5,368 C 46.3,369.8 47.6,371.4 49.5,372 C 51.4,372.6 54.8,371.1 57,371.5 C 59.2,371.9 60.2,374 63,374.5 L 73.5,374.5 L 71.5,372.5 C 71.2,371.3 71,368.7 71.5,367.5 L 74.5,365.5 L 74,363.5 L 59,361 C 55.8,359.8 55.2,357.8 54.5,356 C 53.8,354.2 53.7,352.8 54.5,350 C 55.3,347.2 53.5,347.4 59.5,339.5 C 65.5,331.6 75,322 90.5,302.5 C 106,283 141.5,237.3 152.5,222.5 C 163.5,207.7 154.1,216.7 156.5,213.5 C 158.9,210.3 151.8,222.9 167,203.5 C 182.2,184.1 234.6,116 248,97 C 261.4,78 248.1,91.4 247.5,89.5 C 246.9,87.6 245.5,86.2 244.5,85.5 Z" fill="#FEB8A7"/>
+  <path d="M 195.5,167.5 L 182.5,183 L 213,211.5 C 220.3,219 222.2,222.2 226.5,228 C 230.8,233.8 233.6,237 238.5,246 C 243.4,255 251.9,272.3 256,282 C 260.1,291.7 260.8,295.5 263,304 L 269,333 L 275.5,334 C 277.7,333.8 280.1,331.5 282,331.5 C 283.9,331.5 285.5,333.7 287,334 L 291,333.5 L 290,321.5 C 288.5,314.2 285,299.2 282,289.5 C 279,279.8 276.4,272.7 272,263 C 267.6,253.3 263.2,243.2 255.5,231.5 C 247.8,219.8 233.9,202.7 225.5,193 C 217.1,183.3 210,177.8 205,173.5 L 195.5,167.5 Z" fill="#ECEAE4"/>
+  <path d="M 182.5,185 L 172.5,195.5 L 200.5,222 C 209.3,232.1 218.6,244.5 225.5,256 C 232.4,267.5 237.9,280.5 242,291 C 246.1,301.5 248.3,312.1 250,319 L 252,332.5 L 261,334.5 L 268,333 L 267,320 C 265.9,314.2 264,305.8 261.5,298 C 259,290.2 255.9,281.7 252,273 C 248.1,264.3 241.9,252.9 238,246 C 234.1,239.1 232.7,237.1 228.5,231.5 C 224.3,225.9 219.2,219.2 213,212.5 C 206.8,205.8 196.6,195.6 191.5,191 L 182.5,185 Z" fill="#DBEAF7"/>
+  <path d="M 264.5,414 L 249.5,411.5 L 240,443.5 C 236.5,452.8 231.8,461.2 228.5,467.5 L 220,481 L 222.5,484 C 223.7,484.7 224.7,485 227,485 C 229.3,485 234.6,484.4 236.5,484 C 238.4,483.6 235.4,488.2 238.5,482.5 C 241.6,476.8 250.8,459.8 255,450 C 259.2,440.2 261.9,429.5 263.5,423.5 L 264.5,414 Z" fill="#DBEAF7"/>
+  <path d="M 263,339.5 L 253.5,342 L 253.5,386 L 269.5,389 L 271,369.5 C 271.2,362.3 270.8,350.6 270.5,346 C 270.2,341.4 270.8,343.1 269.5,342 C 268.2,340.9 265.7,339.5 263,339.5 Z" fill="#DBEAF7"/>
+  <path d="M 37.5,358.5 C 36,359 33.4,360.4 32.5,362 C 31.6,363.6 31.3,366.3 32,368 C 32.7,369.7 34.9,371.3 36.5,372 C 38.1,372.7 40,372.7 41.5,372 C 43,371.3 44.8,369.4 45.5,368 C 46.2,366.6 46.2,365 45.5,363.5 C 44.8,362 42.8,359.8 41.5,359 C 40.2,358.2 39,358 37.5,358.5 Z" fill="#FBE1DC"/>
+  <path d="M 5,378.5 L 6,387.5 L 13,391.5 L 10,405 C 9.5,408.7 9.7,411.7 10,413.5 C 10.3,415.3 10.6,415.2 12,416 C 13.4,416.8 16.6,418.2 18.5,418 C 20.4,417.8 20.8,414.8 23.5,415 C 26.2,415.2 32.1,417.3 34.5,419 L 38,425 L 49.5,424 L 55.5,427.5 L 47,454.5 C 44.5,459.9 44.8,458.3 40.5,460 L 21.5,464.5 L 22,469.5 L 29.5,472.5 C 32,474.4 34.9,479.2 37,481 C 39.1,482.8 39.9,483 42,483.5 C 44.1,484 47.2,484.2 49.5,484 C 51.8,483.8 54.2,482.8 55.5,482 C 56.8,481.2 57.2,480 57.5,479 C 57.8,478 56.4,477.1 57,476 C 57.6,474.9 60.1,474 61,472.5 C 61.9,471 62.2,469 62.5,467 C 62.8,465 63.6,462.8 62.5,460.5 L 56,453 L 67.5,431.5 L 71,428.5 L 69,424.5 C 69,423.1 70.7,421.7 71,420 C 71.3,418.3 72.2,416.5 71,414.5 C 69.8,412.5 64.8,409.4 63.5,408 L 63,406 L 65.5,404 L 72.5,403.5 L 73.5,396.5 L 80.5,394.5 L 81,386.5 C 81.4,384.8 82.2,384.5 83,384 L 86,383.5 L 87,380.5 L 83.5,378 C 82.2,377.5 81.2,376.9 79.5,377.5 C 77.8,378.1 74.3,379.8 73,381.5 C 71.7,383.2 72.7,386 71.5,387.5 C 70.3,389 67.1,389.3 66,390.5 C 64.9,391.7 66.4,393.2 65,394.5 L 57.5,398 L 59,403.5 L 56.5,405.5 C 52.2,404.6 37.1,399.7 33,398 L 32,395.5 L 38,388.5 C 40.3,387.2 43.9,387.8 46,388 L 50.5,389.5 L 53.5,384 L 60,382 L 60.5,374.5 L 51,373 C 48.8,372.3 48.3,370.8 47,370.5 C 45.7,370.2 44.8,370.4 43,371 C 41.2,371.6 37.8,372.5 36.5,374 L 35.5,380 L 27,378.5 C 24.6,378.7 22.9,379.8 21,381 L 15.5,386 L 13.5,385 L 10.5,378.5 L 5,378.5 Z" fill="#DFF1E3"/>
+</g>
+<g id="kit-p03" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 95.7055404882,60.054716516 L 98.521285629,63.0897748848 L 97.8902036342,65.5170646318 L 94.0149641858,66.763065923 L 93.1405343185,68.8428188908 L 95.3423218584,72.4804185979 L 94.2535656226,74.6239227054 L 90.1059567974,75.1110992984 L 88.8549686466,77.0229122198 L 90.199450713,80.915516486 L 88.6356554185,82.8737157294 L 84.5458491779,82.4572005269 L 82.9356675614,84.1025926266 L 83.4402089721,88.1517206766 L 81.5345850297,89.745018323 L 77.6010621489,88.4421761428 L 75.6490518846,89.7226666456 L 75.3310174573,93.829837704 L 73.1994104601,94.9771177959 L 69.6017676721,92.9211590488 L 67.4237743529,93.7556319971 L 66.2194129479,97.7065196956 L 63.8618228959,98.4077822331 L 60.7970217512,95.6334365546 L 58.5088909702,95.9407759908 L 56.5340481806,99.6542643719 L 54.0663206668,99.8283933973 L 51.615477123,96.4515063806 L 49.2983248378,96.3475578979 L 46.6224599346,99.4297238603 L 44.1430757343,99.0940841914 L 42.4857865242,95.2478662473 L 40.23809351,94.7499946633 L 36.9596872686,97.2182030249 L 34.5671271571,96.3901594795 L 33.7671434205,92.2889369763 L 31.7221200883,91.2175455583 L 27.9396532839,93.0891611368 L 25.8482436296,91.7049625751 L 25.8708357309,87.5456970634 L 24.0922332203,86.1151121798 L 20.0547618568,87.1294222847 L 18.247137842,85.2875494821 L 19.1560569211,81.2845673303 L 17.7423560074,79.5121537988 L 13.565725678,79.5880424727 L 12.2041192176,77.5201866153 L 13.8835196813,73.7546037809 L 12.8173555469,71.7388423767 L 8.69852780201,70.9110392552 L 7.8814196715,68.6345651607 L 10.2965718843,65.3033431944 L 9.67642530438,63.0615987354 L 5.79499687693,61.4633142292 L 5.42390630092,58.9608570799 L 8.54008062728,56.2609575322 L 8.44706755941,53.9090756114 L 5,51.5750393561 L 5.1213133005,49.1594062956 L 8.74154818984,47.056099531 L 9.04245822317,44.7736768813 L 6.2267130824,41.7386185125 L 6.85779507717,39.3113287655 L 10.7330345256,38.0653274744 L 11.607464393,35.9855745066 L 9.40567685305,32.3479747995 L 10.4944330888,30.2044706919 L 14.642041914,29.717294099 L 15.8930300649,27.8054811775 L 14.5485479984,23.9128769114 L 16.1123432929,21.9546776679 L 20.2021495336,22.3711928705 L 21.81233115,20.7258007707 L 21.3077897393,16.6766727208 L 23.2134136817,15.0833750743 L 27.1469365625,16.3862172545 L 29.0989468269,15.1057267518 L 29.4169812541,10.9985556933 L 31.5485882513,9.85127560139 L 35.1462310393,11.9072343485 L 37.3242243585,11.0727614002 L 38.5285857635,7.12187370171 L 40.8861758155,6.42061116427 L 43.9509769602,9.19495684273 L 46.2391077412,8.88761740649 L 48.2139505308,5.17412902541 L 50.6816780446,5 L 53.1325215884,8.37688701674 L 55.4496738737,8.48083549947 L 58.1255387768,5.39866953702 L 60.6049229771,5.73430920589 L 62.2622121872,9.58052715007 L 64.5099052014,10.078398734 L 67.7883114428,7.61019037243 L 70.1808715543,8.43823391781 L 70.9808552909,12.5394564211 L 73.0258786232,13.610847839 L 76.8083454276,11.7392322606 L 78.8997550818,13.1234308222 L 78.8771629805,17.2826963339 L 80.6557654911,18.7132812176 L 84.6932368546,17.6989711126 L 86.5008608694,19.5408439152 L 85.5919417904,23.543826067 L 87.005642704,25.3162395986 L 91.1822730335,25.2403509246 L 92.5438794938,27.3082067821 L 90.8644790301,31.0737896164 L 91.9306431645,33.0895510206 L 96.0494709094,33.9173541421 L 96.8665790399,36.1938282366 L 94.4514268271,39.525050203 L 95.071573407,41.766794662 L 98.9530018345,43.3650791681 L 99.3240924105,45.8675363175 L 96.2079180841,48.5674358652 L 96.300931152,50.9193177859 L 99.7479987114,53.2533540412 L 99.6266854109,55.6689871017 L 96.0064505216,57.7722938663 Z" fill="#DFF1E3"/>
+  <path d="M 89.7966939702,59.01282745 L 92.6124391109,62.0478858188 L 91.9813571162,64.4751755658 L 88.0250017102,65.6053312639 L 87.1332070251,67.783565007 L 89.1380330144,71.3864350786 L 87.9334311856,73.6110551437 L 83.8379168136,73.8027894107 L 82.3899671122,75.6798726966 L 83.5201228103,79.6362281025 L 81.8752115583,81.4785817529 L 77.7563838134,80.6507786314 L 75.966605464,82.1629603203 L 76.1409749133,86.3569554676 L 74.0731190559,87.7185619279 L 70.226420264,85.9233158711 L 68.2106588598,86.9894800056 L 67.3017397808,90.9924621574 L 64.9094200932,91.8906862454 L 61.7114085377,89.2959372998 L 59.5043937142,89.7191223291 L 57.6280316999,93.449975528 L 55.1429393683,93.7225853287 L 52.5762502314,90.4268142695 L 50.3575787215,90.3402306045 L 47.6643490006,93.5208773422 L 45.1849648003,93.1852376734 L 43.5276755902,89.3390197292 L 41.2973473938,88.74266737 L 37.9204603771,91.1935109138 L 35.6437458587,90.2843514109 L 34.9422428974,86.2004937254 L 32.9145843829,85.0306215321 L 29.0683664387,86.6879107422 L 27.0928023775,85.222596223 L 27.3297208472,80.9995795715 L 25.6669639297,79.4878787303 L 21.600471062,80.0909009164 L 19.9086926402,78.1679121562 L 21.2115348204,74.2343892755 L 20.029525093,72.2997438288 L 15.841238077,71.8658638085 L 14.7113228028,69.635776036 L 16.9468782828,66.1713436588 L 16.2108861098,64.0107151574 L 12.1962472715,62.5920273841 L 11.7093111024,60.1706861922 L 14.6632535137,57.2390954584 L 14.4543948528,54.9683294952 L 10.9899624756,52.7327740152 L 11.0301598186,50.2012953616 L 14.6503947079,48.097988597 L 14.9513047412,45.8155659473 L 12.1355596005,42.7805075785 L 12.7666415952,40.3532178315 L 16.7229970012,39.2230621334 L 17.6147916863,37.0448283903 L 15.609965697,33.4419583188 L 16.8145675258,31.2173382537 L 20.9100818978,31.0256039866 L 22.3580315992,29.1485207007 L 21.2278759011,25.1921652948 L 22.8727871532,23.3498116444 L 26.991614898,24.1776147659 L 28.7813932474,22.665433077 L 28.6070237981,18.4714379298 L 30.6748796555,17.1098314695 L 34.5215784475,18.9050775262 L 36.5373398516,17.8389133918 L 37.4462589307,13.83593124 L 39.8385786182,12.9377071519 L 43.0365901738,15.5324560975 L 45.2436049972,15.1092710682 L 47.1199670115,11.3784178694 L 49.6050593431,11.1058080687 L 52.17174848,14.4015791279 L 54.3904199899,14.4881627928 L 57.0836497108,11.3075160551 L 59.5630339111,11.643155724 L 61.2203231212,15.4893736681 L 63.4506513176,16.0857260274 L 66.8275383343,13.6348824836 L 69.1042528527,14.5440419865 L 69.8057558141,18.627899672 L 71.8334143285,19.7977718652 L 75.6796322727,18.1404826551 L 77.6551963339,19.6057971743 L 77.4182778642,23.8288138258 L 79.0810347817,25.340514667 L 83.1475276495,24.737492481 L 84.8393060712,26.6604812411 L 83.536463891,30.5940041219 L 84.7184736185,32.5286495685 L 88.9067606344,32.9625295888 L 90.0366759086,35.1926173613 L 87.8011204286,38.6570497385 L 88.5371126016,40.81767824 L 92.5517514399,42.2363660133 L 93.038687609,44.6577072051 L 90.0847451977,47.5892979389 L 90.2936038586,49.8600639022 L 93.7580362358,52.0956193821 L 93.7178388928,54.6270980357 L 90.0976040035,56.7304048003 Z" fill="#DFF1E3"/>
+  <path d="M 83.8878474521,57.970938384 L 86.7035925929,61.0059967528 L 85.9740298228,63.4159216821 L 82.0176744169,64.5460773801 L 81.0447637742,66.6084655302 L 82.9163793526,70.3909323346 L 81.532180791,72.4823419888 L 77.390280097,72.3612691122 L 75.8612144381,74.122506805 L 76.5627173994,78.2063644905 L 74.7382094146,79.91550773 L 70.7062057585,78.595300732 L 68.8526762694,79.8931560526 L 68.3376802916,83.9655974755 L 66.0091117438,85.0781479319 L 62.5620441844,82.7441116766 L 60.4187805007,83.3816230743 L 58.8204959945,87.2630515017 L 56.3180388452,87.6341420778 L 53.6355041152,84.4194869761 L 51.3994677875,84.4313840864 L 48.7062380666,87.6120308242 L 46.2268538663,87.2763911553 L 44.5695646562,83.4301732111 L 42.3392364598,82.8338208519 L 38.9797142608,85.1861836204 L 36.6218837849,84.1611785244 L 36.134707192,80.0135696992 L 34.2228942705,78.7625815484 L 30.2318092291,80.089698797 L 28.3894555787,78.444787545 L 29.0202971496,74.2912301646 L 27.4907506429,72.5999325906 L 23.4126010887,72.6931860823 L 21.9525138531,70.6079654071 L 23.8288758674,66.8771122082 L 22.878557326,64.7802348465 L 18.7944592167,63.7554701744 L 18.110561497,61.2993993471 L 20.8849071755,58.2345982024 L 20.5775677392,55.9464674214 L 16.997289769,53.792027899 L 17.0374871119,51.2605492454 L 20.559241226,49.139877663 L 20.8601512593,46.8574550133 L 18.0444061185,43.8223966445 L 18.7739688886,41.4124717153 L 22.7303242946,40.2823160172 L 23.7032349372,38.2199278672 L 21.8316193588,34.4374610628 L 23.2158179204,32.3460514085 L 27.3577186144,32.4671242851 L 28.8867842733,30.7058865923 L 28.185281312,26.6220289068 L 30.0097892969,24.9128856673 L 34.0417929529,26.2330926653 L 35.895322442,24.9352373448 L 36.4103184198,20.8627959219 L 38.7388869676,19.7502454655 L 42.1859545271,22.0842817207 L 44.3292182108,21.446770323 L 45.9275027169,17.5653418956 L 48.4299598663,17.1942513196 L 51.1124945962,20.4089064213 L 53.3485309239,20.3970093109 L 56.0417606448,17.2163625732 L 58.5211448451,17.552002242 L 60.1784340552,21.3982201862 L 62.4087622516,21.9945725454 L 65.7682844506,19.6422097769 L 68.1261149265,20.6672148729 L 68.6132915195,24.8148236982 L 70.5251044409,26.065811849 L 74.5161894824,24.7386946003 L 76.3585431327,26.3836058523 L 75.7277015618,30.5371632328 L 77.2572480685,32.2284608068 L 81.3353976227,32.135207315 L 82.7954848583,34.2204279903 L 80.919122844,37.9512811891 L 81.8694413854,40.0481585508 L 85.9535394947,41.0729232229 L 86.6374372144,43.5289940503 L 83.8630915359,46.5937951949 L 84.1704309722,48.8819259759 L 87.7507089424,51.0363654984 L 87.7105115995,53.567844152 L 84.1887574854,55.6885157343 Z" fill="#DFF1E3"/>
+  <path d="M 77.979000934,56.929049318 L 80.777381257,60.0625884621 L 80.047818487,62.4725133914 L 75.9292311659,63.3709779033 L 74.857839748,65.4160012356 L 76.4166481828,69.244854362 L 74.9339688458,71.3188991985 L 70.7630466476,70.7865384029 L 69.0717490736,72.3160849095 L 69.2461185229,76.5100800568 L 67.0797818901,77.8543216993 L 63.3489286913,75.9779596851 L 61.2694161474,76.8297974511 L 59.9665739671,80.7633203319 L 57.5278679575,81.3487372762 L 54.6136420414,78.2963140896 L 52.360240896,78.4066919753 L 49.8466079079,81.7205491239 L 47.2687429323,81.3675446372 L 45.6114537222,77.5213266931 L 43.4969711189,76.8438583763 L 39.9578521871,79.0630107339 L 37.6347513467,77.8410440874 L 37.4430170796,73.7455297154 L 35.664414569,72.3149448318 L 31.545827248,73.2134093437 L 29.8540488263,71.2904205835 L 31.0584102312,67.339532885 L 29.8764005037,65.4048874384 L 25.7054783055,64.8725266428 L 24.7087734422,62.4628421374 L 27.2224064303,59.1489849889 L 26.799221401,56.9419701654 L 23.0857330199,54.9671273758 L 22.9289688123,52.4009190867 L 26.4680877441,50.181766729 L 26.7689977774,47.8993440793 L 23.9706174544,44.7658049352 L 24.7001802245,42.355880006 L 28.8187675455,41.457415494 L 29.8901589634,39.4123921618 L 28.3313505287,35.5835390354 L 29.8140298656,33.5094941989 L 33.9849520638,34.0418549945 L 35.6762496378,32.5123084878 L 35.5018801885,28.3183133405 L 37.6682168213,26.974071698 L 41.3990700201,28.8504337123 L 43.4785825641,27.9985959462 L 44.7814247443,24.0650730655 L 47.2201307539,23.4796561211 L 50.13435667,26.5320793077 L 52.3877578154,26.4217014221 L 54.9013908035,23.1078442735 L 57.4792557791,23.4608487601 L 59.1365449892,27.3070667043 L 61.2510275925,27.9845350211 L 64.7901465243,25.7653826634 L 67.1132473647,26.98734931 L 67.3049816318,31.0828636819 L 69.0835841424,32.5134485656 L 73.2021714634,31.6149840536 L 74.8939498851,33.5379728138 L 73.6895884802,37.4888605123 L 74.8715982077,39.4235059589 L 79.0425204059,39.9558667545 L 80.0392252692,42.3655512599 L 77.5255922811,45.6794084085 L 77.9487773104,47.8864232319 L 81.6622656915,49.8612660215 L 81.8190298992,52.4274743106 L 78.2799109674,54.6466266683 Z" fill="#DFF1E3"/>
+  <path d="M 72.070154416,55.887160252 L 74.868534739,59.0206993961 L 73.9246456005,61.4943754651 L 69.840787915,62.1958784265 L 68.5897997642,64.1076913479 L 69.7199554623,68.0640467538 L 67.8607178419,69.970151544 L 63.8113493681,68.7484253212 L 61.9751846968,69.9477998665 L 61.1473815753,74.0666276114 L 58.7550618877,74.9648516994 L 55.5917799677,72.1731412032 L 53.4194947798,72.3993646819 L 50.8884969739,75.8117026058 L 48.3106319983,75.4586981192 L 46.7518235635,71.6298449927 L 44.5562250026,70.8365310829 L 40.9533549311,72.8413570722 L 38.6649837262,71.422428875 L 39.0003829712,67.2167770413 L 37.3549908714,65.6065954248 L 33.2594764995,65.7983296919 L 31.8167540816,63.6146282413 L 33.8900776465,59.918504678 L 33.1367206558,57.8563569519 L 29.2726570461,56.1595916704 L 29.0174120632,53.5760185635 L 32.3942990799,51.1251750197 L 32.6778442955,48.9412331453 L 29.8794639725,45.8076940012 L 30.8233531109,43.3340179322 L 34.9072107964,42.6325149709 L 36.1581989472,40.7207020495 L 35.0280432491,36.7643466435 L 36.8872808695,34.8582418534 L 40.9366493433,36.0799680761 L 42.7728140147,34.8805935308 L 43.6006171362,30.761765786 L 45.9929368238,29.8635416979 L 49.1562187437,32.6552521941 L 51.3285039317,32.4290287154 L 53.8595017375,29.0166907916 L 56.4373667131,29.3696952782 L 57.9961751479,33.1985484046 L 60.1917737088,33.9918623144 L 63.7946437803,31.9870363251 L 66.0830149852,33.4059645223 L 65.7476157402,37.611616356 L 67.39300784,39.2217979725 L 71.4885222119,39.0300637055 L 72.9312446298,41.213765156 L 70.8579210649,44.9098887193 L 71.6112780556,46.9720364455 L 75.4753416653,48.6688017269 L 75.7305866483,51.2523748338 L 72.3536996315,53.7032183776 Z" fill="#DFF1E3"/>
+  <path d="M 58.7752497503,53.5429098535 A 6.5,6.5 10 0,1 51.2452862009,58.8154470932 A 6.5,6.5 10 0,1 45.9727489611,51.2854835438 A 6.5,6.5 10 0,1 53.5027125105,46.0129463041 A 6.5,6.5 10 0,1 58.7752497503,53.5429098535 Z" fill="#ECEAE4"/>
+</g>
+<g id="kit-p04" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 5.17025518695,79.406469115 C 4.98850557123,81.1462872311 5.94831332052,83.6778419085 6.58834783949,84.8137802054 C 7.22838235845,85.9497185024 1.24772708064,85.4284101024 9.00435517439,86.4456222804 C 16.7609832681,87.4628344585 42.8037789311,90.5454946828 52.952961971,90.7780535426 L 69.8088226349,87.8832372655 L 72.5558413362,93.7742378813 L 79.0502337128,93.5042977784 C 82.8022503394,92.0857170676 91.6361857582,86.4216562436 95.1524647486,85.4440151736 C 98.6687437389,84.4663741035 98.927933764,86.4419298559 100.01501505,87.5900824056 L 101.674952465,92.3329304717 L 117.38266058,90.5251954808 C 126.526845694,98.0673356672 148.507875888,128.642395955 156.364908721,137.446771859 C 164.221941555,146.251147763 163.262621864,142.064298621 164.700012012,143.490450634 C 166.13740216,144.916602646 165.883831203,144.372817973 164.85024988,146.178838363 C 163.816668556,147.984858752 159.495950693,152.206398418 158.595261974,154.06078776 C 157.694573255,155.915177102 158.79997592,156.392759501 159.621271997,157.444174146 L 163.577514511,160.01285964 L 182.340037936,144.643483766 L 189.259488866,137.003379132 L 184.48854546,131.504461146 C 182.591894292,130.513141648 186.769707956,139.709112123 178.024688715,130.656784331 C 169.279669473,121.604456538 141.784328265,86.5391430245 132.066798963,77.0576017855 L 120.075928892,73.8220129757 L 119.925691025,71.1336252464 C 121.678211452,69.2130336312 129.013685459,64.3580546309 130.681682234,62.2562014582 L 130.108826105,58.6615059419 L 126.302821457,58.7812081774 C 125.257513939,59.3789808702 130.66482503,57.9608882177 123.975980726,62.0729876676 C 117.287136423,66.1850871175 93.4324321865,79.6258120158 86.4839097997,83.4176501771 L 82.1942156272,84.8662784614 L 80.2618978176,81.9055103376 L 104.614946124,58.4123403045 C 113.129108312,51.3526631002 122.168733794,44.7099850896 131.081085738,39.4507092066 C 139.993437683,34.1914333236 152.264747508,28.8002409524 158.270319349,26.7721613544 C 164.275891191,24.7440817563 165.012175557,27.2695293073 167.211254693,27.0164464086 C 169.410333829,26.7633635099 167.911872417,27.5724453335 171.500948865,25.5678181243 C 175.090025314,23.563190915 185.416315018,17.313571651 188.570558952,14.8496834219 L 190.474781421,10.6515961447 L 187.002228432,6.75398460209 C 185.238469869,5.81103405692 183.649865736,5.00708324298 180.115753425,5 C 176.581641114,4.99291675702 169.621880591,5.9212127579 165.978816122,6.62696149183 C 162.335751653,7.33271022577 173.302075877,2.21902925871 158.305735564,9.10159979872 C 143.309395252,15.9841703387 100.078025752,37.7983558875 76.0430360749,48.0130155106 C 52.0080463977,58.2276751337 25.5392160648,65.8257683688 14.1441664536,70.2566649324 C 2.74911684232,74.687561496 9.2439972772,72.7623269294 7.76947631252,74.3326096825 C 6.29495534784,75.9028924356 5.35200480267,77.6666509989 5.17025518695,79.406469115 Z" fill="#FEB8A7"/>
+</g>
+<g id="kit-p05" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 500.5,258.3 A 242.2,242.2 0 0,1 258.3,500.5 A 242.2,242.2 0 0,1 16.1,258.3 A 242.2,242.2 0 0,1 258.3,16.1 A 242.2,242.2 0 0,1 500.5,258.3 Z" fill="none" stroke="#ECEAE4" stroke-width="22.3"/>
+  <path d="M 511.6,258.3 A 253.3,253.3 0 0,1 258.3,511.6 A 253.3,253.3 0 0,1 5,258.3 A 253.3,253.3 0 0,1 258.3,5 A 253.3,253.3 0 0,1 511.6,258.3 Z" fill="none"/>
+  <path d="M 489.3,258.3 A 231,231 0 0,1 258.3,489.3 A 231,231 0 0,1 27.3,258.3 A 231,231 0 0,1 258.3,27.3 A 231,231 0 0,1 489.3,258.3 Z" fill="none"/>
+  <path d="M 482.05,258.3 A 223.75,223.75 0 0,1 258.3,482.05 A 223.75,223.75 0 0,1 34.55,258.3 A 223.75,223.75 0 0,1 258.3,34.55 A 223.75,223.75 0 0,1 482.05,258.3 Z" fill="none" stroke="#DBEAF7" stroke-width="12.5"/>
+  <path d="M 474.8,258.3 A 216.5,216.5 0 0,1 258.3,474.8 A 216.5,216.5 0 0,1 41.8,258.3 A 216.5,216.5 0 0,1 258.3,41.8 A 216.5,216.5 0 0,1 474.8,258.3 Z" fill="none"/>
+  <path d="M 258.4,257.6 L 42.5,240.3" stroke-width="1.6"/>
+  <path d="M 259.6,248.2 L 474,276.8" stroke-width="1.6"/>
+  <path d="M 252.2,276.7 L 456.7,344.9" stroke-width="1.6"/>
+  <path d="M 252.2,276.7 L 47.6,208.5" stroke-width="1.6"/>
+  <path d="M 266.7,235.6 L 468.5,310.1" stroke-width="1.6"/>
+  <path d="M 268.5,232.5 L 468.2,311.4" stroke-width="1.6"/>
+  <path d="M 262.3,250.8 L 72.1,147.8" stroke-width="1.6"/>
+  <path d="M 274,232.3 L 457.6,342.9" stroke-width="1.6"/>
+  <path d="M 260.4,255.7 L 90.8,121.2" stroke-width="1.6"/>
+  <path d="M 258.6,257.9 L 90.3,121.8" stroke-width="1.6"/>
+  <path d="M 267.1,249.5 L 419.9,402.3" stroke-width="1.6"/>
+  <path d="M 241.3,271.1 L 370.4,443.5" stroke-width="1.6"/>
+  <path d="M 241.3,271.1 L 112.1,98.6" stroke-width="1.6"/>
+  <path d="M 242.2,270.3 L 370.5,443.5" stroke-width="1.6"/>
+  <path d="M 269,250.7 L 394.1,426.9" stroke-width="1.6"/>
+  <path d="M 245.4,267.2 L 368,444.9" stroke-width="1.6"/>
+  <path d="M 241.6,267.9 L 134.3,80.8" stroke-width="1.6"/>
+  <path d="M 243.2,265.8 L 339,459.2" stroke-width="1.6"/>
+  <path d="M 244.3,265 L 338.1,459.6" stroke-width="1.6"/>
+  <path d="M 269,253.4 L 178.5,57.1" stroke-width="1.6"/>
+  <path d="M 245.8,260.5 L 209.1,47.5" stroke-width="1.6"/>
+  <path d="M 269.2,256.5 L 305.3,469.6" stroke-width="1.6"/>
+  <path d="M 271,258.3 L 271,474.4" stroke-width="1.6"/>
+  <path d="M 271,258.3 L 271,42.2" stroke-width="1.6"/>
+  <path d="M 242.1,258.3 L 242.1,474.2" stroke-width="1.6"/>
+  <path d="M 242.1,258.3 L 242.1,42.4" stroke-width="1.6"/>
+  <path d="M 271.9,258.4 L 271,474.4" stroke-width="1.6"/>
+  <path d="M 271.9,258.4 L 272.9,42.3" stroke-width="1.6"/>
+  <path d="M 269,260.1 L 304.9,46.9" stroke-width="1.6"/>
+  <path d="M 245.1,256.1 L 209.7,469.3" stroke-width="1.6"/>
+  <path d="M 268.4,263 L 177.9,459.3" stroke-width="1.6"/>
+  <path d="M 244,251.5 L 336.4,56.4" stroke-width="1.6"/>
+  <path d="M 273.8,267.4 L 382.4,80.9" stroke-width="1.6"/>
+  <path d="M 282.4,274.6 L 402.8,97.1" stroke-width="1.6"/>
+  <path d="M 243.2,247.9 L 120.8,425.6" stroke-width="1.6"/>
+  <path d="M 243.2,247.9 L 365.6,70.3" stroke-width="1.6"/>
+  <path d="M 270.1,266.7 L 145.2,442.9" stroke-width="1.6"/>
+  <path d="M 248.3,248.3 L 95.5,401.1" stroke-width="1.6"/>
+  <path d="M 259.3,259.5 L 425,120.1" stroke-width="1.6"/>
+  <path d="M 233.9,222.8 L 59.1,343.1" stroke-width="1.6"/>
+  <path d="M 264.3,269.8 L 72.8,369.9" stroke-width="1.6"/>
+  <path d="M 248.2,235.8 L 444.5,147.9" stroke-width="1.6"/>
+  <path d="M 243.6,225.1 L 48.4,311.2" stroke-width="1.6"/>
+  <path d="M 262.4,270.1 L 58.5,341.6" stroke-width="1.6"/>
+  <path d="M 252.6,241 L 457.3,173" stroke-width="1.6"/>
+  <path d="M 252.6,240.7 L 458,174.7" stroke-width="1.6"/>
+  <path d="M 261.3,268.3 L 468.6,206.9" stroke-width="1.6"/>
+  <path d="M 257.2,249.3 L 42.5,275.9" stroke-width="1.6"/>
+  <path d="M 258.6,261.4 L 474.1,240.7" stroke-width="1.6"/>
+  <path d="M 261.5,234.2 L 257,235.2 L 257,237.7 C 257.6,239 258.4,240.9 260.5,243.2 C 262.6,245.5 267.8,248.1 269.5,251.2 C 271.2,254.3 270.7,258.9 270.5,261.7 C 270.3,264.5 270,266.5 268.5,268.2 C 267,269.9 264.3,271.7 261.5,272.2 C 258.7,272.7 254.5,272.1 252,271.2 C 249.5,270.3 247.8,269.3 246.5,266.7 C 245.2,264.1 244.9,258.4 244,255.7 C 243.1,253 242.3,251.6 241,250.7 C 239.7,249.8 237.7,249.9 236.5,250.2 C 235.3,250.5 234.4,250.4 234,252.7 C 233.6,255 233.4,261 234,264.2 C 234.6,267.4 236.4,269.9 237.5,271.7 C 238.6,273.5 239.3,273.9 240.5,274.7 C 241.7,275.5 243.9,275.3 245,276.2 C 246.1,277.1 245.4,279.1 247,280.2 C 248.6,281.3 252.1,282.3 254.5,282.7 C 256.9,283.1 258.7,283.4 261.5,282.7 C 264.3,282 268,280.9 271,278.7 C 274,276.5 277.7,271.8 279.5,269.2 C 281.3,266.6 281.2,265.8 281.5,263.2 C 281.8,260.6 282.1,256.7 281.5,253.7 C 280.9,250.7 279.9,247.9 278,245.2 C 276.1,242.5 272.7,239.5 270,237.7 C 267.3,235.9 263.7,234.6 261.5,234.2 Z" fill="#FEB8A7"/>
+  <path d="M 259.5,251.7 C 257.5,251.4 254,252.9 252.5,253.7 C 251,254.5 250.7,255.2 250.5,256.7 C 250.3,258.2 250.7,261.5 251.5,262.7 L 255,264.2 L 256.5,259.2 C 257.5,258.1 259.8,257.7 261,257.7 L 263.5,259.2 L 264.5,255.7 L 259.5,251.7 Z" fill="#FBE1DC"/>
+  <path d="M 264.5,256.2 L 261,254.7 L 260,258.2 L 252.5,259.7 L 253,264.7 C 253.5,265.8 254,266.1 255.5,266.2 C 257,266.3 260.5,265.9 262,265.2 C 263.5,264.5 264.1,263.2 264.5,261.7 L 264.5,256.2 Z" fill="#ECEAE4"/>
+</g>
+<g id="kit-p06" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 39.1047498251,16.1510263312 L 24.0405600484,64.885718147 Q 23.0985826805,67.7339945799 20.5642987036,65.8425917343 L 5.99402786351,55.7575925947 Q 4.4091693642,54.1801822051 5.3511467321,51.3319057722 L 20.1087921626,6.708908323 Q 21.0507695305,3.86063189008 23.5850535074,5.75203473562 Z" fill="#ECEAE4"/>
+  <path d="M 20.0300010869,40.3874443952 A 5.5,5.5 108.3 0,1 16.5351194676,33.4386457604 A 5.5,5.5 108.3 0,1 23.4839181025,29.9437641411 A 5.5,5.5 108.3 0,1 26.9787997217,36.892562776 A 5.5,5.5 108.3 0,1 20.0300010869,40.3874443952 Z" fill="#FBE1DC"/>
+</g>
+<g id="kit-p07" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 139.469936915,38.712999492 L 144.844154975,39.1346394379 L 146.739599959,42.0837559686 L 144.722699017,47.1337174129 L 146.257881852,50.0973661205 L 151.477237693,51.496767639 L 152.806370781,54.8573338464 L 149.936856313,59.4142940966 L 150.788170202,62.6275890819 L 155.712983599,64.982628999 L 156.380370914,68.4531612594 L 152.680366096,72.3774400909 L 153.009614438,75.7228243035 L 157.44142664,78.9304777454 L 157.388289658,82.4300743594 L 153.078376414,85.6850164213 L 152.768002157,89.0006864622 L 156.508354415,92.9579285553 L 155.815594835,96.4278109977 L 150.998798038,98.8149575399 L 150.129702883,102.042134884 L 153.061038147,106.587162229 L 151.750779143,109.887650276 L 146.508000492,111.348222773 L 145.102307612,114.347227196 L 147.107068832,119.318236394 L 145.260212103,122.390551519 L 139.892935223,122.829116095 L 137.891866093,125.519045897 L 138.911274742,130.83513525 L 136.572066638,133.399917004 L 131.139070053,132.897375358 L 128.704428072,135.160673489 L 128.7827305,140.542482546 L 126.009949545,142.680632628 L 120.812716878,141.141550885 L 118.025403746,142.919438819 L 117.103821427,148.286065881 L 113.919590795,149.857904068 L 109.075679099,147.444085626 L 106.016596515,148.677784837 L 104.080597272,153.668967756 L 100.764277413,154.718740395 L 96.4133669098,151.452308428 L 93.1634165734,152.083040393 L 90.3526806314,156.720902342 L 86.8676161941,157.028027509 L 83.2081656351,153.012006891 L 79.9070277709,153.061894783 L 76.2658014783,157.067075314 L 72.8104512126,156.734577883 L 69.960017648,152.130772012 L 66.6885939554,151.541037306 L 62.4374592363,154.876881067 L 59.0118231422,153.904761038 L 57.0879636224,148.874973314 L 53.9859343261,147.667739184 L 49.1470143547,150.194565951 L 46.0304528816,148.627069672 L 45.0110442324,143.310980319 L 42.218089557,141.50836994 L 37.0340894316,143.049844136 L 34.2044794052,141.026651832 L 34.2070786771,135.58606425 L 31.7010754485,133.327757845 L 26.3116753938,133.906002646 L 23.930820213,131.309557267 L 24.992082757,125.965053378 L 22.971489725,123.354075822 L 17.597271665,122.932435876 L 15.7018266809,119.983319345 L 17.7187276234,114.933357901 L 16.183544788,111.969709194 L 10.9641889475,110.570307675 L 9.63505585939,107.209741468 L 12.5045703267,102.652781217 L 11.6532564378,99.4394862321 L 6.72844304145,97.0844463151 L 6.06105572567,93.6139140546 L 9.76106054357,89.6896352231 L 9.43181220236,86.3442510105 L 5,83.1365975687 L 5.05313698177,79.6370009546 L 9.36305022616,76.3820588928 L 9.67342448306,73.0663888518 L 5.93307222462,69.1091467588 L 6.62583180449,65.6392643163 L 11.4426286017,63.2521177741 L 12.3117237573,60.0249404299 L 9.38038849323,55.4799130846 L 10.690647497,52.1794250384 L 15.9334261477,50.7188525411 L 17.3391190277,47.7198481184 L 15.3343578085,42.7488389197 L 17.1812145367,39.676523795 L 22.5484914172,39.2379592187 L 24.5495605469,36.548029417 L 23.5301518978,31.2319400643 L 25.869360002,28.6671583104 L 31.3023565872,29.1696999558 L 33.7369985677,26.9064018255 L 33.6586961402,21.5245927681 L 36.4314770953,19.3864426856 L 41.6287097616,20.9255244289 L 44.4160228935,19.1476364952 L 45.3376052128,13.7810094326 L 48.5218358445,12.2091712462 L 53.3657475415,14.6229896885 L 56.4248301253,13.3892904767 L 58.3608293683,8.39810755767 L 61.6771492273,7.34833491891 L 66.0280597302,10.614766886 L 69.2780100666,9.98403492124 L 72.0887460086,5.34617297159 L 75.5738104459,5.03904780459 L 79.2332610049,9.05506842284 L 82.534398869,9.00518053096 L 86.1756251617,5 L 89.6309754274,5.3324974311 L 92.481408992,9.93630330164 L 95.7528326846,10.5260380079 L 100.003967404,7.19019424662 L 103.429603498,8.16231427582 L 105.353463018,13.1921019998 L 108.455492314,14.3993361299 L 113.294412285,11.872509363 L 116.410973758,13.4400056419 L 117.430382408,18.7560949946 L 120.223337083,20.5587053744 L 125.407337208,19.0172311776 L 128.236947235,21.0404234815 L 128.234347963,26.4810110641 L 130.740351191,28.739317469 L 136.129751246,28.161072668 L 138.510606427,30.7575180474 L 137.449343883,36.1020219357 Z" fill="#FDF1C9"/>
+  <path d="M 124.907631016,49.2931340332 A 54,54 -36 0,1 112.961116944,124.720455353 A 54,54 -36 0,1 37.5337956237,112.773941281 A 54,54 -36 0,1 49.4803096962,37.3466199608 A 54,54 -36 0,1 124.907631016,49.2931340332 Z" fill="#EBE3F7"/>
+  <path d="M 113.878977811,65.5875750629 L 128.863366655,64.0948959404 Q 142.105223281,62.7557794013 134.2289009,51.9149516767 L 125.294565065,39.6178933622 Q 117.418242684,28.7770656376 112.052708439,40.9570099013 L 106.00265543,54.7467473383 Q 100.637121185,66.926691602 113.878977811,65.5875750629 Z" fill="#FDF1C9"/>
+  <path d="M 114.542023219,62.7573152186 L 124.673609733,62.0710538185 Q 133.724409801,61.4283889488 128.081671379,53.6618258028 L 121.733590654,44.9244422636 Q 116.090852232,37.1578791176 112.682790586,45.5671071332 L 108.899284797,54.9907520726 Q 105.491223151,63.3999800882 114.542023219,62.7573152186 Z" fill="#F8F7F2"/>
+  <path d="M 132.098577996,78.9257222012 A 3.6,3.6 -36 0,1 131.302143725,83.9542102892 A 3.6,3.6 -36 0,1 126.273655637,83.1577760177 A 3.6,3.6 -36 0,1 127.070089908,78.1292879297 A 3.6,3.6 -36 0,1 132.098577996,78.9257222012 Z" fill="#FBE1DC"/>
+  <path d="M 106.043682051,107.373435595 L 112.036492353,121.06599652 Q 117.471231574,133.309917852 125.357951042,122.388395247 L 134.164303376,110.180686265 Q 142.109801369,99.3400653591 128.86924438,97.9588881069 L 113.93040152,96.4519129888 Q 100.608942831,95.1295142618 106.043682051,107.373435595 Z" fill="#FDF1C9"/>
+  <path d="M 108.889123891,107.036596256 L 112.685655402,116.515327631 Q 116.078328235,124.927804737 121.757928826,117.093129432 L 128.070210836,108.427963777 Q 133.749811428,100.593288473 124.677538004,100.015486672 L 114.546601308,99.3416011764 Q 105.496451058,98.6241191504 108.889123891,107.036596256 Z" fill="#F8F7F2"/>
+  <path d="M 99.0215090128,124.588809126 A 3.6,3.6 -36 0,1 98.2250747413,129.617297214 A 3.6,3.6 -36 0,1 93.1965866533,128.820862942 A 3.6,3.6 -36 0,1 93.9930209248,123.792374854 A 3.6,3.6 -36 0,1 99.0215090128,124.588809126 Z" fill="#FBE1DC"/>
+  <path d="M 63.8177504892,112.71297712 L 52.6450751515,122.684502871 Q 42.7080484795,131.634670519 55.5061419851,135.809452264 L 69.877373313,140.44817085 Q 82.6754668185,144.622952596 79.8143999849,131.498003203 L 76.6158439948,116.887758866 Q 73.8135556864,103.843711172 63.8177504892,112.71297712 Z" fill="#FDF1C9"/>
+  <path d="M 65.0369175243,115.411797555 L 57.1963938582,121.973519025 Q 50.2679120602,127.748996492 59.3831321966,130.767731635 L 69.6745726556,134.044353872 Q 78.7897927919,137.063089015 76.6030544536,128.268876405 L 74.0933591354,118.349630999 Q 71.906620797,109.555418389 65.0369175243,115.411797555 Z" fill="#F8F7F2"/>
+  <path d="M 45.3003587697,107.131202859 A 3.6,3.6 -36 0,1 44.5039244982,112.159690947 A 3.6,3.6 -36 0,1 39.4754364102,111.363256675 A 3.6,3.6 -36 0,1 40.2718706817,106.334768587 A 3.6,3.6 -36 0,1 45.3003587697,107.131202859 Z" fill="#FBE1DC"/>
+  <path d="M 45.6983397242,74.3334649618 L 32.7915798015,66.7766436526 Q 21.1931294287,59.9997749842 21.2087544231,73.461563716 L 21.1794832512,88.5628597928 Q 21.1951082456,102.024648525 32.777933624,95.3397284612 L 45.7139647186,87.7952536936 Q 57.2380115718,81.0294319308 45.6983397242,74.3334649618 Z" fill="#FDF1C9"/>
+  <path d="M 43.5285260162,76.2807472918 L 34.8703015408,70.8286698039 Q 27.1822476407,66.031396909 27.23647744,75.6333268779 L 27.172500371,86.4336003437 Q 27.2267301704,96.0355303126 34.8605542711,91.2308732386 L 43.5239772904,85.8017755613 Q 51.2165799163,81.0780201867 43.5285260162,76.2807472918 Z" fill="#F8F7F2"/>
+  <path d="M 45.2979369532,50.6446558398 A 3.6,3.6 -36 0,1 44.5015026817,55.6731439278 A 3.6,3.6 -36 0,1 39.4730145937,54.8767096563 A 3.6,3.6 -36 0,1 40.2694488652,49.8482215683 A 3.6,3.6 -36 0,1 45.2979369532,50.6446558398 Z" fill="#FBE1DC"/>
+  <path d="M 76.6648165244,45.1602355454 L 79.8479543385,30.486870776 Q 82.6259338374,17.4675455284 69.860596775,21.6742270808 L 55.5290630697,26.277176315 Q 42.7049474821,30.402956168 52.6701818713,39.3552800879 L 63.8407009368,49.2860153984 Q 73.8059353261,58.2383393183 76.6648165244,45.1602355454 Z" fill="#FDF1C9"/>
+  <path d="M 74.10697595,43.6812319634 L 76.5967043662,33.8378965321 Q 78.8506688636,25.0311011986 69.6443567584,28.0116745366 L 59.4526920832,31.3373280286 Q 50.2463799781,34.3179013665 57.1987275859,40.144123362 L 65.0403440695,46.6839284756 Q 71.9926916773,52.510150471 74.10697595,43.6812319634 Z" fill="#F8F7F2"/>
+  <path d="M 98.9474897668,33.2971637184 A 3.6,3.6 -36 0,1 98.1510554953,38.3256518064 A 3.6,3.6 -36 0,1 93.1225674073,37.5292175349 A 3.6,3.6 -36 0,1 93.9190016788,32.5007294469 A 3.6,3.6 -36 0,1 98.9474897668,33.2971637184 Z" fill="#FBE1DC"/>
+</g>
+<g id="kit-p08" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 16.3828533733,151.723384093 C 8.38491249871,151.904882762 5.18149866858,142.975261279 5,134.977320404 L 8.25328829363,13.8723406747 C 8.0264149579,3.87491458148 29.9526903623,0.376565414913 30.2476256987,13.3732193361 L 33.9925356704,134.319387731 C 34.1740343389,142.317328605 30.3792499038,151.405761423 23.3810516385,151.564572758 Z" fill="#EBE3F7"/>
+  <path d="M 19.8713588052,129.138426049 A 9.5,9.5 -91.3 0,1 29.5844432627,138.420451169 A 9.5,9.5 -91.3 0,1 20.3024181431,148.133535626 A 9.5,9.5 -91.3 0,1 10.5893336856,138.851510507 A 9.5,9.5 -91.3 0,1 19.8713588052,129.138426049 Z" fill="#FBE1DC"/>
+</g>
+<g id="kit-p09" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 9.46088058645,5 L 6.37324512743,12.9193754345 C 5.63702496958,20.0382222427 4.66537947152,29.9632363498 5.10040363906,47.8425750952 C 5.5354278066,65.7219138407 7.33412309451,99.3740266311 9.07655925541,120.23173303 C 10.8189954163,141.089439429 11.4298490859,147.230844626 15.2960321128,173.102501488 C 19.1622151397,198.974158351 29.8205250412,256.151517769 32.3463076628,275.275335959 C 34.8720902843,294.399154148 30.7635160587,285.391400941 30.6007409646,288.011229995 C 30.4379658705,290.631059048 30.7696046082,290.331032803 31.5559953436,291.066960525 L 35.2827602539,292.519965447 L 38.1652069463,282.373956327 C 39.1870230219,280.303716749 40.2640147417,280.294291489 41.2999687081,279.839539491 C 42.3359226746,279.384787493 42.5175482898,278.918941879 44.1740736228,279.350130726 C 45.8305989558,279.781319572 49.6915707422,281.715976354 51.1617578297,282.074514954 L 53.1041715168,281.221854959 L 44.3905285306,208.595603328 C 42.40657848,185.604432366 41.5201390259,162.826499512 40.8483135989,143.352192064 C 40.176488172,123.877884615 39.7600220892,114.484985382 40.5822393375,91.7292397608 L 45.7816170886,6.81771833408 L 43.6575777863,8.13622394355 C 41.0219424865,8.28928134075 35.616465011,8.113744275 29.9109612905,7.60656847153 L 9.46088058645,5 Z" fill="#FDF1C9"/>
+</g>
+<g id="kit-p10" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 46.3507918264,5 L 347.788999983,81.6290197217 A 76,76 15 0,1 308.448505127,228.449745318 L 15.040488989,143.102009168 A 8.06226,8.06226 15 0,1 10.9365490101,127.508495239 L 42.8864307631,73.9528694285 A 7,7 15 0,0 41.1626301729,61.0676642875 L 23.7945476711,40.8847579009 A 24,24 15 0,1 46.3507918264,5 Z" stroke-width="8.5" stroke-dasharray="8.5 4"/>
+  <path d="M 46.3507918264,5 L 347.788999983,81.6290197217 A 76,76 15 0,1 308.448505127,228.449745318 L 15.040488989,143.102009168 A 8.06226,8.06226 15 0,1 10.9365490101,127.508495239 L 42.8864307631,73.9528694285 A 7,7 15 0,0 41.1626301729,61.0676642875 L 23.7945476711,40.8847579009 A 24,24 15 0,1 46.3507918264,5 Z" stroke="#DBEAF7" stroke-width="4.4" stroke-dasharray="7 5.5" stroke-dashoffset="-.75"/>
+  <path d="M 46.3507918264,5 L 347.788999983,81.6290197217 A 76,76 15 0,1 308.448505127,228.449745318 L 15.040488989,143.102009168 A 8.06226,8.06226 15 0,1 10.9365490101,127.508495239 L 42.8864307631,73.9528694285 A 7,7 15 0,0 41.1626301729,61.0676642875 L 23.7945476711,40.8847579009 A 24,24 15 0,1 46.3507918264,5 Z" stroke-width="2.4" stroke-dasharray="0 12.5" stroke-dashoffset="-4.25"/>
+</g>
+<g id="kit-p11" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 145.418238983,63.4765863824 L 116.35734985,43.8115228729 C 111.291582185,39.385689848 115.809273639,38.7608187174 114.960235533,37.231395854 C 114.111197427,35.7019729906 113.541582185,35.4885755309 111.313121216,34.5483831521 C 109.084660247,33.6081907732 103.821520526,31.724216177 101.402867178,31.7134466615 C 98.9842138302,31.7026771461 98.5770341532,34.0079330344 96.9878036687,34.3605609786 C 95.3985731842,34.7131889227 100.575110365,36.5471635189 91.6576766498,33.5926117861 C 82.740242935,30.6380600533 52.137237635,20.2440200972 43.1733937587,16.5698531221 C 34.2095498823,12.895686147 42.1351251684,12.9681870723 38.1112159322,11.3378023145 C 34.0873066959,9.70741755679 22.5012196331,7.17510901042 18.9067332603,6.60094203534 C 15.3122468874,6.02677506026 18.0318621297,2.51626328361 16.3576951546,8.0160055448 L 9.08493649054,39.6127930621 L 30.9544826719,44.7336279375 C 35.9881995293,45.2149745896 29.9832013798,40.0159364839 39.1506350946,42.5374755148 C 48.3180688094,45.0590145457 77.8514588671,56.105682446 86.2688925819,59.9262595826 C 94.6863262968,63.7468367192 86.7607510106,63.674335794 89.5320323028,65.274335794 L 103.156387956,69.6762595826 L 103.973375254,67.2611960732 L 107.138438763,66.7791452656 C 111.308758161,68.9559401849 124.678562081,77.5987605079 128.72208656,80.3951706694 C 132.765611038,83.1915808309 130.417534827,81.258568129 131.436188175,83.6942087751 C 132.454841523,86.1298494211 134.242148219,91.4341434151 134.797404107,94.8724120053 C 135.352659995,98.3106805956 135.24189048,100.902539024 134.694518424,104.050615236 C 134.147146368,107.198691447 132.989966691,110.802985441 131.426569232,113.710869273 C 129.863171772,116.618753106 127.78015907,119.226636938 125.127531126,121.621123311 C 122.474903182,124.015609684 118.879454915,126.443108759 115.547404107,128.214390051 C 112.2153533,129.985671343 109.866315194,131.054324691 105.235226281,132.075605983 C 100.604137367,133.096887275 93.194587485,134.130604133 87.8608706276,134.168872723 C 82.5271537702,134.207141313 80.6781156646,134.409769257 73.4195276766,132.182012444 C 66.1609396885,129.95425563 50.3787002031,122.689896276 44.3227401592,120.579126761 L 36.7605623327,119.677202972 L 28.0105623327,134.832647538 C 27.0265877365,138.536941532 24.5713318482,138.389569477 30.9567147554,141.729761855 C 37.3420976627,145.069954234 56.0527981173,152.062070402 66.2496546955,154.600596731 C 76.4465112737,157.13912306 83.2926636964,157.281239227 92.1012516844,156.824317289 C 100.909839672,156.367395351 111.374645443,154.441820065 119.287785164,151.735860021 C 127.200924885,149.029899977 134.75162904,144.151696747 139.430090009,140.848364647 C 144.108550978,137.545032548 144.348743357,136.529007144 147.345153519,132.139072504 C 150.34156368,127.749137864 155.75496114,118.172858422 157.345153519,114.818564428 C 158.935345898,111.464270434 158.0683586,113.965936484 157.046115413,112.33651362 C 156.023872227,110.707090757 152.992783313,108.957090757 151.434899481,105.055424707 C 149.877015648,101.153758657 149.472721654,94.4540163962 147.908620039,89.1631198618 C 146.344518424,83.8722233274 143.0153533,76.63850647 142.15028979,73.1368404202 C 141.285226281,69.6351743704 142.078046604,69.8619692896 142.668238983,68.2397261032 L 145.418238983,63.4765863824 Z" fill="#EBE3F7"/>
+  <path d="M 145.235226281,62.7935736805 L 142.668238983,68.2397261032 C 142.237854225,70.1851743704 141.747661846,71.634212476 142.516315194,74.502865824 C 143.284968542,77.3715191719 145.629454915,80.1107496565 147.24355653,85.3150436505 C 148.857658145,90.5193376445 150.806438512,101.343951036 152.300924885,105.555424707 L 156.247077307,110.720488217 L 168.85829324,105.877221477 C 173.549189774,105.352350346 180.994380302,107.456902079 184.232648893,107.248056352 L 188.2146997,104.350942035 L 194.209890229,108.966967439 C 195.205338496,111.042800464 195.00796644,113.584658893 194.173991844,117.029145266 C 193.340017247,120.473631638 192.691683297,126.79657898 189.156042651,129.720488217 C 185.620402005,132.644397453 176.528801315,132.59151177 173.196750508,134.362793062 C 169.8646997,136.134074354 170.040532725,138.429522621 169.263737806,140.174970889 C 168.486942887,141.920419156 168.486942887,141.920419156 168.312775911,144.822085206 C 168.138608936,147.723751255 168.146492769,154.310096057 168.441941036,157.598364647 C 168.737389303,160.886633237 169.55963249,162.862466262 170.272068055,164.428491666 C 170.98450362,165.99451707 172.390721403,164.958876424 172.803156968,167.04451707 C 173.215592534,169.130157716 172.32443826,174.273682195 172.883283987,176.905733002 C 173.442129714,179.53778381 175.417000845,181.717206673 176.32943641,182.936821915 C 177.241871975,184.156437158 177.738282137,184.096629537 178.494499919,184.186821915 L 181.226550727,183.454771108 L 179.981360199,170.611504368 C 180.685911931,165.59118497 181.686873826,160.857468113 185.517258583,153.0230471 C 189.347643341,145.188626087 199.473476366,130.250168819 202.950271285,123.828183371 C 206.427066205,117.406197924 205.567258583,118.295428408 206.40123318,114.850942035 C 207.235207776,111.406455662 207.210336645,105.849533724 208.004118863,103.074662594 C 208.79790108,100.299791463 207.778285838,100.865816867 210.754118863,98.3115228729 L 225.932322093,88.0221037105 L 223.48616967,80.2589639896 C 223.123734105,78.0867208032 224.89956713,77.6108877783 223.571106161,75.1118496726 C 222.242645192,72.6128115669 217.676877527,67.3209531382 215.428801315,65.2147353556 C 213.180725104,63.1085175729 212.1146997,62.9549277344 209.982648893,62.6477480575 C 207.850598085,62.3405683805 205.622137116,61.4003760016 202.78649647,63.1118496726 C 199.950855824,64.8233233436 196.227650743,70.8721037105 193.005407557,73.0531926237 C 189.78316437,75.2342815369 187.360921184,76.0297298041 183.19322973,76.0483831521 C 179.025538276,76.0670365 174.45162904,75.3892796865 168.135861375,73.128510171 L 145.235226281,62.7935736805 Z" fill="#DFF1E3"/>
+  <path d="M 9.95096189432,40.1127930621 L 7.45096189432,44.442920081 C 7.06076951546,45.718753106 8.07320508076,46.7651632675 7.68301270189,48.0409962924 L 5,51.6881106094 L 6.59807621135,54.920161417 C 10.5853829072,56.4139436343 24.7463411006,60.0864445596 29.0836477965,60.9740089943 L 32.498711306,60.0589454848 L 31.2176223927,55.2778565716 C 29.8953792063,54.1680489504 26.0874953738,54.1634972176 24.4054445662,53.0768946773 C 22.7233937587,51.9902921369 21.6779454915,50.0010616523 21.0753175473,48.8448438697 C 20.4726896031,47.688626087 20.5994845224,47.0690108448 20.7762794416,46.3627930621 L 22.4592921435,44.4477295527 L 21.4102540378,43.2647168508 L 9.95096189432,40.1127930621 Z" fill="#DFF1E3"/>
+  <path d="M 31.1015969889,53.4788184659 L 32.6865334795,45.7336279375 L 22.5932667397,42.2156787451 L 16.5131397208,42.7467676583 L 20.1602540378,45.4297803602 L 18.3432667397,49.5768946773 L 19.3923048454,50.7599073791 L 31.1015969889,53.4788184659 Z" fill="#FBE1DC"/>
+</g>
+</defs></svg>
+````

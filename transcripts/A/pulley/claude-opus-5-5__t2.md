@@ -1,0 +1,215 @@
+# A · pulley · claude-opus-5-5 · trial 2
+
+- Result: **PASS**, score 1.00, tags: pass
+- Model version: `claude-opus-5-5`, response id: `msg_vrtx_011CgrVTHTiha82WUY8DVR6j`
+- Started 2026-11-08T20:32:05-0500, finished 2026-11-08T20:34:05-0500, 119.9 s, attempts 1
+- Tokens: input 6,671, output 11,441 (thinking not reported separately by this provider)
+- Settings: `{"provider": "anthropic", "route": "vertex", "max_tokens": 128000, "thinking": {"type": "adaptive", "display": "summarized"}, "output_config": {"effort": "high"}}`, prompt sha256 `fb51e84f957061389e1cf34461222a2bdcfd9c392286360d6e86ad372bca9ca1`
+
+## Failed checks
+
+- none
+
+## Thinking summary (as returned by the provider)
+
+````text
+I'm working out the geometry of the parts: the beam is a ceiling-mounted rectangle with hatching on top indicating a fixed support, and the bracket hangs from it with a hole sized for the fixed wheel's axle.
+
+I'm trying to reconcile the bracket's flange, which has lips suggesting it mounts flush against the beam, with the arm extending down to the axle hole and a smaller pad hole that might anchor the rope's dead end for a two-wheel hoist setup.
+
+Tracing the rope path: it anchors at a hole, drops to loop under the movable wheel, then rises over the fixed wheel to a free pull end — with the groove radii matching the stroke width I calculated. Now I'm considering whether that anchor point connects to the bracket's pad or to the load box, which appears to be a rounded rectangle with two mounting holes hanging from a hook below it.
+
+I'm now mapping the hook, strap, and shackle pieces — the hook is a bar with a hole on one end and a rounded tip, the strap links the movable wheel's axle hole to the shackle's U-shaped legs, each with their own holes, and I'm trying to match these hole positions to see how everything pins together.
+
+The hook spans from its top hole down to the rounded end at about 80.75 units, so the top hole pins into the strap while the rounded bottom end hooks around the shackle's bow. I'm computing the shackle's bow curve using the bezier control points to find where that bottom bow sits, getting roughly x=57.71 at the midpoint.
+
+Now I'm considering whether the rope's other end anchors into the bracket's pink pad hole instead, which means tracing the bracket's flange geometry to see how it connects.
+
+I need to figure out the correct rotation so the arm points downward from the flange: working through the angles, I find the flange line sits at about -40°, but the arm direction requires a 220° rotation instead to point down rather than up, so the stored rotation should be 140° applied in reverse. Now I'm double-checking the flange's outer edge against this orientation to confirm consistency.
+
+Computing the rotation matrix for -140° (cos ≈ -0.766, sin ≈ -0.643) and applying it to the key points one by one to verify the outer flange edge lands correctly against the beam.
+
+Checking the flange outer edge points confirms the edge sits at y'=-205.82, spanning x' from -77 to 71, so the center lines up at x'=-3, directly above the hole by 106 units. Then I compute the pad hole center from its opposite arc endpoints, giving x'=-3.002, y'=-11.941 — matching the same x' offset as the other features.
+
+Now I'm positioning the bracket under the beam: placing the beam with translate(394,100) so it spans x 399–977, y 121–168, then solving for the bracket's translation so its flange edge (y'=-205.82) meets the beam's bottom (y=168), giving ty=373.82, and aligning x centers gives tx=691.0. This yields the bracket transform translate(691.002,373.822) rotate(-140), with resulting world coordinates for H at (688,274.0) and P at (688,348.5).
+
+I'm checking whether the fixed wheel (radius 64, centered at 688,274) overlaps the beam or the pad hole — it clears the beam bottom at 168, and the pad hole at 348.5 sits just outside the wheel rim at 338, so that's fine. Now I'm tracing the rope path's coordinates and arc segments to verify they're consistent with this geometry, starting from S=(112.556,123.367) through several line and arc commands stored at a 35° rotation.
+
+Computing the first line segment's direction and rotating it by -35° to check alignment, I get a unit vector of roughly (0.411, 0.912), which isn't vertical as I'd expect — meaning the rope likely isn't oriented at exactly -35° after all, or the assembled state has the segments at some other angle than I assumed.
+
+Testing the last segment the same way gives similarly non-vertical results, so I'm now reconsidering whether the two legs of the tackle are even supposed to be parallel. I'm shifting approach to work out the arc centers directly from the endpoints, radius, and sweep direction instead.
+
+So center C1 comes out to about (49.748, 213.064), and I verify the distance to E2 checks out at 45.0 as expected. Now I'm moving to the second arc, computing the direction from E2 to F1 to set up the next circle's geometry.
+
+I find C2 at approximately (155.288, 62.339), verified against F2 with the correct radius of 57.5. Then I compute the distance between the two centers, about 184.0, and work out the direction from C2 to C1 to get the angle between them at roughly 125°.
+
+For the assembled configuration, the movable wheel sits directly below the fixed one, so the direction should be 90°, meaning I need to rotate by -35°. The rope stays rigid even though its legs won't be perfectly vertical since the anchor is offset. Applying that -35° rotation to the anchor point relative to C2, I get a new position roughly (0, 74.5), confirming the anchor sits directly above C2 at that distance.
+
+Checking the bracket pad hole position (348.5 - 274 = 74.5 below H) confirms this matches. Now I'm working out where the movable wheel center C1 lands after rotation, placing it at (688, 458), and figuring out the rope transform by rotating C2 and translating it so it aligns with the fixed wheel position at (688, 274) — giving me the transform parameters translate(525.04, 312.005) combined with rotate(-35).
+
+Now I'm computing the free end location of the rope, confirming it lands within canvas bounds at roughly (862, 686). I'm locating the hub centers for both wheels using opposite-point averaging, then deriving the translation needed to place each wheel hub at its target position — fixed wheel at (619.061, 205.061) and movable wheel at (631.05, 401.05). I'm also starting to locate the strap's 9-hole center using the same opposite-point method.
+
+Computing strap rotation angle...
+
+Rotated big hole lands at (680.262, 565.392), with small hole at world (688, 530) — confirming the strap hangs below the movable wheel's axle with its rounded end wrapping around it. Now checking the hook piece, finding its hole center and rounded end position to set up the next vector calculation.
+
+I'm second-guessing whether the hook's rounded end actually joins the shackle bow directly, or whether the shackle's leg holes need to align with the box's holes instead. Looking at the box geometry, it's rotated 25°, so I'm unrotating it to axis-aligned to figure out which edge holds the semicircle notch and matching holes, trying to determine which side counts as the top.
+
+Now I'm pinpointing the notch semicircle and its two hole positions, then working out the shackle's hole centers and the leg vectors connecting them up to the bow, computing the angle each leg makes.
+
+I need to rotate this whole shackle by -160 degrees so the legs point upward toward the bow, then figure out where the bow apex lands relative to the hole midpoint after rotation, so I can position the hook's rounded end correctly at that apex.
+
+I'm checking the bow's curvature against a semicircle assumption but the geometry doesn't quite fit a standard radius, since the apex extends beyond the leg ends in a flatter curve. I'm now wondering if the grader actually aligns the hook's rounded end with a different reference point on the shackle, like the bow's seat rather than its curvature center.
+
+I'll just go with the bow apex at the centerline as the connection point, accepting some risk of error, placing it around (57.71, 73.40). Then I'm working out the shackle hole positions relative to that apex, putting the hook end at (688, 610.75) and the holes midpoint at (688, 668.0).
+
+Computing the apex coordinates gives (57.71, 73.40), and applying the rotation and translation I get the transformed apex at roughly (717.1, 699.5). I'm then checking the hole midpoint transforms to the same world position to confirm alignment.
+
+Moving on to the box holes, I calculate their centers at (151.59, 51.68) and (207.78, 77.88), then apply a -25° rotation to convert these into the rotated frame.
+
+Checking the rotated distance between the two holes gives exactly 62 with matching y' values, confirming they're horizontally aligned. I then verify by rotating the box corners, finding the box spans y' from roughly -37 to 139, so I'm checking where the holes fall within that range.
+
+Now I'm computing the translation needed to align one shackle hole with a box hole, but realizing the resulting box bottom lands around 828, which exceeds the 768 canvas height, so I need to shift everything upward to fit.
+
+I'll shift the whole composition up by 80 units so the box bottom lands at 744, which keeps it clear while the load still hangs properly. Now I'm recalculating the translate/rotate values for each component—beam, bracket, wheels, rope, strap, hook, and shackle—applying the vertical offset consistently.
+
+Verifying the strap's small hole and hook alignment confirms the hook hole lands exactly at y=450 and the shackle apex matches the hook end at 530.75, so the connections stay flush after the shift. The movable wheel center and strap's larger hole also line up correctly at y=378, confirming the chain of translations is consistent.
+
+Checking the rope points, fixed wheel, bracket, and anchor positions all confirm everything lines up correctly after the coordinate shifts—the geometry checks out and I'm done verifying.
+
+
+````
+
+## Answer
+
+````text
+The hoist hangs from the ceiling beam. The top block is fixed under the beam and the lower block moves, with the load slung below it. The rope is anchored at the top bracket, runs down under the movable wheel, up over the fixed wheel, and its free end comes back down.
+
+**Connections:**
+- **Beam:** placed at translate(394,20) with no rotation. Its hatching is on top, so it is a ceiling beam. Its underside is at y = 88 and its centre is at x = 688.
+- **Bracket:** rotated −140°. Its flanged plate seats against the beam underside. The arm hangs straight down from it.
+  - The arm's 9 px axle hole sits at (688, 194).
+  - The arm's 4 px end hole sits at (688, 268.5).
+- **Fixed wheel:** its hub sits on the bracket axle at (688, 194).
+- **Rope:** rotated −35°.
+  - Its 57.5 px arc wraps the fixed wheel, centred at (688, 194).
+  - Its 45 px arc wraps the movable wheel, centred at (688, 378).
+  - Its end hole lands exactly on the bracket's end hole at (688, 268.5).
+  - The free end hangs out to about (862, 606).
+- **Movable wheel:** its hub is at (688, 378).
+- **Strap:** rotated −125°. Its 9 px hole is on the movable wheel axle at (688, 378), and its 4 px hole hangs below at (688, 450).
+- **Hook:** rotated −55°. Its hole is on the strap pin at (688, 450), and its rounded end hangs at (688, 530.75).
+- **Shackle:** rotated −160°.
+  - The middle of its bow sits on the hook end at (688, 530.75).
+  - This bow point is my judgement of the intended seat. If the grader means the inner face of the bow instead, this joint could be off by up to about 8.5 px.
+  - Its two leg holes, 62 px apart, sit at (657, 588) and (719, 588).
+- **Box (load):** rotated −25°, so it hangs square. Its two top holes, also 62 px apart, match the shackle legs. The box bottom is at about y = 744, inside the canvas.
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768">
+  <use href="#kit-beam" transform="translate(394,20)"/>
+  <use href="#kit-bracket" transform="translate(691.002,293.822) rotate(-140)"/>
+  <use href="#kit-fixed_wheel" transform="translate(619.061,125.061)"/>
+  <use href="#kit-rope" transform="translate(525.040,232.005) rotate(-35)"/>
+  <use href="#kit-movable_wheel" transform="translate(631.050,321.050)"/>
+  <use href="#kit-strap" transform="translate(680.262,485.392) rotate(-125)"/>
+  <use href="#kit-hook" transform="translate(633.801,506.117) rotate(-55)"/>
+  <use href="#kit-shackle" transform="translate(717.124,619.457) rotate(-160)"/>
+  <use href="#kit-box" transform="translate(497.773,605.230) rotate(-25)"/>
+</svg>
+```
+````
+
+## Prompt
+
+````text
+Below is a kit of 9 SVG parts for a two-wheel pulley hoist (side view). Each part is a <g id="kit-..."> drawn in its own local coordinate system, stored at an arbitrary rotation. Each part's id names the part.
+
+Assemble the parts into one complete, working two-wheel pulley hoist (side view) on a 1376 x 768 canvas. Parts are rigid: translate and rotate only, no scaling and no mirroring. Use every part exactly once. The base part, kit-beam, stays upright exactly as stored (at most 3 degrees of rotation).
+
+Nobody will tell you which part connects to which, at which hole or feature, or which way round a part goes. Work that out from the parts, as a practitioner who knows this object would.
+
+Grading is done by code on where the parts land:
+- every connection the real object has must be made: the matching features of the two connected parts (pin holes, axle holes, bolt holes, hub centres, the centres of rounded ends, seats) must coincide within 4 px;
+- a part that slides along a guide (such as a piston in its bore) must sit on the guide's centre line, within 4 px;
+- every part must face the way it does on the working object, relative to the base part, within 8 degrees; parts that turn in use (wheels, gears, sprockets, cranks, connecting rods, pedals, rotors) may sit at any angle;
+- anything that stands on the ground must stand level, within 4 px;
+- a missing, duplicated, scaled, skewed or mirrored part fails the assembly.
+
+Reply with one <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768"> that contains exactly one <use href="#kit-ID" transform="..."/> per part. You may wrap <use> elements in <g transform="..."> groups. Do not copy the part drawings: the kit's <defs> are inserted automatically.
+
+KIT:
+<svg xmlns="http://www.w3.org/2000/svg"><defs>
+<g id="kit-beam" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 5,21 L 583,21 L 583,68 L 5,68 Z" fill="#ECEAE4"/>
+  <path d="M 5,21 L 583,21" fill="none" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 5,68 L 583,68" fill="none" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 11,21 L 27,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 45,21 L 61,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 79,21 L 95,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 113,21 L 129,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 147,21 L 163,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 181,21 L 197,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 215,21 L 231,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 249,21 L 265,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 283,21 L 299,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 317,21 L 333,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 351,21 L 367,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 385,21 L 401,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 419,21 L 435,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 453,21 L 469,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 487,21 L 503,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 521,21 L 537,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 555,21 L 571,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+</g>
+<g id="kit-box" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 84.2177093193,9.22618261741 L 283.605422467,102.2022002 A 10,10 25 0,1 288.44231772,115.491460688 L 226.740051506,247.812397595 A 10,10 25 0,1 213.450791018,252.649292848 L 14.0630778704,159.673275265 A 10,10 25 0,1 9.22618261741,146.384014778 L 70.9284488315,14.0630778704 A 10,10 25 0,1 84.2177093193,9.22618261741 Z" fill="#DFF1E3" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 75.154631449,5 L 103.250172847,18.101166114 A 31,31 25 0,1 62.053465335,33.0955413981 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 292.668500338,106.428382818 L 264.57295894,93.3272167038 A 31,31 25 0,0 279.567334224,134.523924216 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 5,155.447092648 L 33.0955413981,168.548258762 A 31,31 25 0,0 18.101166114,127.35155125 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 222.513868889,256.875475466 L 194.418327491,243.774309352 A 31,31 25 0,1 235.615035003,228.779934068 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 155.816024495,42.6130252949 A 31,31 25 0,0 212.007107291,68.8153575228 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 85.6613930463,193.060117943 A 31,31 25 0,1 141.852475843,219.262450171 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 116.844789653,24.4404400401 L 140.408792116,35.4285148453 L 120.968352076,77.118673049 L 97.4043496126,66.1305982438 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 183.911565893,55.7141914089 L 113.756934444,206.161284057" fill="none" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 155.215073026,53.3665762123 A 4,4 25 0,1 149.899368831,55.3013343134 A 4,4 25 0,1 147.96461073,49.9856301183 A 4,4 25 0,1 153.280314925,48.0508720171 A 4,4 25 0,1 155.215073026,53.3665762123 Z" fill="#F8F7F2"/>
+  <path d="M 211.406155822,79.5689084402 A 4,4 25 0,1 206.090451627,81.5036665414 A 4,4 25 0,1 204.155693526,76.1879623462 A 4,4 25 0,1 209.471397721,74.2532042451 A 4,4 25 0,1 211.406155822,79.5689084402 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-bracket" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 191.286436542,108.171411568 L 77.9118589606,203.303977802 L 72.7695580831,197.175622257 Q 68.912832425,192.579355598 74.2751435269,188.07984233 L 101.086699036,165.582275991 L 13.5615703486,30.1594128986 L 31.9466369834,14.7325102662 L 150.113543396,124.443868971 L 176.925098905,101.946302632 Q 182.287410007,97.4467893646 186.144135665,102.043056023 Z" fill="#EBE3F7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 59.5692611366,80.3220722017 A 9,9 140 0,1 60.6785726375,67.6425837264 A 9,9 140 0,1 73.3580611127,68.7518952273 A 9,9 140 0,1 72.2487496119,81.4313837026 A 9,9 140 0,1 59.5692611366,80.3220722017 Z" fill="#F8F7F2"/>
+  <path d="M 30.0315258756,16.3394792904 L 15.4766814564,28.5524438744 A 6,6 140 0,1 7.02368913952,27.8129028738 L 6.38090152984,27.0468584307 A 6,6 140 0,1 7.12044253043,18.5938661139 L 21.6752869497,6.38090152984 A 6,6 140 0,1 30.1282792665,7.12044253043 L 30.7710668762,7.88648697355 A 6,6 140 0,1 30.0315258756,16.3394792904 Z" fill="#FEB8A7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 15.5118064305,20.0378231409 A 4,4 140 0,1 16.0048337643,14.4024949297 A 4,4 140 0,1 21.6401619755,14.8955222634 A 4,4 140 0,1 21.1471346418,20.5308504746 A 4,4 140 0,1 15.5118064305,20.0378231409 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-fixed_wheel" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 90.8283753541,129.079413912 A 64,64 70 0,1 8.79875845094,90.8283753541 A 64,64 70 0,1 47.0497970084,8.79875845094 A 64,64 70 0,1 129.079413912,47.0497970084 A 64,64 70 0,1 90.8283753541,129.079413912 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 86.0400933475,115.923717221 A 50,50 70 0,1 21.9544551419,86.0400933475 A 50,50 70 0,1 51.838079015,21.9544551419 A 50,50 70 0,1 115.923717221,51.838079015 A 50,50 70 0,1 86.0400933475,115.923717221 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 72.0172674712,77.3963197683 A 9,9 70 0,1 60.4818525942,72.0172674712 A 9,9 70 0,1 65.8609048913,60.4818525942 A 9,9 70 0,1 77.3963197683,65.8609048913 A 9,9 70 0,1 72.0172674712,77.3963197683 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-hook" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 76.8905236535,5 L 7.46738789997,53.6106029808 A 6,6 55 0,0 14.3503051362,63.4404275122 L 83.7734408897,14.8298245315 Z" fill="#ECEAE4" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 79.3496798398,15.4858261883 A 4,4 55 0,1 73.7787659173,14.5035237565 A 4,4 55 0,1 74.761068349,8.93260983398 A 4,4 55 0,1 80.3319822716,9.91491226573 A 4,4 55 0,1 79.3496798398,15.4858261883 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-movable_wheel" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 39.1654600693,105.814523803 A 52,52 110 0,1 8.08649124139,39.1654600693 A 52,52 110 0,1 74.7355549752,8.08649124139 A 52,52 110 0,1 105.814523803,74.7355549752 A 52,52 110 0,1 39.1654600693,105.814523803 Z" fill="#FDF1C9" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 43.9537420759,92.6588271121 A 38,38 110 0,1 21.2421879324,43.9537420759 A 38,38 110 0,1 69.9472729686,21.2421879324 A 38,38 110 0,1 92.6588271121,69.9472729686 A 38,38 110 0,1 43.9537420759,92.6588271121 Z" fill="#FDF1C9" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 53.8723262323,65.4077411093 A 9,9 110 0,1 48.4932739352,53.8723262323 A 9,9 110 0,1 60.0286888122,48.4932739352 A 9,9 110 0,1 65.4077411093,60.0286888122 A 9,9 110 0,1 53.8723262323,65.4077411093 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-rope" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 112.55585817,123.366588224 L 93.9612808915,221.445558043 A 45,45 35 1,1 11.2191650428,189.816597186 L 106.054617793,32.6350093851 A 57.5,57.5 35 0,1 209.491978553,81.5248742758 L 61.5062666074,499.632703096" fill="none" stroke="#1F2A3A" stroke-width="17"/>
+  <path d="M 112.55585817,123.366588224 L 93.9612808915,221.445558043 A 45,45 35 1,1 11.2191650428,189.816597186 L 106.054617793,32.6350093851 A 57.5,57.5 35 0,1 209.491978553,81.5248742758 L 61.5062666074,499.632703096" fill="none" stroke="#FEB8A7" stroke-width="9"/>
+  <path d="M 115.832466347,125.660893969 A 4,4 35 0,1 110.261552424,126.643196401 A 4,4 35 0,1 109.279249992,121.072282478 A 4,4 35 0,1 114.850163915,120.089980047 A 4,4 35 0,1 115.832466347,125.660893969 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-shackle" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 67.2571353751,8.99619288633 L 80.9379411081,46.5838977178 C 88.8044044046,68.1968279958 30.5434619158,89.402076882 22.6769986194,67.789146604 L 8.99619288633,30.2014417725" fill="none" stroke="#1F2A3A" stroke-width="17"/>
+  <path d="M 67.2571353751,8.99619288633 L 80.9379411081,46.5838977178 C 88.8044044046,68.1968279958 30.5434619158,89.402076882 22.6769986194,67.789146604 L 8.99619288633,30.2014417725" fill="none" stroke="#ECEAE4" stroke-width="9"/>
+  <path d="M 63.4983648919,10.3642734596 A 4,4 160 0,1 65.8890548018,5.23742240318 A 4,4 160 0,1 71.0159058582,7.62811231302 A 4,4 160 0,1 68.6252159484,12.7549633695 A 4,4 160 0,1 63.4983648919,10.3642734596 Z" fill="#F8F7F2"/>
+  <path d="M 5.23742240318,31.5695223458 A 4,4 160 0,1 7.62811231302,26.4426712894 A 4,4 160 0,1 12.7549633695,28.8333611992 A 4,4 160 0,1 10.3642734596,33.9602122557 A 4,4 160 0,1 5.23742240318,31.5695223458 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-strap" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 31.3960668461,6.40597930804 L 95.2899263006,51.1449413434 A 20.5,20.5 125 0,1 71.7732924102,84.7301751593 L 7.87943295567,39.9912131239 Q 2.96452068993,36.5497545058 6.40597930804,31.63484224 L 23.0396959622,7.87943295567 Q 26.4811545803,2.96452068993 31.3960668461,6.40597930804 Z" fill="#FDF1C9" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 78.3694214282,75.3099266499 A 9,9 125 0,1 76.1592409568,62.7753703242 A 9,9 125 0,1 88.6937972826,60.5651898527 A 9,9 125 0,1 90.903977754,73.0997461785 A 9,9 125 0,1 78.3694214282,75.3099266499 Z" fill="#F8F7F2"/>
+  <path d="M 22.2583564212,29.9166630112 A 4,4 125 0,1 21.2760539894,24.3457490887 A 4,4 125 0,1 26.846967912,23.3634466569 A 4,4 125 0,1 27.8292703438,28.9343605795 A 4,4 125 0,1 22.2583564212,29.9166630112 Z" fill="#F8F7F2"/>
+</g>
+</defs></svg>
+````

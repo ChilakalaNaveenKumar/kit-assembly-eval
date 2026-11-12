@@ -1,0 +1,265 @@
+# B · pulley · claude-sonnet-5-5 · trial 3
+
+- Result: **PASS**, score 1.00, tags: pass
+- Model version: `claude-sonnet-5-5`, response id: `msg_vrtx_011CgrVTFLUpDBj6yqdCvdK1`
+- Started 2026-11-08T20:32:05-0500, finished 2026-11-08T20:35:25-0500, 199.9 s, attempts 1
+- Tokens: input 6,683, output 23,461 (thinking not reported separately by this provider)
+- Settings: `{"provider": "anthropic", "route": "vertex", "max_tokens": 128000, "thinking": {"type": "adaptive", "display": "summarized"}, "output_config": {"effort": "high"}}`, prompt sha256 `0eb4a228ba7e95b6b6657247f40030cf1c9e960d98e122abe06db12d8d862842`
+
+## Failed checks
+
+- none
+
+## Thinking summary (as returned by the provider)
+
+````text
+I'm identifying the hoist components: p08 looks like a ceiling beam the hoist mounts to with hatching marking the fixed surface, while p01 appears to be the pulley block housing with side plates for the wheel assembly.
+
+Going through the remaining parts: a hook-like bracket with large and small holes, a small bar link, two wheels of different sizes with hub holes, a rope with a loop and eyelet, a U-shaped shackle, and an L-shaped lever with a pink rounded end. This all points to a two-wheel pulley hoist assembly — fixed block with wheel up top, movable block with wheel below, rope threading through, and a hook at the bottom.
+
+I'm checking whether the frame plate's pin holes actually align with where the two wheels would sit, but the spacing between the holes doesn't match the wheel radii, and the combined wheel diameters seem too wide to fit the plate's width, so I'm reconsidering how these pieces actually attach to each other.
+
+Actually the holes aren't quite on that line, so maybe they're pin holes near the top edge spaced along the long direction instead, perhaps where other links attach. I'm reconsidering the whole assembly as a hoist, with p02 possibly acting as a bracket or arm holding a wheel axle, given its large and small hole placement.
+
+Looking more closely, p09 seems to be another arm with a bolted end — its small hole matching a pin size and a larger hole matching a wheel hub size, suggesting these parts connect to wheels p04/p05 while smaller holes serve as pivot or bolt connections.
+
+I'm also tracing the rope piece p06 — its eyelet connects to a large looping path that curves around with varying arc radii, suggesting it wraps around a wheel's groove before trailing off into a long tail, which helps me figure out how the rope physically interacts with the mechanism.
+
+Working out the offset distance (~7.9) from the chord midpoint to find the arc center, then figuring out which side the center lies on based on the clockwise sweep direction and the incoming tangent line from the eyelet.
+
+Now computing the second arc's center: for the segment from (106.05,32.6) to (209.5,81.5), the incoming direction suggests a clockwise turn toward the right, putting the center at (155.3,62.3) — confirmed by checking the distance to the endpoint matches radius 57.5. This gives wheel 2 (p05, r64) its center in rope coordinates, and I notice it aligns with p01's small hole.
+
+I'm checking whether the rope wheels belong to separate blocks — small wheel p04 on the movable block below, big wheel p05 on the fixed block above — with the eyelet sitting between them and the rope tail hanging from p05's right side, trying to figure out which block the rope end is actually attached to.
+
+Tracing the path: eyelet down to the small movable wheel, then up to the big fixed wheel, with the tail hanging off. Checking the tilt of that hanging tail relative to vertical, I'm seeing it's off by about 19.5 degrees, so I'll need to rotate the whole rope assembly to make it hang straight.
+
+Applying that rotation, the big wheel ends up 49 right and 177 above the small wheel, and the eyelet sits roughly 20 left and 72 below the big wheel's center.
+
+Now I'm tracing how the rope actually runs between the wheels — it seems to leave the small wheel's left edge and travel up to the big wheel's left/top edge, rather than crossing straight across, so I need to reconsider which sides the tangent line actually connects.
+
+I'm reconsidering the parts list — maybe p01 isn't structural but actually the load itself, a crate rectangle with corner reinforcement brackets and strap decorations, plus attachment eye holes at top where it hangs from the hook.
+
+Checking the geometry, p07 looks like a U-shaped shackle or sling with two small holes at its ends, which line up with the two eye holes on the crate — I'm verifying the hole spacing matches by estimating the circle centers from the path coordinates, and the distance comes out to about 62, confirming the connection.
+
+Now I'm tracing what the middle of that sling curve connects to — maybe a hook or bracket piece like p09 or p02, each of which seems to have one larger hole and one smaller pink-marked hole, while p03 looks like a simple link with a single hole, so I'm mapping out how the fixed beam p08 connects through p03 toward the rest of the mechanism.
+
+I'm measuring p02's shape more carefully — it looks like a rounded plate roughly 78 units long and 41 units wide based on its corner coordinates, possibly a slotted bracket.
+
+Looking at the holes, there's a big radius-9 hole near one end at (83.6,68) and a smaller radius-4 hole at the other end — likely where the main axle mounts versus a secondary pivot. Then checking p09, it seems like an L-shaped arm or lever with a hole for the big axle and a rounded pink tip with a smaller hole, possibly where p03 (a thin 85-unit bar with one rounded holeless end and one end with a radius-4 hole) connects as a linking pin.
+
+Thinking through the hoist assembly now: the beam up top holds an upper block, and p02 might be the plate carrying the big wheel at its radius-9 hole while the rope eyelet sits at its radius-4 hole — the distance between those checks out at roughly 72-74 units, matching the geometry, so I'm working out the orientation vector from the big hole to the small hole to place p02 correctly.
+
+Both p02 and p09 have r9 holes, suggesting two wheels need axles there — p09 likely being the small movable wheel's hook-shaped holder, with its pink tip possibly linking to p07 toward the crank, though the connection chain is still unclear.
+
+I'm now second-guessing whether p07's two holes attach to the crate directly, given matching 62 spacing, but then nothing obviously links p07 to the hoist mechanism. I'm starting to wonder if p01 isn't actually the crate at all, but part of the movable block housing instead.
+
+Looking at p07's path more carefully, it traces a U-shaped loop between two top holes, curving down through a wide bulge — likely meant as a rope sling or chain loop rather than a rigid piece, with hook p09 possibly catching into that bulge.
+
+Tracing the polygon coordinates, I'm seeing a thin elongated shape with two long arms reaching from one end near (13,30) to the far corner around (191,108), suggesting this could be a clevis hook with a shaft connecting two gripping points.
+
+I'm tracing the vertices more carefully now, treating the shape as a single triangle roughly at (22,22), (186,103), and (76,196), checking the approximate side lengths to understand the outline's overall form before mapping the full polygon path.
+
+So it looks roughly perpendicular, forming an L-bracket or crank-lever shape — a long arm A meeting a shorter arm B at an elbow, with a r9 hole on arm A near (66,74.5) and a pink-capped end at (18.5,17.5) with a smaller r4 hole. I'm wondering if the pink tip is a grip or handle, and whether this whole piece is a wall-mounted bracket holding an axle, possibly something like a hanging bracket fixed to a beam.
+
+Checking distances, the gap from the rope eyelet to the small wheel comes out around 109, which doesn't match, but the eyelet-to-big-wheel distance of about 74.6 lines up closely with the 75 measured between the r9 and pink-cap holes on this bracket piece — so this part likely connects the eyelet to the larger wheel rather than the small one.
+
+Checking arm A's axis: it passes from the tip through both holes consistently, with the r4 hole near the tip and the r9 hole further along toward an elbow, while arm B extends from that elbow to attach to the beam.
+
+I'm questioning whether a small angular deviation from vertical is tolerable given the grader's orientation tolerance, and trying to work out arm A's actual expected angle by comparing the hole-to-hole direction against the arm's edge geometry.
+
+Since those two estimates disagree by about 7°, I'm reconsidering which reference line matters, then checking if aligning arm B against the beam gives a cleaner target rotation—computing arm B's edge angle versus arm A's and testing a 40° rotation to see if that matches.
+
+Tracing through the geometry more carefully, it looks like arm A attaches not at B's endpoint but somewhere in B's middle section, making the overall shape more like a T-junction rather than a simple bent L-shape.
+
+Checking the stem edges more carefully, I find the taper converges to a mean axis of 50°, which is indeed perpendicular to the crossbar's -40° angle, confirming my orientation. With the tip pointing at 230°, I need a rotation of -140° to make it point straight down.
+
+Now checking the wheel-to-eyelet direction and rope geometry, I'm finding a conflict: if the rope's vector needs to point straight down, that requires its own rotation of about -35°, which would make the tail slant roughly 15° from vertical rather than perfectly aligned. I'm trying to figure out if this discrepancy is intentional in the design.
+
+Maybe my pairing of p09 with p02 is wrong—perhaps the rope eyelet actually connects differently, with p02 hanging underneath instead. I should reconsider the whole setup: a rope tied at the eyelet, a wheel hung on the axle, the eyelet positioned vertically below it, with the rope running from the eyelet down to a movable pulley's tangent point and a tail off the larger wheel's side.
+
+Looking at the actual rope geometry now, the segment from the eyelet tilts about 10.7° from vertical while the segment from the small wheel up to the big wheel tilts around 31°. Since the rope seems to only have one defined feature (the eyelet hole), its rotation might be essentially unconstrained except for some orientation check I need to work out.
+
+Actually, I'm realizing the key constraint might be that the rope arcs' centers correspond to the wheel hub centers — so the eyelet anchors to one hole position while the big arc's center aligns with the wheel hub, which fits the measured distance of about 74.6 versus 74.2. That would mean the rope's orientation is essentially slaved to the wheel assembly's pose rather than independent.
+
+Then for the small wheel, I need to figure out which part it mounts to and how it connects onward to the movable block and crate — tracking which holes pair with which holes across p02, p03, p04, and p07, since the crate has exactly two holes that must match up with p07's two holes, leaving p02's remaining hole to connect to p03.
+
+I'm computing the distance between p03's hole center and its rounded end center, getting a link length around 80.7 units, and reconsidering whether p03 actually connects p02's hole to p07's loop rather than directly to the crate.
+
+Maybe p07 isn't attached to the crate at all—perhaps it's a hook or bail with ends joining elsewhere, while p01 could actually be a movable plate rather than the crate itself. I'm trying different pairings: p03 as a lever or pin, or p09 as a bracket, to see which combination of hole spacings and distances matches up consistently.
+
+I'm now working through the geometry of the rope and movable wheel—rotating the rope by roughly -35° so the eyelet sits below the big wheel, and checking how the small and large holes on p02 align with p07 and the crate's two connection points.
+
+Tail direction rotates to 74.5° after transform, pointing down-right about 15° off vertical — a bit odd but plausible if the rope is pulled, and confirms the wheel-center-vertical-stack design. So the small wheel sits 184 below the big wheel, and now I need to figure out the movable block: p02 sitting at the small wheel's hole, with its r4 hole offset 72 away, likely hanging straight down given the orientation constraints.
+
+p02's long axis runs at about 35°, matching the direction to its r4 hole, so it reads as a vertical plate with the wheel hole at one end and the r4 hole near the other. From there I'm tracing the chain downward — a link from the r4 hole extending further down, connecting toward the crate holes spaced 62 apart.
+
+Maybe p03 isn't actually tied to p02's r4 hole; perhaps it's instead a separate link bridging to p07. I need to make sure every part lands a connection: base beam, bracket p09, the two wheels, rope, movable block p02, a hook, the load crate, sling p07, and p03 all need roles. I'm wondering if p03 is a thin hanger-type bar (around 85 long) linking the movable block down to the load, while p07 acts more like a hook whose ends anchor into the crate's holes.
+
+I'm now reconsidering whether p07's rounded path ends actually align with p03's hole, and whether the crate's two holes are meant for p07 rather than p03 — checking geometry by projecting the crate's top edge and seeing where each hole falls relative to that line.
+
+Measuring the perpendicular distances of both holes from the crate's top edge, I find both sit about 10 units inside it, symmetric about the midpoint — confirming they're a matched pair of top eyelets, so that edge of p01 is indeed the "top" where the sling attaches.
+
+I locate the line's starting point as exactly the midpoint of the top edge, confirming it's the crate's vertical centerline. To orient the crate upright, I need to rotate by roughly -25° to make that top edge horizontal.
+
+I'm identifying which edge is actually "top" by checking the holes' location and interior normal direction after rotation — the edge with holes near (84,9)-(283,102) checks out as top since its normal points downward into the crate after rotating -25°. Now for p07, I'm figuring out the rotation needed so its two hole endpoints sit horizontal, which will show the sling curve arching upward over the crate.
+
+After rotating by −160°, the hole line becomes horizontal with A left of B, confirming the arch rises above the holes with roughly 60 units height and 70 units width. Now I need to figure out what attaches to this arch's apex — maybe p03 links the movable block's hole to the peak, though the apex itself isn't a hole, so perhaps the connection is actually at a different feature point like p07.
+
+Computing the apex of the arch curve by averaging the Bezier control points at t=0.5, I get roughly (57.7, 73.4), which sits about 57 units perpendicular from the midpoint of the hole pair — a substantial offset I need to reconcile with the rest of the geometry.
+
+So I'm piecing together a plausible top-to-bottom stacking order: beam, then p09, wheels, p02 as the movable block, p03 as the link, p07's arch apex, and finally the crate holes — with p03's rounded end possibly seating right at that apex like a hook or shackle connection to p02's hole.
+
+Now I need to actually compute the coordinates, starting with the beam's position and working down through each offset.
+
+Working out the rotation math for p09, applying the −140° transform formula to find where the hole center and key points land after rotating.
+
+Good, r4 sits below r9 by about 74.5 units, confirming the orientation. Now I'm locating the crossbar's elbow by averaging its endpoint coordinates, transforming to get its center around y'=−199.8, roughly 100 above r9, and estimating its top edge near y'=−212 given the thickness.
+
+Checking the far-side edge of the bar (away from stem A), I find it transforms to y'≈−206.1, which should align with the beam's bottom edge since the stem tip points downward — confirming this is indeed the top of the crossbar. Now I need to translate p09 so this edge matches the beam's bottom Y coordinate.
+
+Working through the vertical chain downward from the beam: setting beam bottom at y=78 gives the big wheel hub at 184.3, small wheel hub at 368.4, the p02 r4 hole at 440.5, then the p03 link brings it to 521 for the sling apex. From there the crate top sits at 568 and with a height of 146 the bottom lands at 714, comfortably under the 768 limit.
+
+Now checking the rope tail trailing from the big wheel — roughly 443 units long, angled after the rotation so it drifts rightward as it falls, ending somewhere around y=610. I'm verifying it clears the crate by checking the horizontal offset at that depth against the crate's width, and it looks like the tail passes just to the right of the crate.
+
+For the horizontal placement, I'm picking the hub x-coordinate around 690 and working out the matching translate values for the crossbar and beam pieces so their rotated positions line up correctly with that hub.
+
+Now I'm finding the wheel's local center by averaging its defining circle points, then computing the translate offset needed to place it at the hub position. I'm also starting to work out the rope's rotation angle and the precise coordinates of its larger arc's center so it connects properly to the hub.
+
+Confirming the hole center matches the circle point average exactly. Now I'm computing the vector from eyelet to center, finding its distance matches the p09-r4 segment length precisely, which tells me this is the rope attachment point. I'm calculating the angle needed to rotate this vector to point straight down, landing on a rotation of about -35 degrees.
+
+Working through the full rope transform now: applying this rotation to the center point and solving for the translation offset that places it at the target anchor coordinates, then verifying the eyelet position lands correctly under the same transform.
+
+I'm also deriving the small wheel's arc center by computing the unit tangent direction from point E and offsetting by the wheel radius along the left-hand normal, landing near (49.7, 213.1).
+
+Now I'm working out p02's hole centers, finding the r9 and r4 positions and the vector between them with length 72.0, then computing the angle (215°) and figuring out the rotation needed (−125°) to orient it pointing down.
+
+I'm second-guessing the orientation choice for p02 — whether r9 should point up or r4 should face the beam instead. Checking the geometry near the wheel hub, the rope loop sits around radius 53.5 from the hub, landing near 421.8, while the r4 hole's plate edge sits around 440 with some overlap that's probably fine. I'm weighing whether p02's r4 hole should actually link toward p03 below rather than toward the beam.
+
+Now I'm working out p03's placement: its hole aligns with p02's r4 point at (690,440.3), with the rounded end sitting roughly 80.7 units below. I'm computing the hole's local center from four boundary points, landing around (77.05, 12.21), then finding the rounded end's center from its arc endpoints, which comes out near (10.909, 58.525). From there I'm calculating the vector and distance between hole and end (about 80.73 units), finding the angle (145°), and figuring out the rotation needed (-55°) to align it vertically.
+
+For p07, I'm checking the apex position relative to the hole line after a -160° rotation, verifying the arch curves upward and the holes sit correctly below the apex by comparing vector angles.
+
+I'm uncertain whether this apex connection is actually what's intended for linking p03 and p07, though a hook-like interpretation seems plausible enough to proceed with. Now I'm working out the precise hole center coordinates for p07's geometry.
+
+Computing the Bezier curve's midpoint and apex position for p07, I find the apex-to-midpoint vector has length 57.25, and I'm now applying a -160° rotation to align things correctly.
+
+Applying this rotation to the midpoint and apex, then translating so the midpoint lands at (690, 578.3), I get the transformed apex location around (690.0, 521.05).
+
+Now checking the p01 crate rotated by −25°: I'm computing the two hole centers from their corner coordinates, then finding their midpoint to compare against the target mid location at (690, 578.3).
+
+I confirm the midpoint matches when offset along the inward normal, then apply the −25° rotation matrix to get the translation offset, giving T=(499.77, 595.53). I'm now verifying the hole spacing stays consistent after rotation, cross-checking against the p07 arch's hole vector rotated by −160°.
+
+B checks out at 721, matching the crate holes at 659 and 721 either order. The crate spans x 580–800 with the top edge near y568, so the rope tail should clear it fine. I'll apply the translate-then-rotate transform to position everything.
+
+
+````
+
+## Answer
+
+````text
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768">
+  <use href="#kit-p08" transform="translate(399,10)"/>
+  <use href="#kit-p09" transform="translate(693,284.1) rotate(-140)"/>
+  <use href="#kit-p05" transform="translate(621.06,115.36)"/>
+  <use href="#kit-p06" transform="translate(527.04,222.31) rotate(-35)"/>
+  <use href="#kit-p04" transform="translate(633.05,311.35)"/>
+  <use href="#kit-p02" transform="translate(682.26,475.69) rotate(-125)"/>
+  <use href="#kit-p03" transform="translate(635.81,496.42) rotate(-55)"/>
+  <use href="#kit-p07" transform="translate(719.13,609.76) rotate(-160)"/>
+  <use href="#kit-p01" transform="translate(499.77,595.53) rotate(-25)"/>
+</svg>
+````
+
+## Prompt
+
+````text
+Below is a kit of 9 SVG parts for a two-wheel pulley hoist (side view). Each part is a <g id="kit-..."> drawn in its own local coordinate system, stored at an arbitrary rotation. The parts are unlabelled (ids p01 to p09); work out what each one is from its drawing.
+
+Assemble the parts into one complete, working two-wheel pulley hoist (side view) on a 1376 x 768 canvas. Parts are rigid: translate and rotate only, no scaling and no mirroring. Use every part exactly once. The base part, kit-p08, stays upright exactly as stored (at most 3 degrees of rotation).
+
+Nobody will tell you which part connects to which, at which hole or feature, or which way round a part goes. Work that out from the parts, as a practitioner who knows this object would.
+
+Grading is done by code on where the parts land:
+- every connection the real object has must be made: the matching features of the two connected parts (pin holes, axle holes, bolt holes, hub centres, the centres of rounded ends, seats) must coincide within 4 px;
+- a part that slides along a guide (such as a piston in its bore) must sit on the guide's centre line, within 4 px;
+- every part must face the way it does on the working object, relative to the base part, within 8 degrees; parts that turn in use (wheels, gears, sprockets, cranks, connecting rods, pedals, rotors) may sit at any angle;
+- anything that stands on the ground must stand level, within 4 px;
+- a missing, duplicated, scaled, skewed or mirrored part fails the assembly.
+
+Reply with one <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768"> that contains exactly one <use href="#kit-ID" transform="..."/> per part. You may wrap <use> elements in <g transform="..."> groups. Do not copy the part drawings: the kit's <defs> are inserted automatically.
+
+KIT:
+<svg xmlns="http://www.w3.org/2000/svg"><defs>
+<g id="kit-p01" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 84.2177093193,9.22618261741 L 283.605422467,102.2022002 A 10,10 25 0,1 288.44231772,115.491460688 L 226.740051506,247.812397595 A 10,10 25 0,1 213.450791018,252.649292848 L 14.0630778704,159.673275265 A 10,10 25 0,1 9.22618261741,146.384014778 L 70.9284488315,14.0630778704 A 10,10 25 0,1 84.2177093193,9.22618261741 Z" fill="#DFF1E3" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 75.154631449,5 L 103.250172847,18.101166114 A 31,31 25 0,1 62.053465335,33.0955413981 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 292.668500338,106.428382818 L 264.57295894,93.3272167038 A 31,31 25 0,0 279.567334224,134.523924216 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 5,155.447092648 L 33.0955413981,168.548258762 A 31,31 25 0,0 18.101166114,127.35155125 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 222.513868889,256.875475466 L 194.418327491,243.774309352 A 31,31 25 0,1 235.615035003,228.779934068 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 155.816024495,42.6130252949 A 31,31 25 0,0 212.007107291,68.8153575228 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 85.6613930463,193.060117943 A 31,31 25 0,1 141.852475843,219.262450171 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 116.844789653,24.4404400401 L 140.408792116,35.4285148453 L 120.968352076,77.118673049 L 97.4043496126,66.1305982438 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 183.911565893,55.7141914089 L 113.756934444,206.161284057" fill="none" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 155.215073026,53.3665762123 A 4,4 25 0,1 149.899368831,55.3013343134 A 4,4 25 0,1 147.96461073,49.9856301183 A 4,4 25 0,1 153.280314925,48.0508720171 A 4,4 25 0,1 155.215073026,53.3665762123 Z" fill="#F8F7F2"/>
+  <path d="M 211.406155822,79.5689084402 A 4,4 25 0,1 206.090451627,81.5036665414 A 4,4 25 0,1 204.155693526,76.1879623462 A 4,4 25 0,1 209.471397721,74.2532042451 A 4,4 25 0,1 211.406155822,79.5689084402 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-p02" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 31.3960668461,6.40597930804 L 95.2899263006,51.1449413434 A 20.5,20.5 125 0,1 71.7732924102,84.7301751593 L 7.87943295567,39.9912131239 Q 2.96452068993,36.5497545058 6.40597930804,31.63484224 L 23.0396959622,7.87943295567 Q 26.4811545803,2.96452068993 31.3960668461,6.40597930804 Z" fill="#FDF1C9" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 78.3694214282,75.3099266499 A 9,9 125 0,1 76.1592409568,62.7753703242 A 9,9 125 0,1 88.6937972826,60.5651898527 A 9,9 125 0,1 90.903977754,73.0997461785 A 9,9 125 0,1 78.3694214282,75.3099266499 Z" fill="#F8F7F2"/>
+  <path d="M 22.2583564212,29.9166630112 A 4,4 125 0,1 21.2760539894,24.3457490887 A 4,4 125 0,1 26.846967912,23.3634466569 A 4,4 125 0,1 27.8292703438,28.9343605795 A 4,4 125 0,1 22.2583564212,29.9166630112 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-p03" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 76.8905236535,5 L 7.46738789997,53.6106029808 A 6,6 55 0,0 14.3503051362,63.4404275122 L 83.7734408897,14.8298245315 Z" fill="#ECEAE4" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 79.3496798398,15.4858261883 A 4,4 55 0,1 73.7787659173,14.5035237565 A 4,4 55 0,1 74.761068349,8.93260983398 A 4,4 55 0,1 80.3319822716,9.91491226573 A 4,4 55 0,1 79.3496798398,15.4858261883 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-p04" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 39.1654600693,105.814523803 A 52,52 110 0,1 8.08649124139,39.1654600693 A 52,52 110 0,1 74.7355549752,8.08649124139 A 52,52 110 0,1 105.814523803,74.7355549752 A 52,52 110 0,1 39.1654600693,105.814523803 Z" fill="#FDF1C9" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 43.9537420759,92.6588271121 A 38,38 110 0,1 21.2421879324,43.9537420759 A 38,38 110 0,1 69.9472729686,21.2421879324 A 38,38 110 0,1 92.6588271121,69.9472729686 A 38,38 110 0,1 43.9537420759,92.6588271121 Z" fill="#FDF1C9" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 53.8723262323,65.4077411093 A 9,9 110 0,1 48.4932739352,53.8723262323 A 9,9 110 0,1 60.0286888122,48.4932739352 A 9,9 110 0,1 65.4077411093,60.0286888122 A 9,9 110 0,1 53.8723262323,65.4077411093 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-p05" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 90.8283753541,129.079413912 A 64,64 70 0,1 8.79875845094,90.8283753541 A 64,64 70 0,1 47.0497970084,8.79875845094 A 64,64 70 0,1 129.079413912,47.0497970084 A 64,64 70 0,1 90.8283753541,129.079413912 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 86.0400933475,115.923717221 A 50,50 70 0,1 21.9544551419,86.0400933475 A 50,50 70 0,1 51.838079015,21.9544551419 A 50,50 70 0,1 115.923717221,51.838079015 A 50,50 70 0,1 86.0400933475,115.923717221 Z" fill="#DBEAF7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 72.0172674712,77.3963197683 A 9,9 70 0,1 60.4818525942,72.0172674712 A 9,9 70 0,1 65.8609048913,60.4818525942 A 9,9 70 0,1 77.3963197683,65.8609048913 A 9,9 70 0,1 72.0172674712,77.3963197683 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-p06" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 112.55585817,123.366588224 L 93.9612808915,221.445558043 A 45,45 35 1,1 11.2191650428,189.816597186 L 106.054617793,32.6350093851 A 57.5,57.5 35 0,1 209.491978553,81.5248742758 L 61.5062666074,499.632703096" fill="none" stroke="#1F2A3A" stroke-width="17"/>
+  <path d="M 112.55585817,123.366588224 L 93.9612808915,221.445558043 A 45,45 35 1,1 11.2191650428,189.816597186 L 106.054617793,32.6350093851 A 57.5,57.5 35 0,1 209.491978553,81.5248742758 L 61.5062666074,499.632703096" fill="none" stroke="#FEB8A7" stroke-width="9"/>
+  <path d="M 115.832466347,125.660893969 A 4,4 35 0,1 110.261552424,126.643196401 A 4,4 35 0,1 109.279249992,121.072282478 A 4,4 35 0,1 114.850163915,120.089980047 A 4,4 35 0,1 115.832466347,125.660893969 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-p07" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 67.2571353751,8.99619288633 L 80.9379411081,46.5838977178 C 88.8044044046,68.1968279958 30.5434619158,89.402076882 22.6769986194,67.789146604 L 8.99619288633,30.2014417725" fill="none" stroke="#1F2A3A" stroke-width="17"/>
+  <path d="M 67.2571353751,8.99619288633 L 80.9379411081,46.5838977178 C 88.8044044046,68.1968279958 30.5434619158,89.402076882 22.6769986194,67.789146604 L 8.99619288633,30.2014417725" fill="none" stroke="#ECEAE4" stroke-width="9"/>
+  <path d="M 63.4983648919,10.3642734596 A 4,4 160 0,1 65.8890548018,5.23742240318 A 4,4 160 0,1 71.0159058582,7.62811231302 A 4,4 160 0,1 68.6252159484,12.7549633695 A 4,4 160 0,1 63.4983648919,10.3642734596 Z" fill="#F8F7F2"/>
+  <path d="M 5.23742240318,31.5695223458 A 4,4 160 0,1 7.62811231302,26.4426712894 A 4,4 160 0,1 12.7549633695,28.8333611992 A 4,4 160 0,1 10.3642734596,33.9602122557 A 4,4 160 0,1 5.23742240318,31.5695223458 Z" fill="#F8F7F2"/>
+</g>
+<g id="kit-p08" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 5,21 L 583,21 L 583,68 L 5,68 Z" fill="#ECEAE4"/>
+  <path d="M 5,21 L 583,21" fill="none" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 5,68 L 583,68" fill="none" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 11,21 L 27,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 45,21 L 61,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 79,21 L 95,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 113,21 L 129,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 147,21 L 163,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 181,21 L 197,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 215,21 L 231,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 249,21 L 265,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 283,21 L 299,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 317,21 L 333,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 351,21 L 367,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 385,21 L 401,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 419,21 L 435,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 453,21 L 469,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 487,21 L 503,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 521,21 L 537,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+  <path d="M 555,21 L 571,5" fill="none" stroke="#1F2A3A" stroke-width="3"/>
+</g>
+<g id="kit-p09" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 191.286436542,108.171411568 L 77.9118589606,203.303977802 L 72.7695580831,197.175622257 Q 68.912832425,192.579355598 74.2751435269,188.07984233 L 101.086699036,165.582275991 L 13.5615703486,30.1594128986 L 31.9466369834,14.7325102662 L 150.113543396,124.443868971 L 176.925098905,101.946302632 Q 182.287410007,97.4467893646 186.144135665,102.043056023 Z" fill="#EBE3F7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 59.5692611366,80.3220722017 A 9,9 140 0,1 60.6785726375,67.6425837264 A 9,9 140 0,1 73.3580611127,68.7518952273 A 9,9 140 0,1 72.2487496119,81.4313837026 A 9,9 140 0,1 59.5692611366,80.3220722017 Z" fill="#F8F7F2"/>
+  <path d="M 30.0315258756,16.3394792904 L 15.4766814564,28.5524438744 A 6,6 140 0,1 7.02368913952,27.8129028738 L 6.38090152984,27.0468584307 A 6,6 140 0,1 7.12044253043,18.5938661139 L 21.6752869497,6.38090152984 A 6,6 140 0,1 30.1282792665,7.12044253043 L 30.7710668762,7.88648697355 A 6,6 140 0,1 30.0315258756,16.3394792904 Z" fill="#FEB8A7" stroke="#1F2A3A" stroke-width="4"/>
+  <path d="M 15.5118064305,20.0378231409 A 4,4 140 0,1 16.0048337643,14.4024949297 A 4,4 140 0,1 21.6401619755,14.8955222634 A 4,4 140 0,1 21.1471346418,20.5308504746 A 4,4 140 0,1 15.5118064305,20.0378231409 Z" fill="#F8F7F2"/>
+</g>
+</defs></svg>
+````

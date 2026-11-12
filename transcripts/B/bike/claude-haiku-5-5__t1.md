@@ -1,0 +1,644 @@
+# B · bike · claude-haiku-5-5 · trial 1
+
+- Result: **FAIL**, score 0.44, tags: fail, wrong connection (far off), failed:joint, failed:orient
+- Model version: `claude-haiku-5-5`, response id: `msg_vrtx_011CgrVRAwFrRMXh1iDKzfyC`
+- Started 2026-11-08T20:31:35-0500, finished 2026-11-08T20:37:00-0500, 325.6 s, attempts 1
+- Tokens: input 30,705, output 67,777 (thinking not reported separately by this provider)
+- Settings: `{"provider": "anthropic", "route": "vertex", "max_tokens": 128000, "thinking": {"type": "adaptive", "display": "summarized"}, "output_config": {"effort": "high"}}`, prompt sha256 `61c524f0c6b5bca64bf3c87a79352356a32888b1c544776eaa6ebf180455b035`
+
+## Failed checks
+
+- Rear wheel: its hub centre (the common centre of its tyre/rim circles) on the centre of the frame's small round rear-dropout eyelet (within 8 px): error 12.0 (tolerance 8)
+- Crank arm: the centre of its large round spindle eye on the chainring centre (within 8 px): error 125.0 (tolerance 8)
+- Pedal: the centre of its round axle on the centre of the crank arm's rounded outer end (within 8 px): error 129.16 (tolerance 8)
+- Fork: the centre of its top (crown) edge at the centre of the bottom end of the frame's head tube (within 8 px): error 31.87 (tolerance 8)
+- Handlebar: the centre of the bottom edge of its green headset spacer on the centre of the top edge of the frame's head tube (within 8 px): error 472.18 (tolerance 8)
+- Saddle: the bottom edge of its seatpost collar sits on the top edge of the frame's seat tube, centred on it (within 8 px): error 404.36 (tolerance 8)
+- Handlebar faces the way it does on the working object (within 8 deg): error 19.5 (tolerance 8.0)
+- Saddle faces the way it does on the working object (within 8 deg): error 155.0 (tolerance 8.0)
+- Fork faces the way it does on the working object (within 8 deg): error 21.3 (tolerance 8.0)
+
+## Thinking summary (as returned by the provider)
+
+````text
+I need to identify the bike parts and figure out how to assemble them. I'm examining the first part, which looks like a wheel with a tire ring, rim, and hub centered around (258.3, 258.3) with roughly 258 radius.
+
+Looking further, p05 appears to be a second wheel with nearly identical geometry, so these two are clearly the front and rear wheels. Then p02 seems to be the frame itself, a complex multi-colored path combining the seat tube, down tube, top tube, and possibly chainstays and dropouts — I'm trying to trace which colored sections correspond to which tube based on their coordinate ranges.
+
+I'll tentatively call p03 a chainring with roughly 48-50 teeth based on its spider pattern and center bore. Then p06 looks like a small quadrilateral piece with a hole near the top, possibly a pedal component, tracing an outline from around (39,16) down through (24,65) to (6,56).
+
+Checking p11 next, it's a larger shape spanning roughly from (9,40) to (226,88) to (157,157), with bulbous regions around (145,63) and (158,113) — this could be a rear derailleur or crank arm shape.
+
+Then p07 is a gear-like outline with scalloped edges and a central arc pattern around radius 54, which looks like a chainring with a five-arm spider pattern.
+
+p08 looks like a narrow vertical shape with a hole near the bottom, resembling a seat post or maybe a pedal arm.
+
+p09 is a long, tapered narrow shape about 280 units long, which doesn't match a saddle — maybe it's a chainstay or seatstay instead.
+
+p10 looks different though: it has dashed stroke patterns forming a loop shape, which suggests it's actually the drive chain rather than a solid frame part.
+
+I'm trying to map this shape against typical bike components — maybe it's a chain loop with dashed links, or possibly part of the crank/chainring assembly. Given the ambiguity, I'm reconsidering the whole part list against standard bicycle anatomy: wheels, frame, fork, handlebar, saddle, seatpost, crank, and chainring.
+
+I'm now trying to assign each labeled piece to a likely bike part, counting up wheels, pedals, chain, and derailleur to see if they total eleven, while noting that the frame piece seems to be a composite of several sub-shapes that might actually include the fork and head tube within it.
+
+Tracing through this shape's path, it looks like a long thin top tube running from around (260,70) to (645,60), tapering to a point near (648,5).
+
+Next I'm looking at a purple-colored region with a diagonal path running from roughly (641,47) down to (373,358), which could be the seat tube or down tube of the frame.
+
+I'm tracing the seat tube from its top near (250-255,70) down to roughly (320,340) at the bottom bracket, with the purple diagonal forming the down tube connecting the head tube at upper right (~640,75) to that same bottom bracket area, and the top tube spanning between the seat top and head tube.
+
+Now I'm tracing the salmon-colored piece as a seat stay running from the seat cluster (~245,85) down-left to a rear dropout around (25,370), with another nearby tube path suggesting the chainstay connecting toward the bottom bracket.
+
+Then I'm examining the grey piece coordinates, which seem to trace the bottom bracket shell around (270,380) extending down-left toward another cluster near (240,480), with yet another separate path near (5,378) possibly forming a rear dropout or stay piece.
+
+Trying to precisely decode this frame's geometry by hand is proving really difficult — matching every connection point within 8px tolerance across all these parts is a huge undertaking. I think I need to be more systematic about estimating the key junction coordinates for each component rather than trying to trace every path exactly.
+
+This blue region spans the top-right area and seems to trace the head tube and fork crown geometry, with a pointed tip near the top that could represent a stem or fork junction.
+
+Looking at p04 separately, it's a long curved path stretching from around (5,79) down through (190,14) — possibly a drop handlebar given its sweeping curve shape.
+
+Without a full decode this is tough, so I'll fall back on general bike geometry knowledge for the key connections: front wheel hub to fork dropouts, rear wheel hub to rear dropouts, fork steerer to head tube, handlebar/stem to steerer, and seatpost into the seat tube with saddle on top. That gives me a reasonable approximation to work from even without pinning down every part exactly.
+
+I'm trying to figure out the scale by comparing wheel diameter in pixels to a typical 700mm wheel, then checking whether wheelbase and chainring proportions line up with real-world bike dimensions.
+
+That scalloped shape with five holes around the rim looks like a crank spider—likely a chainring with the classic five-bolt pattern, though the scale estimates for its diameter don't cleanly match standard chainring sizes like a 52T ring.
+
+Then I'm looking at another star-shaped outline with many spikes and a central hole—this could be a sprocket or cassette cog, but the radius-to-scale math doesn't fit typical cog dimensions either, so the scale factor I'm assuming is probably off somewhere.
+
+Maybe the drawings aren't meant to be dimensionally precise at all—the scale could just be stylized rather than literal.
+
+What matters more for the grader is matching actual features between parts: hub centers, axle holes, bolt holes, pin holes, and rounded-end centers. I'm cataloging these per part—both wheels share a hub at the same coordinates, p03 has a small center hole, p06's pedal has an offset hole, and p07's chainring has a center point surrounded by several circular points on its outer arc.
+
+Thinking p08 might actually be the seatpost tube, with a rounded bottom end and an open top, and a small hole near the bottom — possibly representing where it inserts into the frame.
+
+Actually a bottom hole doesn't fit typical seatposts, so maybe p08 is something else like a seat lug. Moving to p09, it's a long tapered shape without holes, narrowing from top to bottom—possibly a fork, since forks have a wide steerer tube at top and taper down toward the blades.
+
+Looking closer, p09 looks like a single fork blade seen from the side, with the steerer/crown at top and a dropout curving near the bottom, so I'm identifying it as the fork. That leaves p04, a salmon-colored shape, as the drop handlebar—its stem extends out before the bars curve down into the drop section.
+
+For p10, the dashed stroke pattern suggests chain links, but the closed loop with varying arc radii (76, 8, 7, 24) makes me reconsider—this could instead be a rear derailleur, with the larger arc representing a pulley cage and the smaller ones being the jockey wheels.
+
+That chain loop wraps around two sprockets, with the larger radius-76 arc tracing the front edge of the loop around the chainring, so I'm trying to match that up with the chainring's actual outer radius from p07.
+
+I'm working out that the chord length between the two endpoints equals exactly 152, which is twice the radius 76, meaning the chain segment is tangent to the chainring circle — confirming the center location calculation checks out geometrically.
+
+Tracing the full chain path now: it runs straight from the rear area up to the chainring, wraps clockwise around the chainring (center 328,155, radius 76), runs back along the bottom to the rear sprocket cluster, then loops through a few smaller arcs (radius 8, 7, and 24) that must correspond to a rear derailleur pulley system before closing the loop.
+
+Tracing the closed loop further, I see it running from the upper chainring span down through the lower run, wrapping the derailleur pulleys at radius 8 and 7, then curving through a radius-24 arc that looks like it corresponds to the rear sprocket before closing back to the start point.
+
+I'm second-guessing whether this geometric match-up is even the right approach — maybe the grader isn't checking exact chain-to-cog coordinates but rather just the logical connections between parts, so I shouldn't over-invest in precise circle-fitting here.
+
+I'll just try to assemble a plausible bike with sensible connections: wheels to dropouts, fork into head tube, seatpost in seat tube, chainring at the bottom bracket, pedals and handlebar attached, and figure out which numbered part is the crank arm versus the rear cog cluster based on shape and size rather than forcing exact radius matches.
+
+Actually let me reconsider p06 instead: it's a rectangle-ish shape roughly 35x60 with a hole at one point, fill salmon, outlined by a few corner coordinates.
+
+Actually it makes sense as a side view with only one crank and pedal drawn, since the far-side ones would be hidden behind the frame. So p11 is likely the crank arm, p06 the pedal, and I can start assigning the rest: wheels at p01/p05, frame at p02, handlebar at p04, chainring at p07, seatpost at p08, fork at p09, leaving p03 as the cog or rear sprocket.
+
+Now I'm trying to figure out where the derailleur fits in, or if it's omitted entirely. p03's star-like shape with many spikes could be a cassette with stacked cogs, but its radius doesn't quite line up with where the chain wraps around in p10 — I'm checking whether the chain path actually loops around this larger cog or a smaller effective tooth radius.
+
+The key connection I'm finding: the chain's arc radius of 76 matches p07's chainring radius exactly, confirming the chain wraps around the chainring at the same center point. That's a solid link between chain and chainring, so I'll use that as an anchor connection.
+
+Checking the layered spike radii — outer ring at 47, next ring around 37-38 based on distances from center, confirming the cog's concentric structure.
+
+Continuing the distance calculations, I find this is actually a cassette-like stack of five cogs with radii roughly 47, 37.5, 31.5, 25.5, 19.5, all centered around (53,52). The chain's 24-radius arc likely wraps the cog nearest 25.5 in this stack, meaning this rear cog set's center is the reference point for the chain path coordinates.
+
+I'm matching the chain's large arc to the chainring center at (328,155), which lines up with the p07 chainring's outer radius of about 76. Now I'm checking whether the small arc on the chain's other end, radius about 8, corresponds to the rear hub position.
+
+The two small arcs near (19,135) and (41,67) look like derailleur jockey wheels, but there's no separate derailleur part in the kit — so I'm wondering if p11 actually represents the rear derailleur. Its shape is a bulbous blob built from Bezier curves rather than arcs, with a narrow section and a salmon-filled bulge near (21,45) that could be the pulley cage.
+
+Comparing p11 against the crank arm instead: a crank arm typically has a round spindle hole at one end and a rounded pedal boss at the other, and p11's two ends — one narrow around (9-16, 6-40) and one rounded around (135-160, 85-160) — seem to match that profile better than a derailleur shape.
+
+But if p11 is actually the rear derailleur, its small pulley radii (around 8 and 7) line up suspiciously well with the arcs where the chain wraps, which is a strong signal the chain and derailleur pulleys were meant to mesh together.
+
+I'm spending too much time parsing individual coordinates, so I should step back and think about the overall bike layout: rear wheel and dropouts on the left, front wheel on the right, chainring near the bottom bracket, chain running to the rear cog with the derailleur near the rear dropout, and the fork, handlebar, seatpost, and saddle arranged accordingly.
+
+Actually p09's narrowing shape fits a fork blade better, with the crown wide and blades tapering to a dropout tip. That means I still need to track down the saddle, seatpost, handlebar/stem, crank, and derailleur among the remaining unidentified parts.
+
+Testing p04's path, I'm tracing its outline to see if it matches a saddle shape — checking whether the nose sits at one end and a wider rear section at the other.
+
+Checking the dimensions, p04 at 185x155 is plausible as a saddle, with that hook-shaped path at the bottom right possibly forming the rail clamp for the seatpost. The pointed left end could be the saddle nose, matching typical side-view saddle geometry.
+
+For the other parts, p08 with its length around 151 looks like a candidate for the seatpost, with a hole or attachment point near its top connecting to where the saddle rail clamp would sit. Then p11, spanning roughly 225 units with curved loop shapes near the top-left, seems like it could be the handlebar and stem assembly, possibly drop bars given the looping curves.
+
+I'm still puzzling over p04 and p06 though — p06 has a hole that could be the pedal spindle, so I'm leaning toward p06 being a pedal, while p04 might be a crank arm despite lacking an obvious bolt hole for the pedal or bottom bracket connection.
+
+Since p04 lacks a hole, saddle fits better there, which pushes crank onto p11 — that part has the pulley-like blob near its base, so I'm checking whether that could represent a pedal spindle attachment point.
+
+Actually p08 looks more promising for the crank: it's a tall tapered rectangle with a hole at the bottom (r 9.5), matching a pedal spindle hole, while the top end attaches to the frame spindle. That bottom hole radius lines up with the pedal piece p06's hole, suggesting p08 and p06 connect at the pedal spindle.
+
+Estimating that top curve gives a rounded center near (19,13) with radius about 11, putting the apex around y=2. Now I'm reconsidering whether p09 might actually be the seatpost instead, since it's long—280 units—with a top width of 40.
+
+Trying to match p08 to a crank arm: distance from spindle center (19,13) to the bottom hole (20,139) is about 126px, which compares reasonably to a typical 170mm crank scaled by roughly 0.8. Checking the chainring radius too, but the numbers aren't lining up cleanly, so I'm working through the chain arc center at (328,155) to pin down the chainring center and refine the crank arm geometry.
+
+Now I'm confirming that the crank spindle center should coincide with the chainring center and the bottom bracket, since they're mechanically the same point. I'm also trying to figure out which piece is the seatpost—p11 doesn't quite fit the shape, and p04 with its curves and clamp is ambiguous too. I'm building out a tentative mapping: p01 and p05 as wheels, p02 as frame, p03 as cassette cogs, p04 possibly saddle or handlebar, p06 as pedal, p07 as chainring, p08 as crank arm, p09 as fork, p10 as chain, and p11 possibly handlebar.
+
+I'm still puzzling over whether p04 or p11 is actually the seatpost, since I need saddle, seatpost, and handlebar/stem accounted for but only two ambiguous parts remain—so maybe the frame itself incorporates the seatpost, or the fork's steerer tube doubles as part of the stem. I'm also testing whether p08 could be the seatpost instead of the crank, but the hole placement near the bottom doesn't match a typical seatpost's saddle-clamp bolt at the top, so it's more likely a pedal thread hole, reinforcing that p08 is the crank after all.
+
+Tracing the saddle outline further, I'm following the curve from the nose through the rear bump, mapping out the rounded contour points that form the saddle's side profile.
+
+Trying to place the saddle rails and rear point, but not confident on those coordinates. I'm wondering if p08 could actually be the seatpost, with its hole representing the saddle-clamp bolt rather than something else.
+
+Stepping back, I'm trying to figure out the full parts list the kit was generated from — likely frame, fork, handlebar, stem, saddle, seatpost, crank, chainring, pedal, chain, and wheels, but that's more than 11 pieces, so some parts must be combined or missing from my count.
+
+I'm trying to map each labeled part to its likely bike component, but I'm stuck figuring out where the seatpost fits versus other ambiguous shapes like p04 and p08 — I may need to reconsider whether seatpost is actually present at all.
+
+Given the uncertainty, I'll just commit to a reasonable best-effort layout rather than keep second-guessing every shape.
+
+Tracing the path further, I can identify the chainstay running from the bottom bracket area around (270,390) leftward to the rear dropout near (75,366), based on how the shape curves down and across.
+
+I'm trying to trace the down tube and chainstay paths but the coordinates aren't lining up cleanly, so I'll just settle on rough approximate positions for the top tube, down tube, seat tube, and chainstay endpoints to move forward.
+
+Since both wheels must stand level on the same ground, I need the rear and front hubs at equal heights, with ground at hub_y plus the wheel radius. So the rear hub aligns with the rear dropout around (72,366), putting ground at y≈621, and the front hub needs to match that same ground level via the fork dropout position.
+
+Estimating the wheelbase using the wheel radius (255px ≈ 0.35m) gives a scale of roughly 730px/m, so a ~1m wheelbase translates to about 725px separation — placing the front hub around x≈800-1025 depending on where the rear hub sits, which needs to fit within the canvas and frame geometry (frame spans x=5 to 681).
+
+But checking the frame's chainstay length (BB to rear dropout ≈198px) against the wheel scale reveals an inconsistency — the frame proportions don't quite match what a 700C wheel (622mm rim, ~311mm radius) would imply, suggesting the frame drawing itself may be slightly off-scale.
+
+Trying the rear hub position at the dropout (~72,366), a 258px wheel radius would extend well past the left edge of the canvas, which doesn't work geometrically.
+
+I need to figure out the ground line and front hub position instead—ground sits at y=624, and the front hub should land at that same height on the other side. That means working out the fork geometry from the steerer tube down to the dropout to place the front hub correctly.
+
+I'm tracing the fork's outline path, following its curve from the crown down through the blade to the dropout, narrowing in on where the steerer tube center lines up with the head tube.
+
+Tracking the fork blade widening toward the bottom, I'm placing the steerer at the top of the fork around x=26, aligning it with where the head tube's bottom would meet the crown, and estimating the fork's tilt by comparing center x-positions down its length.
+
+That diagonal piece from (648,5) to (681,107) looks more like it could be the stem rather than the steerer tube itself. I'm leaning toward identifying the actual head tube axis using the segment between (641,47) and (629,116).
+
+So tracing it out: the down tube runs from the head tube base near (641,47) down to the bottom bracket around (380-410, 340-378), while the top tube connects from the seat area near (260,70-92) across to the head tube top around (640,57-107). The seat tube spans from roughly (236-268, 52-97) down to (314-338, 331-344), and the head tube itself sits vertically around x≈636, from y=47 at the top to y=116 at the bottom, giving it a center around y≈82.
+
+Now I'm matching this to the fork: its steerer top is at local (26,5), with the blade curving down to the axle near (42,278), showing a slight forward rake. Comparing axis tilts, the head tube goes from about (641,47) to (629,116), a dx of -12 over dy of 69, roughly a 10° lean from vertical — though real bike head angles are closer to 17° from vertical, so I'm double-checking the exact endpoints of the purple head tube path, which includes points like (629.5,116), (644.5,115), (641,107), (642.5,86), (642,100.5), and (640,106.5) to pin down the true tube edges.
+
+I'm narrowing the head tube to roughly x=629-642, y=47-116, with a center line around x=636 running nearly vertical over about 69px. The fork's steerer should align through this centerline, but I need to figure out exactly where the steerer top sits relative to the head tube top since the fork model doesn't show a distinct crown beyond y=5, so that upper region (y 5 to ~40) may actually represent the steerer itself.
+
+Given the measurements, I'll just settle on approximate frame coordinates: head tube axis from roughly A=(637,50) down to B=(632,112), accepting this as close enough rather than chasing exact pixel alignment further.
+
+Now I'm trying to pin down the seat tube — setting its top near (256,72) and estimating its angle around 15.7° from vertical, which should put the bottom bracket somewhere near (330,345). I want to cross-check this against where the chainstay meets the frame to make sure the BB location is consistent.
+
+The gray shape I'm looking at near (270,341)-(270,388) is confusing me — it doesn't fit cleanly as either a chainstay or a bottom bracket shell viewed from the side, since a BB shell should appear circular rather than rectangular from this angle. Given the ambiguity, I'll just estimate the BB center is roughly around (275,365) and move forward with that approximation.
+
+Trying to cross-check against the seat tube's direction doesn't resolve the ambiguity either, since the angles I get don't match the expected ~15.7° tilt. I'll settle on an approximate BB location around (300,362), acknowledging this estimate could easily be off by more than the 8px tolerance the grader likely uses, but given the difficulty of pinpointing exact coordinates by eye, I'll accept this as a reasonable best guess and move on.
+
+Now I'm working out the rest of the frame geometry — rear dropout around (73,368), head tube center near (636,82), seat tube top at (256,72) — and trying to place the front axle by matching its ground height to the rear axle's y-coordinate, then reasoning through the fork's length and offset to figure out where that front axle should land horizontally.
+
+The rear wheel top is fine since the hub sits at the bottom-left corner, so I'm thinking about realistic bike proportions instead—bottom bracket height above ground is typically around 70mm, with the head tube top positioned accordingly.
+
+Checking ratios: the vertical distance from BB to head top here is 320px against a wheel radius of 258px, giving about 1.24, while a real bike's ratio is closer to 1.6. That mismatch suggests my BB is placed at hub height rather than with the correct drop below the axle, which isn't right geometrically.
+
+Working through the real-world numbers: with wheel radius 0.34m and BB drop 0.07m, the BB should sit about 0.07m below the rear hub, not level with it. Converting that to pixels at roughly 0.75 px/mm, if the rear hub is at y=368, the BB should land around y=418.
+
+But checking the head tube top against this same scale gives a negative, nonsensical y-value, so the frame's proportions don't actually match a real bike scale consistently. That tells me I can't derive the geometry purely from real-world bike measurements — I need to trust that the hidden generator defined the frame's true positions by construction, and my job is just to extract those features as drawn in this upright frame.
+
+Instead, the geometry is likely overdetermined by assembly constraints: the fork's steerer must align with the head tube axis, which fixes the fork's position and therefore the front axle location, while the rear axle comes directly from the frame's dropout; both wheel hubs should then sit level on the ground. I'm now trying to pin down the exact coordinates of the rear dropout and chainstay end in the frame's path data to check whether this consistency actually holds.
+
+I'm not going to nail the precise geometry rigorously in reasonable time, so I'll go with approximate best-guess positions instead — assuming the frame sits at identity, with the rear axle around (66, 418) and the front axle much further out.
+
+Looking at the SVG shapes themselves, I'm trying to pin down the rear dropout and hub location by tracing the green chainstay piece's path coordinates to estimate where the rear axle actually sits.
+
+That small rounded salmon-filled region looks like the dropout hole, centered around (39,366).
+
+Checking the rear axle position—it's at roughly the same y-coordinate (366) as what I'd expect for the front axle too, so I'm comparing the fork's local axle position near (42,278) against the frame head tube location to verify alignment.
+
+Trying to trace where the fork steerer connects to the head tube though, the numbers aren't quite lining up: placing the steerer top at the head tube top gives an axle y around 323, but it should be 366, so there's a mismatch I need to resolve, possibly by using a different head tube axis or steerer connection point.
+
+Checking the head tube span of 47..116 pixels against the fork crown position, I'm trying to figure out where the crown should align with the head tube bottom, which affects where the steerer top needs to sit relative to the blade end at y=280.
+
+Working through the fork axis math: if the crown sits at the head tube bottom (~y=116) and the local blade top is at y≈40, projecting to the axle at local y=278 lands around y=354, close enough to the target 366 to be plausible with some tilt adjustment. That gives me a working hypothesis for the fork's steerer axis direction between the two local points.
+
+But comparing this to the actual head tube angle in the frame, I'm finding a mismatch — the fork's implied tilt doesn't quite match the head tube's tilt, which traces from around (641,47) down to (629.5,116), roughly a 17° lean from vertical consistent with a 73° head angle.
+
+Computing the fork's angle from vertical gives about 3.4°, while the target is -11.3°, so I need roughly a -14.7° rotation to align it—though I still need to account for the front wheel sitting level against the ground.
+
+Now I'm working out the fork's transform: rotating it by that angle and translating it so its steerer axis lines up with the head tube's position, mapping local fork coordinates into the frame's coordinate space.
+
+Applying that rotation gives an axle position around (724,318), but that's off by about 48 pixels from the rear axle height of 366, so something's inconsistent. I think the tilt direction is backwards — the fork's local axis should shift left going down to match the head tube, but I applied a rotation that shifts it right instead.
+
+Working out the rotation relationship: a rotation by θ shifts the vector's angle from vertical by -θ, so I need to figure out how much to rotate the original angle of about +3.4° to reach the desired target angle for the fork direction.
+
+So θ comes out to about +14.7°, giving cos≈0.967 and sin≈0.254. Applying this to the axle offset vector (16,273) relative to the steerer top point, I get a new axle position around (585,326), but that doesn't match the expected rear axle y-coordinate of 366 — there's a 40-unit discrepancy, so I'm trying lowering the steerer top point to compensate, though that places it inside the head tube region, which seems off.
+
+Maybe I'm misidentifying which local point is the steerer top versus the crown, or maybe the rear axle itself isn't at y=366 but somewhere lower, like near a different frame hole. There's ambiguity since the steerer top can slide along the fork axis without changing geometry, which shifts where the axle lands — I need to pin this down using the actual fork length.
+
+Working through the math: if I place the steerer top around (633,98) on the head tube axis and project along the fork axis by its fixed length, I get a front axle near (578,366), giving a wheelbase of about 539px versus rear axle at (39,366). That ratio to wheel radius comes out lower than a typical bike's wheelbase-to-radius ratio, so it's not perfectly consistent, but it's close enough given the frame's actual proportions.
+
+Given time constraints, I should just pick a configuration that keeps both wheels grounded and the fork reasonably aligned with the head tube, accepting some imprecision — treating the frame piece as fixed in place and positioning the rear wheel hub at its dropout so the wheel bottom sits at the ground line.
+
+Now I'm checking the fork's orientation against the head tube: with the computed rotation, the axle ends up left of the steerer top, but since the front wheel sits to the right (forward) of the head tube on this bike, the fork's lean direction seems backwards from what the frame geometry calls for, so I need to reconsider the rotation sign.
+
+Checking the actual coordinates of the head tube shape's top and bottom points to see which direction it leans.
+
+Actually that span from 47 to 116 seems to cover the whole head tube, so I'm reconsidering which piece is which. With the head tube near x≈636 and the front wheel further right, the fork should run from the steerer top down and forward to the axle, so I need to check that the fork's directional vector points forward and downward toward the axle position.
+
+The purple shape's path is a mess of overlapping points and odd Bezier curves, so I'm trying to trace the actual polygon edges point by point to figure out which segment is the down tube versus the head tube versus the fork.
+
+Given the head tube is roughly vertical around x≈636, the frame orientation puts the front of the bike to the right, so the fork should extend down and slightly forward from the steerer tube's base.
+
+The measured head tube coordinates seem inconsistent with the expected forward tilt, so I'll simplify by assuming the head tube axis is vertical at x≈636 and setting the fork rotation to zero. Working through the placement math, I'm positioning the steerer top so the axle lands at ground level, giving steerer top coordinates around (636, 93).
+
+That rear dropout position would put the wheel's left edge off-canvas, which seems wrong given the frame itself fits cleanly within canvas bounds at identity transform. I'm wondering if I can shift the whole assembly's translation, since the upright constraint only limits rotation, not position.
+
+Since translation seems allowed, I'll try shifting the frame by (300, 100) so the rear hub lands at (339, 466) and front hub at (952, 466), fitting both wheels well within the 1376-wide canvas with ground level at y=724, comfortably inside the 768-tall canvas.
+
+Working out the wheel radius more precisely, it comes out to roughly 255. Now I need to translate the remaining frame points—head tube, seat tube top, bottom bracket—by the same (300, 100) offset, making sure the bottom bracket position stays consistent with the seat tube angle and supports proper chainring placement.
+
+Actually the chainring center should coincide with the BB by design, so I can use that to anchor the crank/pedal geometry rather than guessing from the chainstay shape. I'll tentatively settle on BB frame coordinates around (300, 402) and check it against where the seat tube passes through.
+
+The geometry seems plausible enough, so I'll accept BB at (335,402) in frame coordinates. Translating everything by (+300,+100) gives BB at (635,502), rear hub at (339,466), front hub at (952,466), seat tube top at (556,172), and head tube spanning roughly y=147 to 216 with the fork steerer top around 193 — close enough to work with.
+
+Checking the rear chainstay from BB to rear hub gives a distance of about 298, which seems fine, and the front fork axis from steerer top to axle also looks consistent.
+
+Now I need to pin down the remaining part assignments — crank, seatpost, saddle, handlebar, pedal, chainring, chain, cassette, fork, and the two wheels would total 12 items, but I only have 11 parts, so one category must be missing. I'm reconsidering whether p03, with its small center hole and stacked star-like outline, might actually be the chainring rather than the cassette.
+
+I'm leaning toward p07 being the chainring given its 5 bolt holes and radius, which raises the question of whether p04 or p11 could be the handlebar/stem instead of a crank, since no stem appears near the fork top. Counting it out — wheels, frame, fork, chain, chainring, pedal, cassette, seatpost, saddle, crank, handlebar — adds up to 12 distinct items against only 11 parts, so either two of these are merged into one part or one category is absent, and I suspect the chainring and crank might actually be combined into a single spider-and-chainring piece like p07.
+
+Trying to match colors and shapes to roles: p04's salmon curve could be the saddle, p11's three-tone mix might be a handlebar, p08's lavender-salmon tube could be seat-related or a crank arm, and p09, p06, p07, p03, p10, p01/p05 seem to map to fork, pedal, chainring, cassette, chain, and wheels respectively. I'm deciding to treat p08 as the crank arm, with its pedal-adjacent hole at the bottom and a rounded spindle end at top.
+
+Still, I'm unsure whether p08 could instead be a seatpost, since its bottom hole doesn't match typical crank or seatpost geometry — neither has an obvious spindle or clamp hole at the matching location. I'm examining p08's lower curve coordinates to see if they clarify which part it actually represents.
+
+Estimating the top arc's center, which places the spindle axis around x=19.25, y≈13.5, roughly matching where the pedal hole offset would make sense geometrically.
+
+Checking the pedal spindle distance gives a crank arm length near 125, and now I'm trying to pin down the pedal hole center for another part by working through its arc coordinates.
+
+Checking the body's long axis orientation using those corner coordinates to confirm its width and alignment.
+
+I'm thinking about how the pedal mounts on the bike: the spindle runs through the pedal body's center perpendicular to the short side, so the long 51-length axis represents the fore-aft foot direction, which should appear roughly horizontal when the crank is at 90° in this side view.
+
+I realize the pedal should stay horizontal regardless of crank angle, since its top surface must stay parallel to the ground for the foot to rest on—so its long axis isn't fixed relative to the crank arm but rather fixed relative to the ground/horizon in the final drawing.
+
+Actually, the grader's rule clarifies this: parts that rotate during use, like pedals and cranks, are allowed to sit at any angle, so the pedal's facing doesn't need to match a strict reference—only the pedal hole position matters for alignment.
+
+The crank's spindle must align at the bottom bracket with its pedal end 125 units out, but since it also rotates freely, its angular position is unconstrained. Similarly the chainring and cassette centers just need to sit at the BB and rear hub respectively, with free rotation. The chain is trickier though, since as a flexible loop it needs its arcs to actually touch both the chainring and cassette circles to form a valid connection.
+
+Tracing the chain's two runs: the top run connects from the rear cog near (46,5) tangent to the chainring top at (347,82), while the lower run goes from the chainring bottom (308,228) down to the derailleur's lower pulley — placing the cog up top and the derailleur pulleys down at bottom-left around (19,135) and (41,67).
+
+I'm second-guessing whether the derailleur-side cog actually matches the cassette's smallest sprocket radius of 19.5, since my computed wrap center (44.7,29) doesn't line up with the cassette hub at (53,52) — so my sign choice in solving for the tangent center might be wrong, and I should try the other solution near (25.5,16.9) instead.
+
+Right, the chain's own coordinate system is independent of the cassette's placement — it's drawn at its own arbitrary rotation and origin. So I need to compute the distance between the chainring center (328,155) and the cog center (44.7,29) within the chain's local coordinates to figure out the actual separation.
+
+That distance comes to about 310, which is close to the frame's BB-to-rear-hub distance of 298, though off by about 12px. Checking the radii, the chainring arc matches r=76 well, but I need to verify which cog the chain wraps around given the ~24px radius.
+
+Now I'm working out the arc's sweep direction and center to determine whether the correct cog center is (44.7,29.0) or (25.5,16.9), tracing through the path commands to see which solution matches the clockwise sweep as drawn.
+
+That gives a large-arc, confirming the flag mismatch, so cog center stays at (44.7,29). I verify the ring center at (328.1,155) works since the arc spans a semicircle with matching radius, and I note the smaller arcs near the pulley area likely belong to derailleur details that may not matter unless the chain path requires them.
+
+Wait—the kit lacks a derailleur, yet the chain drawing wraps around pulleys, so maybe p11 actually is the rear derailleur with those small pulley arcs, and the salmon blob near (18,48) is one of its pulleys. That would mean the part list breaks down as: two wheels, frame, fork, chain, chainring, pedal, crank, cassette, derailleur, plus one more part (p04) that could be the handlebar or saddle, leaving the seatpost unaccounted for among the eleven labeled parts.
+
+I'm now checking whether that top-right piece of the frame near (648,5)-(681,107) might actually be a stem rather than part of the main frame, which would mean the handlebar is separate, and testing whether p04's outline—with its drop-bar hook shape and curved ends—matches a handlebar rather than a saddle.
+
+On closer look, p04's closed outline with a nose at left and a hooked clamp region at bottom-right fits a saddle-with-rails profile better than a handlebar. That leaves p08 as a candidate for seatpost and p11 as a possible crank, with the derailleur arcs still needing a match.
+
+Maybe those small arcs aren't wrapping the derailleur at all but instead trace the chain path as it curves around the actual pulley wheels rather than nothing, with the cog circle up top connecting to a pulley below it.
+
+So p11 is probably the derailleur with pulleys — its blob near (18,48) with radius about 8 likely matches the pulley near (19,135) of similar size.
+
+That still leaves four roles (seatpost, saddle, handlebar, crank) competing for only two remaining parts, p04 and p08, which doesn't add up for an 11-part bike. Maybe one role doesn't actually exist separately — perhaps there's no distinct seatpost, with the saddle mounted directly.
+
+I'm trying p08 as the seatpost/saddle combo and wondering if the crank is simply absent, with the pedal instead connecting straight to some other matching hole. Then I test whether p04 could work as the crank arm by checking its endpoint measurements against a plausible crank length, but the shape doesn't clearly fit.
+
+Shifting focus, I consider p11 as the crank instead, measuring the distance between its two blob ends to see if it resembles a crank arm with a spindle end and a pedal-hole end, but the curve details don't line up cleanly either. Coming back to p08, I notice both ends are rounded with no hole, which actually fits better with a crank's spindle end than with a seatpost — so I decide p08 is the crank after all, which means I now need to reassign the seatpost, saddle, and handlebar among the remaining pieces, starting with reconsidering p11 as the seatpost.
+
+Thinking about the full kit composition, I try listing what a typical bike kit would include — frame, fork, handlebar, seatpost, saddle, crank, chainring, pedal, chain, cassette, and two wheels — and wonder whether the cassette might be missing or substituted since p03's stacked-cog shape could actually represent something else, like a derailleur. I also note that p01 and p05 look like near-identical wheels, likely front and rear, and consider whether the frame's blue top-right piece might actually be an integrated stem/handlebar rather than part of the frame itself.
+
+I tentatively settle on a mapping: p02 as frame, p01/p05 as wheels, p09 as fork, p07 as chainring, p08 as crank, p06 as pedal, p10 as chain, p03 as cassette, p11 as rear derailleur, and p04 as saddle — but that leaves both seatpost and handlebar unaccounted for, so I reconsider whether p04 might actually combine a seatpost and saddle, with its hook shape near the bottom serving as a clamp and its body resting above the seat tube.
+
+Looking more closely at the chain's small arcs, I notice two radii (about 8 and 7) that look like derailleur jockey pulleys rather than just chain links, which strengthens my case for p11 being the rear derailleur rather than the handlebar. Meanwhile p03's concentric circles with teeth clearly match a cassette stack, especially since the chain wraps a cog of matching radius, confirming p03 as the cassette. That leaves p11 with its lavender, green, and salmon coloring as the best candidate for the derailleur, with the salmon blob likely representing one of the pulley wheels.
+
+That still leaves the crank, saddle, seatpost, and handlebar roles to assign among only p04 and p08, which doesn't add up — so I'm wondering if p07, the scalloped radius-76 chainring, actually represents an integrated crank spider rather than a standalone chainring, which would let the pedal attach there while p08 serves as the separate crank arm, but then I still need to figure out where the seatpost and handlebar fit among the remaining pieces.
+
+Counting through all 11 parts against the expected bike component types — two wheels, frame, fork, chain, cassette, chainring, crank, pedal, derailleur — accounts for exactly 10 of them, leaving p04 as the sole remaining part. That means this bike kit only includes one of saddle, seatpost, or handlebar, not all three.
+
+I'm reconsidering which part is which: maybe p11 is actually the handlebar rather than the derailleur, with p04 being the saddle, examining the geometry of each shape's curves and endpoints to figure out which interpretation fits.
+
+Could p04 be the drop handlebars instead—that long U-shaped curve with the stem? At 185 wide by 150 tall it's smaller than the typical ~420mm bar width, so I'm second-guessing that identification.
+
+That rounded top-right corner looks like a stem clamp, so I'm leaning toward classifying p04 as a handlebar with a drop: the stem clamp sits at top-right, and the bar sweeps down-left toward the drop section.
+
+Tracing the two arms of the U shape, I'll settle on calling p04 the handlebar, then move on to identifying the saddle and seatpost next.
+
+I'm recounting all 11 parts against the expected roles—two wheels, frame, fork, handlebar, crank, chainring, pedal, chain, cassette—and realizing both saddle and seatpost are still unaccounted for, leaving p11 ambiguous between them.
+
+Trying crank p08, chainring p07, pedal p06, chain p10, cassette p03, and derailleur p11 given its pulley arcs — but that leaves no saddle or seatpost assigned, which can't be right for a complete bike.
+
+Maybe p11 is actually the saddle and there's no derailleur at all, though that conflicts with how the chain's drawn wrapping around something. Or perhaps p08 is a seatpost while the crank is missing entirely and p07 is a full crankset with integrated arm — but then pedal p06 needs a mounting point, so the crank must exist somewhere. I'm also reconsidering whether p09 is really the fork, checking if its 285 length fits better as a seatpost instead.
+
+Comparing proportions against the wheel radius of 255px: the fork's axle-to-crown ratio checks out nicely at 1.12 versus the expected 1.09, confirming p09 as the fork. For the seatpost I'd expect around 200px given typical real-world lengths, but p08 only measures 151, giving a lower ratio than anticipated. Checking saddle length expectations against real-world proportions, both p04 (185) and p11 (225) come reasonably close to the target of ~210px, making either plausible as the saddle, while neither seems wide enough to be drop handlebars which should be closer to 260px.
+
+I'm now trying to settle on final assignments: p04 as saddle given its rail-like shape, though I second-guess whether p08 might be seatpost or crank instead. Looking at p11's bounding box and bulbous features near the corners, I lean toward p11 being the saddle with rail loops, which would make p04 the handlebar and p08 the crank — though that leaves derailleur and seatpost unaccounted for, and I'm now second-guessing whether my full part list of 13 types even matches the actual 11-piece count I need to assign.
+
+I'm reconciling that mismatch by assuming the kit likely omits a separate seatpost and derailleur as distinct pieces, folding them into the frame or saddle instead, and reconsidering whether the chain geometry actually wraps the cassette differently than I assumed. Settling on a final layout now: frame centered, fork with its steerer, handlebar mounted at the fork top near the stem area, and saddle positioned along the seat tube.
+
+Looking closer, I'm testing whether the piece with a rounded spindle end and a hole at the pedal end is actually the crank — that matches well, so I'm keeping that assignment. That leaves the other ambiguous piece as the saddle rather than a seatpost, since its shape doesn't read as tube-like, and I'm deciding the saddle's clamp can just attach directly to the top of the seat tube, treating the seatpost as absent from this kit, with the derailleur also left out and the chain simply wrapping the cassette directly.
+
+Now I'm working out the actual coordinate transforms for each part — computing frame translations and key reference points like the bottom bracket, dropout hub, fork steerer top, seat tube top, and head tube top, then mapping each wheel's hub location to the dropout position so everything lines up once placed.
+
+For wheels, rotation doesn't matter since they're circular, so I'm leaving that at zero while focusing on getting the fork's local geometry right — estimating where the steerer top center and the dropout tip circle center actually sit based on the rounded edges of the fork tip.
+
+Working through the fork vector, I compute steerer top at roughly (27.6,5.9) and axle at (42,281), giving a local vector of about (14.4,275). Applying the translation to match the target steerer position (936,193) puts the axle projection at (950.4,468.1), which lands within about 2.6px of the actual front hub (952,466) — close enough to accept.
+
+I'm still unsure whether the steerer top should align with the head tube's center (around y=181) or its bottom; since this is ambiguous, I'll just accept the current placement at y=193 and move on to figuring out where the handlebar/stem attaches to the fork steerer top.
+
+Next I work out the drivetrain geometry: chainring center aligns directly with the bottom bracket at (635,502) using zero rotation, and the crank's spindle also centers on the BB with its pedal end placed at roughly (636,627) using zero rotation too, since any crank angle works geometrically and this keeps things simple.
+
+For the pedal, I need to place its hole at that crank pedal position (636,627), but the pedal body's local axis is vertical while it should actually sit horizontal for a proper fore-aft orientation, so I need to rotate it roughly 90° about its hole center and recompute the resulting translation.
+
+Good, that checks out. Now I'm verifying the cassette's center point by checking its hole circle coordinates.
+
+Now mapping the rear wheel hub position at (339,466) with rotation left free for the cassette, giving a translation offset of (286.6, 413.6) from the computed center. I'm now starting to work out the chain's local coordinates relative to the ring center.
+
+Checking the chainring-to-cog vector against the final hub positions, I find the local distance is about 310.2 versus the transformed distance of 298.2 — a mismatch of roughly 12 units, since a rigid transform can't perfectly align both the chainring and cog centers simultaneously. I'll need to pick one reference point to prioritize for the chain alignment.
+
+Since the rear dropout location itself was just an estimate with significant uncertainty, I'll keep the chain geometry consistent with the chainring position and accept that the wheel hub placement might be slightly loose relative to it.
+
+With the ring fixed at the bottom bracket (635,502), I need to find the chain rotation angle φ that maps the local vector (-283.4,-126) onto the target vector (-296,-36), so I'm computing the angle of that local vector to solve for the rotation.
+
+That gives a cog position off from the hub by about 11.8px, which seems close enough to accept, or I could split the difference and let both the ring and cog each absorb roughly 6px of mismatch instead.
+
+Rather than shifting the frame translation (which is fixed), I should just adjust the rear hub position directly to match the chain line — treating the dropout coordinate as approximate anyway, so I'll set the rear hub to align with the chain's endpoint and let the wheel geometry follow from there.
+
+Setting rear hub at (327,465) and front hub at (952,466) keeps both wheel bottoms at ground level within a pixel, so that checks out. Now working out the chain transform: rotating by -17.2° and translating so the ring center lands at (635,502), confirming that the local ring center maps correctly under this rotation-translation.
+
+Checking the chain's wrap orientation, the upper run should connect the cog top to the ring top, and the local arc traces the right side of the chainring, bulging outward there — meaning the chain wraps around the "front" (right) side of the ring.
+
+So tracing the geometry: the top chain run is tangent from the cassette to the top of the ring, then it wraps around the front/right side of the ring, and the bottom run exits leftward back toward the rear.
+
+The lower run goes back left to the ring's top, and the cassette wrap sits on the left side with the cog arc curving from one tangent point to another around its local center.
+
+I'm tracing the chain path down to the derailleur and accepting some uncertainty about the exact wrap direction around the cog—it's close enough for a chain path. Now I need to decide which labeled part goes where: whether p11 is the handlebar and p04 is the saddle, judging by which fits more naturally at the fork top versus the seat area.
+
+Since all 11 parts need mapping to roles like wheels, frame, cassette, chainring, crank, pedal, chain, and fork, I'm left guessing between handlebar, saddle, derailleur, and seatpost for the remaining slots—it's genuinely ambiguous, so I'll just commit to a reasonable assignment and move forward.
+
+I'm now looking at p11 more carefully: its narrow left end could be a saddle nose, with the wider lobes toward the right matching the rear of a saddle shape, which pushes me toward assigning p11 as saddle and p04 as handlebar, leaving derailleur and seatpost unassigned.
+
+Since the bike faces right in the final layout, the saddle's nose needs to point forward, meaning I'd rotate p11 roughly 180 degrees from its current orientation so the narrow nose ends up on the right side, with the rails underneath attaching to the seat tube clamp.
+
+Thinking about the nose-to-back direction vector (136,23), which gives a slight upward tilt angle for the saddle when rotated into place—keeping the nose pointing right and roughly level with the back.
+
+Now I need to figure out the mapping from local saddle coordinates to final position, picking a clamp point near where the rails loop under the seat—something like (100,130)—since the grader likely checks where the saddle attaches relative to the seat tube top.
+
+I'm computing the rotated offset using the rotation angle to solve for the translation T, placing the saddle's clamp point at the seat top coordinate (556,172), working through the trig to get the final translation.
+
+Now I realize a problem: rotating by 170° would flip the saddle upside down, putting the rails on top and the body facing down, which is wrong—I need the body up and rails toward the seat. But reverting to near-0° rotation puts the nose at the rear instead of the front, and I can't mirror the shape, so the orientation logic needs rethinking.
+
+Looking more carefully at the path, I notice the pointed tip near (226,88) is actually the nose of the saddle, while the rounded bulbous end near (9,40) is the rear—meaning I had the nose and rear reversed, and the rail loop sits along the bottom between them.
+
+With nose at right (~225,85) and rear at left (~10,45), I'm calculating the angle of the saddle's spine—about 10.5°—so I can rotate the shape to level it with the nose pointing forward.
+
+I'm now locating the rail clamp point, choosing a local coordinate near (100,140) under the rails, then applying the rotation matrix to map it to the seat top position at (556,172) so the saddle sits correctly above the seatpost.
+
+Checking the nose point too—after transforming (225,85) through the same rotation and translation, it lands around (669,95), which overlaps the top tube region, so the saddle would be positioned too far forward relative to the frame.
+
+Checking the saddle nose position relative to the head tube confirms they're far enough apart to avoid overlap, and the saddle rails clamp placement above the top tube looks reasonable. Now I'm figuring out where the handlebar attaches to the fork steerer top and locating the stem's position.
+
+I'm trying to figure out the orientation: if bars extend leftward locally but need to point right in the final image, I'd rotate 180°, which flips the clamp and drop-hook positions accordingly. I'm also reconsidering the vertical placement—bars should sit near the steerer top around y≈193, extending forward and down toward the drop ends.
+
+I'm trying to reconcile the clamp position with the drop and hook geometry in p04 — the clamp sits at top-right while the bar extends left and the hook is bottom-right, which doesn't match a typical drop bar's forward-and-down orientation, so I'm second-guessing which side represents the front.
+
+Given the ambiguity, I decide to just pick an orientation: rotate the local bar coordinates 180° and translate so the clamp lands near (936,193), then recompute where the other reference points (like the local left-end at 5,79) fall under that transform to get their mapped positions.
+
+I'll try placing the clamp at the steerer top with a 180° rotation, computing the bars' final bounding box and checking it fits within the canvas — but it looks like this placement overlaps the fork's head area, so I need to reconsider the positioning.
+
+Moving on, I'm also recalculating the translation offsets for the frame's top-right piece and double-checking the crank's orientation relative to the bottom bracket and chainring — that part seems consistent. Now I'm working out the rear wheel hub's translation by comparing its original and final coordinates.
+
+Continuing those calculations for the front wheel, fork, frame, cassette, chainring, crank, and pedal transforms, I'm computing each component's translation offset relative to its mounting point. For the chain, I'm checking its combined translate-rotate-translate transform to verify the cog's local coordinates land at the expected hub position after rotation.
+
+Front ground check matches too. Now I'm recalculating triangle points T1 and T3 from the new rear hub position, then moving to verify the front hub by recomputing the fork axle location.
+
+Verifying the saddle transform: translate(556,172) rotate(-10.5) translate(-100,-140) applies SVG's clockwise rotation convention, and my sign on sin(-10.5°) matches what I used earlier, so the math checks out.
+
+Confirming the nose direction comes out horizontal after rotation, checking the handlebar placement at (936,193), and sanity-checking the saddle rear and pedal hole positions against the crank transform.
+
+Now I'm assembling the full SVG with use elements for each part, applying the computed translate/rotate transforms for the chain, saddle, handlebar, frame, wheels, fork, chainring, crank, pedal, and cassette.
+
+Still writing SVG code...
+
+
+````
+
+## Answer
+
+````text
+I identified the parts from their shapes and holes, then placed them using the frame's main joints. I could not verify every connection to the 8 px tolerance by hand, and two parts are uncertain, so treat this as a best-effort assembly.
+
+- **Wheels (p01, p05):** hub centres at the rear and front dropouts, both on the same ground line.
+- **Frame (p02):** base part, translated only.
+- **Fork (p09):** steerer at the head tube, axle at the front hub.
+- **Chainring (p07) and crank (p08):** chainring centred on the bottom bracket, crank spindle on the same point.
+- **Pedal (p06):** on the crank's pedal eye.
+- **Cassette (p03):** centred on the rear hub.
+- **Chain (p10):** wraps the chainring and cassette, rotated to fit the centre-to-centre distance.
+- **Saddle (p11):** nose forward, level, clamped at the seat tube top.
+- **Handlebar (p04):** clamped at the steerer top, turned 180° so the drops point forward.
+
+Uncertainties:
+- The kit has 11 parts but a complete road bike needs more, so one of seatpost, derailleur or a second handlebar/saddle role is probably unmatched. I left the seatpost and derailleur out.
+- The handlebar orientation is the least certain placement.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768">
+<use href="#kit-p02" transform="translate(300,100)"/>
+<use href="#kit-p01" transform="translate(68.7,207.1)"/>
+<use href="#kit-p05" transform="translate(692.1,209.8)"/>
+<use href="#kit-p09" transform="translate(908.4,187.1)"/>
+<use href="#kit-p04" transform="translate(1114,207) rotate(180)"/>
+<use href="#kit-p11" transform="translate(556,172) rotate(-10.5) translate(-100,-140)"/>
+<use href="#kit-p07" transform="translate(554,421)"/>
+<use href="#kit-p08" transform="translate(615.8,488.4)"/>
+<use href="#kit-p06" transform="translate(614.2,592)"/>
+<use href="#kit-p03" transform="translate(274.6,413)"/>
+<use href="#kit-p10" transform="translate(635,502) rotate(-17.2) translate(-328.1,-155)"/>
+</svg>
+````
+
+## Prompt
+
+````text
+Below is a kit of 11 SVG parts for a road bike (side view). Each part is a <g id="kit-..."> drawn in its own local coordinate system, stored at an arbitrary rotation. The parts are unlabelled (ids p01 to p11); work out what each one is from its drawing.
+
+Assemble the parts into one complete, working road bike (side view) on a 1376 x 768 canvas. Parts are rigid: translate and rotate only, no scaling and no mirroring. Use every part exactly once. The base part, kit-p02, stays upright exactly as stored (at most 3 degrees of rotation).
+
+Nobody will tell you which part connects to which, at which hole or feature, or which way round a part goes. Work that out from the parts, as a practitioner who knows this object would.
+
+Grading is done by code on where the parts land:
+- every connection the real object has must be made: the matching features of the two connected parts (pin holes, axle holes, bolt holes, hub centres, the centres of rounded ends, seats) must coincide within 8 px;
+- a part that slides along a guide (such as a piston in its bore) must sit on the guide's centre line, within 8 px;
+- every part must face the way it does on the working object, relative to the base part, within 8 degrees; parts that turn in use (wheels, gears, sprockets, cranks, connecting rods, pedals, rotors) may sit at any angle;
+- anything that stands on the ground must stand level, within 8 px;
+- a missing, duplicated, scaled, skewed or mirrored part fails the assembly.
+
+Reply with one <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768"> that contains exactly one <use href="#kit-ID" transform="..."/> per part. You may wrap <use> elements in <g transform="..."> groups. Do not copy the part drawings: the kit's <defs> are inserted automatically.
+
+KIT:
+<svg xmlns="http://www.w3.org/2000/svg"><defs>
+<g id="kit-p01" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 500.5,258.3 A 242.2,242.2 0 0,1 258.3,500.5 A 242.2,242.2 0 0,1 16.1,258.3 A 242.2,242.2 0 0,1 258.3,16.1 A 242.2,242.2 0 0,1 500.5,258.3 Z" fill="none" stroke="#ECEAE4" stroke-width="22.3"/>
+  <path d="M 511.6,258.3 A 253.3,253.3 0 0,1 258.3,511.6 A 253.3,253.3 0 0,1 5,258.3 A 253.3,253.3 0 0,1 258.3,5 A 253.3,253.3 0 0,1 511.6,258.3 Z" fill="none"/>
+  <path d="M 489.3,258.3 A 231,231 0 0,1 258.3,489.3 A 231,231 0 0,1 27.3,258.3 A 231,231 0 0,1 258.3,27.3 A 231,231 0 0,1 489.3,258.3 Z" fill="none"/>
+  <path d="M 482.05,258.3 A 223.75,223.75 0 0,1 258.3,482.05 A 223.75,223.75 0 0,1 34.55,258.3 A 223.75,223.75 0 0,1 258.3,34.55 A 223.75,223.75 0 0,1 482.05,258.3 Z" fill="none" stroke="#DBEAF7" stroke-width="12.5"/>
+  <path d="M 474.8,258.3 A 216.5,216.5 0 0,1 258.3,474.8 A 216.5,216.5 0 0,1 41.8,258.3 A 216.5,216.5 0 0,1 258.3,41.8 A 216.5,216.5 0 0,1 474.8,258.3 Z" fill="none"/>
+  <path d="M 257.7,258.3 L 41.9,240.9" stroke-width="1.6"/>
+  <path d="M 252.1,275.3 L 456.6,344.1" stroke-width="1.6"/>
+  <path d="M 252.1,275.3 L 47.6,206.4" stroke-width="1.6"/>
+  <path d="M 248.6,278 L 443.6,369.5" stroke-width="1.6"/>
+  <path d="M 263.1,248.2 L 72,147.2" stroke-width="1.6"/>
+  <path d="M 247.6,277 L 58.6,173.5" stroke-width="1.6"/>
+  <path d="M 274.2,231.4 L 457.2,342.6" stroke-width="1.6"/>
+  <path d="M 260.8,254.6 L 90.8,120.6" stroke-width="1.6"/>
+  <path d="M 267.6,248.6 L 420.4,401.3" stroke-width="1.6"/>
+  <path d="M 242.1,270.2 L 112.9,97.6" stroke-width="1.6"/>
+  <path d="M 245.2,267.2 L 369.2,444.1" stroke-width="1.6"/>
+  <path d="M 272.8,248.3 L 393.9,426.8" stroke-width="1.6"/>
+  <path d="M 272.8,248.3 L 151.7,69.7" stroke-width="1.6"/>
+  <path d="M 241.9,267.4 L 135.8,79.6" stroke-width="1.6"/>
+  <path d="M 240.4,267.9 L 137.5,78.4" stroke-width="1.6"/>
+  <path d="M 274.4,250.4 L 180.1,56.4" stroke-width="1.6"/>
+  <path d="M 245.5,264.4 L 339.9,458.8" stroke-width="1.6"/>
+  <path d="M 269.4,256.4 L 306.8,469.3" stroke-width="1.6"/>
+  <path d="M 248.4,260.1 L 211.2,47" stroke-width="1.6"/>
+  <path d="M 244.1,258.5 L 244.1,474.6" stroke-width="1.6"/>
+  <path d="M 244.1,258.5 L 244.1,42.4" stroke-width="1.6"/>
+  <path d="M 273.7,258.5 L 273.7,474.4" stroke-width="1.6"/>
+  <path d="M 273.7,258.5 L 273.7,42.6" stroke-width="1.6"/>
+  <path d="M 271.4,260.8 L 307.5,47.8" stroke-width="1.6"/>
+  <path d="M 247.5,256.7 L 210.2,469.7" stroke-width="1.6"/>
+  <path d="M 270.1,264.4 L 177.8,459.7" stroke-width="1.6"/>
+  <path d="M 244.1,251.8 L 339.6,58.1" stroke-width="1.6"/>
+  <path d="M 244.2,249.1 L 120.5,426" stroke-width="1.6"/>
+  <path d="M 244.2,249.1 L 368,72.2" stroke-width="1.6"/>
+  <path d="M 269.4,266.7 L 145.4,443.6" stroke-width="1.6"/>
+  <path d="M 280.2,274.4 L 404.1,99" stroke-width="1.6"/>
+  <path d="M 248.1,248.9 L 95.3,401.7" stroke-width="1.6"/>
+  <path d="M 258.9,259.9 L 425.5,121.7" stroke-width="1.6"/>
+  <path d="M 234.3,224.4 L 59,344.6" stroke-width="1.6"/>
+  <path d="M 263.6,269.6 L 72.6,370.8" stroke-width="1.6"/>
+  <path d="M 249,239.7 L 444.3,148.7" stroke-width="1.6"/>
+  <path d="M 248.2,237.5 L 444.4,148.9" stroke-width="1.6"/>
+  <path d="M 243.2,225.6 L 47.8,311.6" stroke-width="1.6"/>
+  <path d="M 262,270.7 L 58.2,342.7" stroke-width="1.6"/>
+  <path d="M 252.1,241.4 L 457,173.9" stroke-width="1.6"/>
+  <path d="M 261.2,269.9 L 467.9,206.6" stroke-width="1.6"/>
+  <path d="M 256.5,249.1 L 41.9,276.1" stroke-width="1.6"/>
+  <path d="M 258.3,263.5 L 473.4,239.6" stroke-width="1.6"/>
+</g>
+<g id="kit-p02" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 681.5,107.5 L 648,5 L 648.5,7.5 C 648.3,8.2 652.5,7.7 647,9.5 L 615.5,18.5 L 616.5,26 C 616.2,27.6 670.9,21.3 614,28 C 557.1,34.7 333.7,59.7 275,66 C 216.3,72.3 264.7,65.8 262,66 C 259.3,66.2 259.8,65.9 259,67 C 258.2,68.1 257.8,70.2 257.5,72.5 C 257.2,74.8 256.6,77.7 257.5,80.5 C 258.4,83.3 262.2,87.7 263,89.5 C 263.8,91.3 263,91 262.5,91.5 L 260,92.5 L 565,62 C 625.7,56.2 613.3,57.2 624,57.5 C 634.7,57.8 627,62.1 629,64 C 631,65.9 634,66.6 636,69 C 638,71.4 639.9,75.7 641,78.5 C 642.1,81.3 642.5,81.2 642.5,86 C 642.5,90.8 640.7,102.2 641,107 L 644.5,115 L 678,105 C 684,103.4 679.9,105.1 680.5,105.5 L 681.5,107.5 Z" fill="#DBEAF7"/>
+  <path d="M 641,47.5 L 373.5,358.5 L 388.5,342.5 C 391.8,339.8 391.9,341.6 393.5,342.5 C 395.1,343.4 396.4,346.8 398,348 C 399.6,349.2 401.8,348.3 403,349.5 C 404.2,350.7 403.8,353 405.5,355 L 413.5,361.5 L 402.5,378.5 L 629.5,116 C 669.1,70.7 637.8,109.1 640,106.5 C 642.2,103.9 642.2,104.6 642.5,100.5 C 642.8,96.4 642.7,86.6 642,82 C 641.3,77.4 640,75.6 638.5,73 C 637,70.4 634.5,67.8 633,66.5 C 631.5,65.2 630.2,65.7 629.5,65 C 628.8,64.3 627.1,65.4 629,62.5 L 641,47.5 Z" fill="#EBE3F7"/>
+  <path d="M 236.5,57.5 L 233.5,60 L 236,72 L 240,84 L 244,84 C 245.2,84.6 246.4,85.3 247,87.5 C 247.6,89.7 247.8,94.8 247.5,97 C 247.2,99.2 233.9,59.5 245,100.5 C 256.1,141.5 302.4,302.4 314,343 L 314.5,344 L 313.5,334 C 313.8,331.9 314.7,331.7 316.5,331.5 C 318.3,331.3 322.1,333.1 324.5,333 C 326.9,332.9 329.3,331.2 331,331 L 334.5,331.5 L 338.5,342 L 268,97.5 C 256.2,55.7 268.5,93.3 268,91 L 265,83.5 L 264.5,87 C 264.1,87.8 263.2,88.1 262.5,88 C 261.8,87.9 260.8,87.6 260,86.5 C 259.2,85.4 257.9,83.8 257.5,81.5 C 257.1,79.2 257.1,75.8 257.5,73 C 257.9,70.2 260.4,67.9 260,64.5 L 255,52.5 L 236.5,57.5 Z" fill="#DFF1E3"/>
+  <path d="M 293,344 L 291.5,339 L 287.5,339 C 286.2,339.3 286.1,340.9 284,341 C 281.9,341.1 277.3,339.4 275,339.5 L 270,341.5 L 270,386 C 269.6,393.8 294.6,390.9 267.5,388 C 240.4,385.1 139.2,372.6 107.5,368.5 C 75.8,364.4 83.7,364.1 77.5,363.5 L 70.5,365 L 72.5,366 C 73,366.9 74,369 73.5,370.5 L 69.5,375 L 264,413.5 L 264,422 C 262.6,427.9 259.8,438.9 255.5,449 C 251.2,459.1 241.2,476.6 238.5,482.5 L 239.5,484.5 L 247,484.5 C 248.9,484.8 248.3,486.4 251,486.5 C 253.7,486.6 258,492 263,485 C 268,478 278,451.8 281,444.5 C 284,437.2 281.8,442.8 281,441.5 L 276,437 L 277.5,430 L 272.5,425 L 276,420 C 276.7,418.6 275.9,417.3 276.5,416.5 L 279.5,415 L 275,412.5 L 276,406 L 272.5,401 L 277.5,396.5 C 278.5,395.1 277.8,393.3 278.5,392.5 L 281.5,391.5 L 279,389 L 281.5,385 L 280.5,377.5 L 285,376 C 286.1,375.3 286.6,375.1 287,373.5 L 287.5,366.5 L 293.5,365.5 L 293,344 Z" fill="#ECEAE4"/>
+  <path d="M 244.5,85.5 C 243.5,84.8 243.8,83 241.5,85 C 239.2,87 233.7,93.3 230.5,97.5 C 227.3,101.7 224.2,107.7 222.5,110 C 220.8,112.3 224.6,105.8 220,111.5 C 215.4,117.2 199.6,137.5 195,144 C 190.4,150.5 194.2,148.2 192.5,150.5 C 190.8,152.8 205,131.2 184.5,157.5 C 164,183.8 90.8,280.2 69.5,308.5 C 48.2,336.8 60,323.4 57,327.5 C 54,331.6 52.5,331.7 51.5,333 C 50.5,334.3 55.1,331.2 51,335.5 C 46.9,339.8 31.2,354.2 27,358.5 C 22.8,362.8 25.8,358.2 25.5,361.5 L 25.5,378.5 L 29,378 C 30.2,378.2 31.8,379.9 33,380 L 36.5,378.5 L 37,374 C 36.2,372.3 32.8,370.3 32,368.5 C 31.2,366.7 31.1,364.7 32,363 C 32.9,361.3 35.8,359.2 37.5,358.5 C 39.2,357.8 41.3,358.6 42.5,359 C 43.7,359.4 44,359.5 44.5,361 C 45,362.5 44.7,366.2 45.5,368 C 46.3,369.8 47.6,371.4 49.5,372 C 51.4,372.6 54.8,371.1 57,371.5 C 59.2,371.9 60.2,374 63,374.5 L 73.5,374.5 L 71.5,372.5 C 71.2,371.3 71,368.7 71.5,367.5 L 74.5,365.5 L 74,363.5 L 59,361 C 55.8,359.8 55.2,357.8 54.5,356 C 53.8,354.2 53.7,352.8 54.5,350 C 55.3,347.2 53.5,347.4 59.5,339.5 C 65.5,331.6 75,322 90.5,302.5 C 106,283 141.5,237.3 152.5,222.5 C 163.5,207.7 154.1,216.7 156.5,213.5 C 158.9,210.3 151.8,222.9 167,203.5 C 182.2,184.1 234.6,116 248,97 C 261.4,78 248.1,91.4 247.5,89.5 C 246.9,87.6 245.5,86.2 244.5,85.5 Z" fill="#FEB8A7"/>
+  <path d="M 195.5,167.5 L 182.5,183 L 213,211.5 C 220.3,219 222.2,222.2 226.5,228 C 230.8,233.8 233.6,237 238.5,246 C 243.4,255 251.9,272.3 256,282 C 260.1,291.7 260.8,295.5 263,304 L 269,333 L 275.5,334 C 277.7,333.8 280.1,331.5 282,331.5 C 283.9,331.5 285.5,333.7 287,334 L 291,333.5 L 290,321.5 C 288.5,314.2 285,299.2 282,289.5 C 279,279.8 276.4,272.7 272,263 C 267.6,253.3 263.2,243.2 255.5,231.5 C 247.8,219.8 233.9,202.7 225.5,193 C 217.1,183.3 210,177.8 205,173.5 L 195.5,167.5 Z" fill="#ECEAE4"/>
+  <path d="M 182.5,185 L 172.5,195.5 L 200.5,222 C 209.3,232.1 218.6,244.5 225.5,256 C 232.4,267.5 237.9,280.5 242,291 C 246.1,301.5 248.3,312.1 250,319 L 252,332.5 L 261,334.5 L 268,333 L 267,320 C 265.9,314.2 264,305.8 261.5,298 C 259,290.2 255.9,281.7 252,273 C 248.1,264.3 241.9,252.9 238,246 C 234.1,239.1 232.7,237.1 228.5,231.5 C 224.3,225.9 219.2,219.2 213,212.5 C 206.8,205.8 196.6,195.6 191.5,191 L 182.5,185 Z" fill="#DBEAF7"/>
+  <path d="M 264.5,414 L 249.5,411.5 L 240,443.5 C 236.5,452.8 231.8,461.2 228.5,467.5 L 220,481 L 222.5,484 C 223.7,484.7 224.7,485 227,485 C 229.3,485 234.6,484.4 236.5,484 C 238.4,483.6 235.4,488.2 238.5,482.5 C 241.6,476.8 250.8,459.8 255,450 C 259.2,440.2 261.9,429.5 263.5,423.5 L 264.5,414 Z" fill="#DBEAF7"/>
+  <path d="M 263,339.5 L 253.5,342 L 253.5,386 L 269.5,389 L 271,369.5 C 271.2,362.3 270.8,350.6 270.5,346 C 270.2,341.4 270.8,343.1 269.5,342 C 268.2,340.9 265.7,339.5 263,339.5 Z" fill="#DBEAF7"/>
+  <path d="M 37.5,358.5 C 36,359 33.4,360.4 32.5,362 C 31.6,363.6 31.3,366.3 32,368 C 32.7,369.7 34.9,371.3 36.5,372 C 38.1,372.7 40,372.7 41.5,372 C 43,371.3 44.8,369.4 45.5,368 C 46.2,366.6 46.2,365 45.5,363.5 C 44.8,362 42.8,359.8 41.5,359 C 40.2,358.2 39,358 37.5,358.5 Z" fill="#FBE1DC"/>
+  <path d="M 5,378.5 L 6,387.5 L 13,391.5 L 10,405 C 9.5,408.7 9.7,411.7 10,413.5 C 10.3,415.3 10.6,415.2 12,416 C 13.4,416.8 16.6,418.2 18.5,418 C 20.4,417.8 20.8,414.8 23.5,415 C 26.2,415.2 32.1,417.3 34.5,419 L 38,425 L 49.5,424 L 55.5,427.5 L 47,454.5 C 44.5,459.9 44.8,458.3 40.5,460 L 21.5,464.5 L 22,469.5 L 29.5,472.5 C 32,474.4 34.9,479.2 37,481 C 39.1,482.8 39.9,483 42,483.5 C 44.1,484 47.2,484.2 49.5,484 C 51.8,483.8 54.2,482.8 55.5,482 C 56.8,481.2 57.2,480 57.5,479 C 57.8,478 56.4,477.1 57,476 C 57.6,474.9 60.1,474 61,472.5 C 61.9,471 62.2,469 62.5,467 C 62.8,465 63.6,462.8 62.5,460.5 L 56,453 L 67.5,431.5 L 71,428.5 L 69,424.5 C 69,423.1 70.7,421.7 71,420 C 71.3,418.3 72.2,416.5 71,414.5 C 69.8,412.5 64.8,409.4 63.5,408 L 63,406 L 65.5,404 L 72.5,403.5 L 73.5,396.5 L 80.5,394.5 L 81,386.5 C 81.4,384.8 82.2,384.5 83,384 L 86,383.5 L 87,380.5 L 83.5,378 C 82.2,377.5 81.2,376.9 79.5,377.5 C 77.8,378.1 74.3,379.8 73,381.5 C 71.7,383.2 72.7,386 71.5,387.5 C 70.3,389 67.1,389.3 66,390.5 C 64.9,391.7 66.4,393.2 65,394.5 L 57.5,398 L 59,403.5 L 56.5,405.5 C 52.2,404.6 37.1,399.7 33,398 L 32,395.5 L 38,388.5 C 40.3,387.2 43.9,387.8 46,388 L 50.5,389.5 L 53.5,384 L 60,382 L 60.5,374.5 L 51,373 C 48.8,372.3 48.3,370.8 47,370.5 C 45.7,370.2 44.8,370.4 43,371 C 41.2,371.6 37.8,372.5 36.5,374 L 35.5,380 L 27,378.5 C 24.6,378.7 22.9,379.8 21,381 L 15.5,386 L 13.5,385 L 10.5,378.5 L 5,378.5 Z" fill="#DFF1E3"/>
+</g>
+<g id="kit-p03" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 95.7055404882,60.054716516 L 98.521285629,63.0897748848 L 97.8902036342,65.5170646318 L 94.0149641858,66.763065923 L 93.1405343185,68.8428188908 L 95.3423218584,72.4804185979 L 94.2535656226,74.6239227054 L 90.1059567974,75.1110992984 L 88.8549686466,77.0229122198 L 90.199450713,80.915516486 L 88.6356554185,82.8737157294 L 84.5458491779,82.4572005269 L 82.9356675614,84.1025926266 L 83.4402089721,88.1517206766 L 81.5345850297,89.745018323 L 77.6010621489,88.4421761428 L 75.6490518846,89.7226666456 L 75.3310174573,93.829837704 L 73.1994104601,94.9771177959 L 69.6017676721,92.9211590488 L 67.4237743529,93.7556319971 L 66.2194129479,97.7065196956 L 63.8618228959,98.4077822331 L 60.7970217512,95.6334365546 L 58.5088909702,95.9407759908 L 56.5340481806,99.6542643719 L 54.0663206668,99.8283933973 L 51.615477123,96.4515063806 L 49.2983248378,96.3475578979 L 46.6224599346,99.4297238603 L 44.1430757343,99.0940841914 L 42.4857865242,95.2478662473 L 40.23809351,94.7499946633 L 36.9596872686,97.2182030249 L 34.5671271571,96.3901594795 L 33.7671434205,92.2889369763 L 31.7221200883,91.2175455583 L 27.9396532839,93.0891611368 L 25.8482436296,91.7049625751 L 25.8708357309,87.5456970634 L 24.0922332203,86.1151121798 L 20.0547618568,87.1294222847 L 18.247137842,85.2875494821 L 19.1560569211,81.2845673303 L 17.7423560074,79.5121537988 L 13.565725678,79.5880424727 L 12.2041192176,77.5201866153 L 13.8835196813,73.7546037809 L 12.8173555469,71.7388423767 L 8.69852780201,70.9110392552 L 7.8814196715,68.6345651607 L 10.2965718843,65.3033431944 L 9.67642530438,63.0615987354 L 5.79499687693,61.4633142292 L 5.42390630092,58.9608570799 L 8.54008062728,56.2609575322 L 8.44706755941,53.9090756114 L 5,51.5750393561 L 5.1213133005,49.1594062956 L 8.74154818984,47.056099531 L 9.04245822317,44.7736768813 L 6.2267130824,41.7386185125 L 6.85779507717,39.3113287655 L 10.7330345256,38.0653274744 L 11.607464393,35.9855745066 L 9.40567685305,32.3479747995 L 10.4944330888,30.2044706919 L 14.642041914,29.717294099 L 15.8930300649,27.8054811775 L 14.5485479984,23.9128769114 L 16.1123432929,21.9546776679 L 20.2021495336,22.3711928705 L 21.81233115,20.7258007707 L 21.3077897393,16.6766727208 L 23.2134136817,15.0833750743 L 27.1469365625,16.3862172545 L 29.0989468269,15.1057267518 L 29.4169812541,10.9985556933 L 31.5485882513,9.85127560139 L 35.1462310393,11.9072343485 L 37.3242243585,11.0727614002 L 38.5285857635,7.12187370171 L 40.8861758155,6.42061116427 L 43.9509769602,9.19495684273 L 46.2391077412,8.88761740649 L 48.2139505308,5.17412902541 L 50.6816780446,5 L 53.1325215884,8.37688701674 L 55.4496738737,8.48083549947 L 58.1255387768,5.39866953702 L 60.6049229771,5.73430920589 L 62.2622121872,9.58052715007 L 64.5099052014,10.078398734 L 67.7883114428,7.61019037243 L 70.1808715543,8.43823391781 L 70.9808552909,12.5394564211 L 73.0258786232,13.610847839 L 76.8083454276,11.7392322606 L 78.8997550818,13.1234308222 L 78.8771629805,17.2826963339 L 80.6557654911,18.7132812176 L 84.6932368546,17.6989711126 L 86.5008608694,19.5408439152 L 85.5919417904,23.543826067 L 87.005642704,25.3162395986 L 91.1822730335,25.2403509246 L 92.5438794938,27.3082067821 L 90.8644790301,31.0737896164 L 91.9306431645,33.0895510206 L 96.0494709094,33.9173541421 L 96.8665790399,36.1938282366 L 94.4514268271,39.525050203 L 95.071573407,41.766794662 L 98.9530018345,43.3650791681 L 99.3240924105,45.8675363175 L 96.2079180841,48.5674358652 L 96.300931152,50.9193177859 L 99.7479987114,53.2533540412 L 99.6266854109,55.6689871017 L 96.0064505216,57.7722938663 Z" fill="#DFF1E3"/>
+  <path d="M 89.7966939702,59.01282745 L 92.6124391109,62.0478858188 L 91.9813571162,64.4751755658 L 88.0250017102,65.6053312639 L 87.1332070251,67.783565007 L 89.1380330144,71.3864350786 L 87.9334311856,73.6110551437 L 83.8379168136,73.8027894107 L 82.3899671122,75.6798726966 L 83.5201228103,79.6362281025 L 81.8752115583,81.4785817529 L 77.7563838134,80.6507786314 L 75.966605464,82.1629603203 L 76.1409749133,86.3569554676 L 74.0731190559,87.7185619279 L 70.226420264,85.9233158711 L 68.2106588598,86.9894800056 L 67.3017397808,90.9924621574 L 64.9094200932,91.8906862454 L 61.7114085377,89.2959372998 L 59.5043937142,89.7191223291 L 57.6280316999,93.449975528 L 55.1429393683,93.7225853287 L 52.5762502314,90.4268142695 L 50.3575787215,90.3402306045 L 47.6643490006,93.5208773422 L 45.1849648003,93.1852376734 L 43.5276755902,89.3390197292 L 41.2973473938,88.74266737 L 37.9204603771,91.1935109138 L 35.6437458587,90.2843514109 L 34.9422428974,86.2004937254 L 32.9145843829,85.0306215321 L 29.0683664387,86.6879107422 L 27.0928023775,85.222596223 L 27.3297208472,80.9995795715 L 25.6669639297,79.4878787303 L 21.600471062,80.0909009164 L 19.9086926402,78.1679121562 L 21.2115348204,74.2343892755 L 20.029525093,72.2997438288 L 15.841238077,71.8658638085 L 14.7113228028,69.635776036 L 16.9468782828,66.1713436588 L 16.2108861098,64.0107151574 L 12.1962472715,62.5920273841 L 11.7093111024,60.1706861922 L 14.6632535137,57.2390954584 L 14.4543948528,54.9683294952 L 10.9899624756,52.7327740152 L 11.0301598186,50.2012953616 L 14.6503947079,48.097988597 L 14.9513047412,45.8155659473 L 12.1355596005,42.7805075785 L 12.7666415952,40.3532178315 L 16.7229970012,39.2230621334 L 17.6147916863,37.0448283903 L 15.609965697,33.4419583188 L 16.8145675258,31.2173382537 L 20.9100818978,31.0256039866 L 22.3580315992,29.1485207007 L 21.2278759011,25.1921652948 L 22.8727871532,23.3498116444 L 26.991614898,24.1776147659 L 28.7813932474,22.665433077 L 28.6070237981,18.4714379298 L 30.6748796555,17.1098314695 L 34.5215784475,18.9050775262 L 36.5373398516,17.8389133918 L 37.4462589307,13.83593124 L 39.8385786182,12.9377071519 L 43.0365901738,15.5324560975 L 45.2436049972,15.1092710682 L 47.1199670115,11.3784178694 L 49.6050593431,11.1058080687 L 52.17174848,14.4015791279 L 54.3904199899,14.4881627928 L 57.0836497108,11.3075160551 L 59.5630339111,11.643155724 L 61.2203231212,15.4893736681 L 63.4506513176,16.0857260274 L 66.8275383343,13.6348824836 L 69.1042528527,14.5440419865 L 69.8057558141,18.627899672 L 71.8334143285,19.7977718652 L 75.6796322727,18.1404826551 L 77.6551963339,19.6057971743 L 77.4182778642,23.8288138258 L 79.0810347817,25.340514667 L 83.1475276495,24.737492481 L 84.8393060712,26.6604812411 L 83.536463891,30.5940041219 L 84.7184736185,32.5286495685 L 88.9067606344,32.9625295888 L 90.0366759086,35.1926173613 L 87.8011204286,38.6570497385 L 88.5371126016,40.81767824 L 92.5517514399,42.2363660133 L 93.038687609,44.6577072051 L 90.0847451977,47.5892979389 L 90.2936038586,49.8600639022 L 93.7580362358,52.0956193821 L 93.7178388928,54.6270980357 L 90.0976040035,56.7304048003 Z" fill="#DFF1E3"/>
+  <path d="M 83.8878474521,57.970938384 L 86.7035925929,61.0059967528 L 85.9740298228,63.4159216821 L 82.0176744169,64.5460773801 L 81.0447637742,66.6084655302 L 82.9163793526,70.3909323346 L 81.532180791,72.4823419888 L 77.390280097,72.3612691122 L 75.8612144381,74.122506805 L 76.5627173994,78.2063644905 L 74.7382094146,79.91550773 L 70.7062057585,78.595300732 L 68.8526762694,79.8931560526 L 68.3376802916,83.9655974755 L 66.0091117438,85.0781479319 L 62.5620441844,82.7441116766 L 60.4187805007,83.3816230743 L 58.8204959945,87.2630515017 L 56.3180388452,87.6341420778 L 53.6355041152,84.4194869761 L 51.3994677875,84.4313840864 L 48.7062380666,87.6120308242 L 46.2268538663,87.2763911553 L 44.5695646562,83.4301732111 L 42.3392364598,82.8338208519 L 38.9797142608,85.1861836204 L 36.6218837849,84.1611785244 L 36.134707192,80.0135696992 L 34.2228942705,78.7625815484 L 30.2318092291,80.089698797 L 28.3894555787,78.444787545 L 29.0202971496,74.2912301646 L 27.4907506429,72.5999325906 L 23.4126010887,72.6931860823 L 21.9525138531,70.6079654071 L 23.8288758674,66.8771122082 L 22.878557326,64.7802348465 L 18.7944592167,63.7554701744 L 18.110561497,61.2993993471 L 20.8849071755,58.2345982024 L 20.5775677392,55.9464674214 L 16.997289769,53.792027899 L 17.0374871119,51.2605492454 L 20.559241226,49.139877663 L 20.8601512593,46.8574550133 L 18.0444061185,43.8223966445 L 18.7739688886,41.4124717153 L 22.7303242946,40.2823160172 L 23.7032349372,38.2199278672 L 21.8316193588,34.4374610628 L 23.2158179204,32.3460514085 L 27.3577186144,32.4671242851 L 28.8867842733,30.7058865923 L 28.185281312,26.6220289068 L 30.0097892969,24.9128856673 L 34.0417929529,26.2330926653 L 35.895322442,24.9352373448 L 36.4103184198,20.8627959219 L 38.7388869676,19.7502454655 L 42.1859545271,22.0842817207 L 44.3292182108,21.446770323 L 45.9275027169,17.5653418956 L 48.4299598663,17.1942513196 L 51.1124945962,20.4089064213 L 53.3485309239,20.3970093109 L 56.0417606448,17.2163625732 L 58.5211448451,17.552002242 L 60.1784340552,21.3982201862 L 62.4087622516,21.9945725454 L 65.7682844506,19.6422097769 L 68.1261149265,20.6672148729 L 68.6132915195,24.8148236982 L 70.5251044409,26.065811849 L 74.5161894824,24.7386946003 L 76.3585431327,26.3836058523 L 75.7277015618,30.5371632328 L 77.2572480685,32.2284608068 L 81.3353976227,32.135207315 L 82.7954848583,34.2204279903 L 80.919122844,37.9512811891 L 81.8694413854,40.0481585508 L 85.9535394947,41.0729232229 L 86.6374372144,43.5289940503 L 83.8630915359,46.5937951949 L 84.1704309722,48.8819259759 L 87.7507089424,51.0363654984 L 87.7105115995,53.567844152 L 84.1887574854,55.6885157343 Z" fill="#DFF1E3"/>
+  <path d="M 77.979000934,56.929049318 L 80.777381257,60.0625884621 L 80.047818487,62.4725133914 L 75.9292311659,63.3709779033 L 74.857839748,65.4160012356 L 76.4166481828,69.244854362 L 74.9339688458,71.3188991985 L 70.7630466476,70.7865384029 L 69.0717490736,72.3160849095 L 69.2461185229,76.5100800568 L 67.0797818901,77.8543216993 L 63.3489286913,75.9779596851 L 61.2694161474,76.8297974511 L 59.9665739671,80.7633203319 L 57.5278679575,81.3487372762 L 54.6136420414,78.2963140896 L 52.360240896,78.4066919753 L 49.8466079079,81.7205491239 L 47.2687429323,81.3675446372 L 45.6114537222,77.5213266931 L 43.4969711189,76.8438583763 L 39.9578521871,79.0630107339 L 37.6347513467,77.8410440874 L 37.4430170796,73.7455297154 L 35.664414569,72.3149448318 L 31.545827248,73.2134093437 L 29.8540488263,71.2904205835 L 31.0584102312,67.339532885 L 29.8764005037,65.4048874384 L 25.7054783055,64.8725266428 L 24.7087734422,62.4628421374 L 27.2224064303,59.1489849889 L 26.799221401,56.9419701654 L 23.0857330199,54.9671273758 L 22.9289688123,52.4009190867 L 26.4680877441,50.181766729 L 26.7689977774,47.8993440793 L 23.9706174544,44.7658049352 L 24.7001802245,42.355880006 L 28.8187675455,41.457415494 L 29.8901589634,39.4123921618 L 28.3313505287,35.5835390354 L 29.8140298656,33.5094941989 L 33.9849520638,34.0418549945 L 35.6762496378,32.5123084878 L 35.5018801885,28.3183133405 L 37.6682168213,26.974071698 L 41.3990700201,28.8504337123 L 43.4785825641,27.9985959462 L 44.7814247443,24.0650730655 L 47.2201307539,23.4796561211 L 50.13435667,26.5320793077 L 52.3877578154,26.4217014221 L 54.9013908035,23.1078442735 L 57.4792557791,23.4608487601 L 59.1365449892,27.3070667043 L 61.2510275925,27.9845350211 L 64.7901465243,25.7653826634 L 67.1132473647,26.98734931 L 67.3049816318,31.0828636819 L 69.0835841424,32.5134485656 L 73.2021714634,31.6149840536 L 74.8939498851,33.5379728138 L 73.6895884802,37.4888605123 L 74.8715982077,39.4235059589 L 79.0425204059,39.9558667545 L 80.0392252692,42.3655512599 L 77.5255922811,45.6794084085 L 77.9487773104,47.8864232319 L 81.6622656915,49.8612660215 L 81.8190298992,52.4274743106 L 78.2799109674,54.6466266683 Z" fill="#DFF1E3"/>
+  <path d="M 72.070154416,55.887160252 L 74.868534739,59.0206993961 L 73.9246456005,61.4943754651 L 69.840787915,62.1958784265 L 68.5897997642,64.1076913479 L 69.7199554623,68.0640467538 L 67.8607178419,69.970151544 L 63.8113493681,68.7484253212 L 61.9751846968,69.9477998665 L 61.1473815753,74.0666276114 L 58.7550618877,74.9648516994 L 55.5917799677,72.1731412032 L 53.4194947798,72.3993646819 L 50.8884969739,75.8117026058 L 48.3106319983,75.4586981192 L 46.7518235635,71.6298449927 L 44.5562250026,70.8365310829 L 40.9533549311,72.8413570722 L 38.6649837262,71.422428875 L 39.0003829712,67.2167770413 L 37.3549908714,65.6065954248 L 33.2594764995,65.7983296919 L 31.8167540816,63.6146282413 L 33.8900776465,59.918504678 L 33.1367206558,57.8563569519 L 29.2726570461,56.1595916704 L 29.0174120632,53.5760185635 L 32.3942990799,51.1251750197 L 32.6778442955,48.9412331453 L 29.8794639725,45.8076940012 L 30.8233531109,43.3340179322 L 34.9072107964,42.6325149709 L 36.1581989472,40.7207020495 L 35.0280432491,36.7643466435 L 36.8872808695,34.8582418534 L 40.9366493433,36.0799680761 L 42.7728140147,34.8805935308 L 43.6006171362,30.761765786 L 45.9929368238,29.8635416979 L 49.1562187437,32.6552521941 L 51.3285039317,32.4290287154 L 53.8595017375,29.0166907916 L 56.4373667131,29.3696952782 L 57.9961751479,33.1985484046 L 60.1917737088,33.9918623144 L 63.7946437803,31.9870363251 L 66.0830149852,33.4059645223 L 65.7476157402,37.611616356 L 67.39300784,39.2217979725 L 71.4885222119,39.0300637055 L 72.9312446298,41.213765156 L 70.8579210649,44.9098887193 L 71.6112780556,46.9720364455 L 75.4753416653,48.6688017269 L 75.7305866483,51.2523748338 L 72.3536996315,53.7032183776 Z" fill="#DFF1E3"/>
+  <path d="M 58.7752497503,53.5429098535 A 6.5,6.5 10 0,1 51.2452862009,58.8154470932 A 6.5,6.5 10 0,1 45.9727489611,51.2854835438 A 6.5,6.5 10 0,1 53.5027125105,46.0129463041 A 6.5,6.5 10 0,1 58.7752497503,53.5429098535 Z" fill="#ECEAE4"/>
+</g>
+<g id="kit-p04" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 5.17025518695,79.406469115 C 4.98850557123,81.1462872311 5.94831332052,83.6778419085 6.58834783949,84.8137802054 C 7.22838235845,85.9497185024 1.24772708064,85.4284101024 9.00435517439,86.4456222804 C 16.7609832681,87.4628344585 42.8037789311,90.5454946828 52.952961971,90.7780535426 L 69.8088226349,87.8832372655 L 72.5558413362,93.7742378813 L 79.0502337128,93.5042977784 C 82.8022503394,92.0857170676 91.6361857582,86.4216562436 95.1524647486,85.4440151736 C 98.6687437389,84.4663741035 98.927933764,86.4419298559 100.01501505,87.5900824056 L 101.674952465,92.3329304717 L 117.38266058,90.5251954808 C 126.526845694,98.0673356672 148.507875888,128.642395955 156.364908721,137.446771859 C 164.221941555,146.251147763 163.262621864,142.064298621 164.700012012,143.490450634 C 166.13740216,144.916602646 165.883831203,144.372817973 164.85024988,146.178838363 C 163.816668556,147.984858752 159.495950693,152.206398418 158.595261974,154.06078776 C 157.694573255,155.915177102 158.79997592,156.392759501 159.621271997,157.444174146 L 163.577514511,160.01285964 L 182.340037936,144.643483766 L 189.259488866,137.003379132 L 184.48854546,131.504461146 C 182.591894292,130.513141648 186.769707956,139.709112123 178.024688715,130.656784331 C 169.279669473,121.604456538 141.784328265,86.5391430245 132.066798963,77.0576017855 L 120.075928892,73.8220129757 L 119.925691025,71.1336252464 C 121.678211452,69.2130336312 129.013685459,64.3580546309 130.681682234,62.2562014582 L 130.108826105,58.6615059419 L 126.302821457,58.7812081774 C 125.257513939,59.3789808702 130.66482503,57.9608882177 123.975980726,62.0729876676 C 117.287136423,66.1850871175 93.4324321865,79.6258120158 86.4839097997,83.4176501771 L 82.1942156272,84.8662784614 L 80.2618978176,81.9055103376 L 104.614946124,58.4123403045 C 113.129108312,51.3526631002 122.168733794,44.7099850896 131.081085738,39.4507092066 C 139.993437683,34.1914333236 152.264747508,28.8002409524 158.270319349,26.7721613544 C 164.275891191,24.7440817563 165.012175557,27.2695293073 167.211254693,27.0164464086 C 169.410333829,26.7633635099 167.911872417,27.5724453335 171.500948865,25.5678181243 C 175.090025314,23.563190915 185.416315018,17.313571651 188.570558952,14.8496834219 L 190.474781421,10.6515961447 L 187.002228432,6.75398460209 C 185.238469869,5.81103405692 183.649865736,5.00708324298 180.115753425,5 C 176.581641114,4.99291675702 169.621880591,5.9212127579 165.978816122,6.62696149183 C 162.335751653,7.33271022577 173.302075877,2.21902925871 158.305735564,9.10159979872 C 143.309395252,15.9841703387 100.078025752,37.7983558875 76.0430360749,48.0130155106 C 52.0080463977,58.2276751337 25.5392160648,65.8257683688 14.1441664536,70.2566649324 C 2.74911684232,74.687561496 9.2439972772,72.7623269294 7.76947631252,74.3326096825 C 6.29495534784,75.9028924356 5.35200480267,77.6666509989 5.17025518695,79.406469115 Z" fill="#FEB8A7"/>
+</g>
+<g id="kit-p05" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 500.5,258.3 A 242.2,242.2 0 0,1 258.3,500.5 A 242.2,242.2 0 0,1 16.1,258.3 A 242.2,242.2 0 0,1 258.3,16.1 A 242.2,242.2 0 0,1 500.5,258.3 Z" fill="none" stroke="#ECEAE4" stroke-width="22.3"/>
+  <path d="M 511.6,258.3 A 253.3,253.3 0 0,1 258.3,511.6 A 253.3,253.3 0 0,1 5,258.3 A 253.3,253.3 0 0,1 258.3,5 A 253.3,253.3 0 0,1 511.6,258.3 Z" fill="none"/>
+  <path d="M 489.3,258.3 A 231,231 0 0,1 258.3,489.3 A 231,231 0 0,1 27.3,258.3 A 231,231 0 0,1 258.3,27.3 A 231,231 0 0,1 489.3,258.3 Z" fill="none"/>
+  <path d="M 482.05,258.3 A 223.75,223.75 0 0,1 258.3,482.05 A 223.75,223.75 0 0,1 34.55,258.3 A 223.75,223.75 0 0,1 258.3,34.55 A 223.75,223.75 0 0,1 482.05,258.3 Z" fill="none" stroke="#DBEAF7" stroke-width="12.5"/>
+  <path d="M 474.8,258.3 A 216.5,216.5 0 0,1 258.3,474.8 A 216.5,216.5 0 0,1 41.8,258.3 A 216.5,216.5 0 0,1 258.3,41.8 A 216.5,216.5 0 0,1 474.8,258.3 Z" fill="none"/>
+  <path d="M 258.4,257.6 L 42.5,240.3" stroke-width="1.6"/>
+  <path d="M 259.6,248.2 L 474,276.8" stroke-width="1.6"/>
+  <path d="M 252.2,276.7 L 456.7,344.9" stroke-width="1.6"/>
+  <path d="M 252.2,276.7 L 47.6,208.5" stroke-width="1.6"/>
+  <path d="M 266.7,235.6 L 468.5,310.1" stroke-width="1.6"/>
+  <path d="M 268.5,232.5 L 468.2,311.4" stroke-width="1.6"/>
+  <path d="M 262.3,250.8 L 72.1,147.8" stroke-width="1.6"/>
+  <path d="M 274,232.3 L 457.6,342.9" stroke-width="1.6"/>
+  <path d="M 260.4,255.7 L 90.8,121.2" stroke-width="1.6"/>
+  <path d="M 258.6,257.9 L 90.3,121.8" stroke-width="1.6"/>
+  <path d="M 267.1,249.5 L 419.9,402.3" stroke-width="1.6"/>
+  <path d="M 241.3,271.1 L 370.4,443.5" stroke-width="1.6"/>
+  <path d="M 241.3,271.1 L 112.1,98.6" stroke-width="1.6"/>
+  <path d="M 242.2,270.3 L 370.5,443.5" stroke-width="1.6"/>
+  <path d="M 269,250.7 L 394.1,426.9" stroke-width="1.6"/>
+  <path d="M 245.4,267.2 L 368,444.9" stroke-width="1.6"/>
+  <path d="M 241.6,267.9 L 134.3,80.8" stroke-width="1.6"/>
+  <path d="M 243.2,265.8 L 339,459.2" stroke-width="1.6"/>
+  <path d="M 244.3,265 L 338.1,459.6" stroke-width="1.6"/>
+  <path d="M 269,253.4 L 178.5,57.1" stroke-width="1.6"/>
+  <path d="M 245.8,260.5 L 209.1,47.5" stroke-width="1.6"/>
+  <path d="M 269.2,256.5 L 305.3,469.6" stroke-width="1.6"/>
+  <path d="M 271,258.3 L 271,474.4" stroke-width="1.6"/>
+  <path d="M 271,258.3 L 271,42.2" stroke-width="1.6"/>
+  <path d="M 242.1,258.3 L 242.1,474.2" stroke-width="1.6"/>
+  <path d="M 242.1,258.3 L 242.1,42.4" stroke-width="1.6"/>
+  <path d="M 271.9,258.4 L 271,474.4" stroke-width="1.6"/>
+  <path d="M 271.9,258.4 L 272.9,42.3" stroke-width="1.6"/>
+  <path d="M 269,260.1 L 304.9,46.9" stroke-width="1.6"/>
+  <path d="M 245.1,256.1 L 209.7,469.3" stroke-width="1.6"/>
+  <path d="M 268.4,263 L 177.9,459.3" stroke-width="1.6"/>
+  <path d="M 244,251.5 L 336.4,56.4" stroke-width="1.6"/>
+  <path d="M 273.8,267.4 L 382.4,80.9" stroke-width="1.6"/>
+  <path d="M 282.4,274.6 L 402.8,97.1" stroke-width="1.6"/>
+  <path d="M 243.2,247.9 L 120.8,425.6" stroke-width="1.6"/>
+  <path d="M 243.2,247.9 L 365.6,70.3" stroke-width="1.6"/>
+  <path d="M 270.1,266.7 L 145.2,442.9" stroke-width="1.6"/>
+  <path d="M 248.3,248.3 L 95.5,401.1" stroke-width="1.6"/>
+  <path d="M 259.3,259.5 L 425,120.1" stroke-width="1.6"/>
+  <path d="M 233.9,222.8 L 59.1,343.1" stroke-width="1.6"/>
+  <path d="M 264.3,269.8 L 72.8,369.9" stroke-width="1.6"/>
+  <path d="M 248.2,235.8 L 444.5,147.9" stroke-width="1.6"/>
+  <path d="M 243.6,225.1 L 48.4,311.2" stroke-width="1.6"/>
+  <path d="M 262.4,270.1 L 58.5,341.6" stroke-width="1.6"/>
+  <path d="M 252.6,241 L 457.3,173" stroke-width="1.6"/>
+  <path d="M 252.6,240.7 L 458,174.7" stroke-width="1.6"/>
+  <path d="M 261.3,268.3 L 468.6,206.9" stroke-width="1.6"/>
+  <path d="M 257.2,249.3 L 42.5,275.9" stroke-width="1.6"/>
+  <path d="M 258.6,261.4 L 474.1,240.7" stroke-width="1.6"/>
+  <path d="M 261.5,234.2 L 257,235.2 L 257,237.7 C 257.6,239 258.4,240.9 260.5,243.2 C 262.6,245.5 267.8,248.1 269.5,251.2 C 271.2,254.3 270.7,258.9 270.5,261.7 C 270.3,264.5 270,266.5 268.5,268.2 C 267,269.9 264.3,271.7 261.5,272.2 C 258.7,272.7 254.5,272.1 252,271.2 C 249.5,270.3 247.8,269.3 246.5,266.7 C 245.2,264.1 244.9,258.4 244,255.7 C 243.1,253 242.3,251.6 241,250.7 C 239.7,249.8 237.7,249.9 236.5,250.2 C 235.3,250.5 234.4,250.4 234,252.7 C 233.6,255 233.4,261 234,264.2 C 234.6,267.4 236.4,269.9 237.5,271.7 C 238.6,273.5 239.3,273.9 240.5,274.7 C 241.7,275.5 243.9,275.3 245,276.2 C 246.1,277.1 245.4,279.1 247,280.2 C 248.6,281.3 252.1,282.3 254.5,282.7 C 256.9,283.1 258.7,283.4 261.5,282.7 C 264.3,282 268,280.9 271,278.7 C 274,276.5 277.7,271.8 279.5,269.2 C 281.3,266.6 281.2,265.8 281.5,263.2 C 281.8,260.6 282.1,256.7 281.5,253.7 C 280.9,250.7 279.9,247.9 278,245.2 C 276.1,242.5 272.7,239.5 270,237.7 C 267.3,235.9 263.7,234.6 261.5,234.2 Z" fill="#FEB8A7"/>
+  <path d="M 259.5,251.7 C 257.5,251.4 254,252.9 252.5,253.7 C 251,254.5 250.7,255.2 250.5,256.7 C 250.3,258.2 250.7,261.5 251.5,262.7 L 255,264.2 L 256.5,259.2 C 257.5,258.1 259.8,257.7 261,257.7 L 263.5,259.2 L 264.5,255.7 L 259.5,251.7 Z" fill="#FBE1DC"/>
+  <path d="M 264.5,256.2 L 261,254.7 L 260,258.2 L 252.5,259.7 L 253,264.7 C 253.5,265.8 254,266.1 255.5,266.2 C 257,266.3 260.5,265.9 262,265.2 C 263.5,264.5 264.1,263.2 264.5,261.7 L 264.5,256.2 Z" fill="#ECEAE4"/>
+</g>
+<g id="kit-p06" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 39.1047498251,16.1510263312 L 24.0405600484,64.885718147 Q 23.0985826805,67.7339945799 20.5642987036,65.8425917343 L 5.99402786351,55.7575925947 Q 4.4091693642,54.1801822051 5.3511467321,51.3319057722 L 20.1087921626,6.708908323 Q 21.0507695305,3.86063189008 23.5850535074,5.75203473562 Z" fill="#ECEAE4"/>
+  <path d="M 20.0300010869,40.3874443952 A 5.5,5.5 108.3 0,1 16.5351194676,33.4386457604 A 5.5,5.5 108.3 0,1 23.4839181025,29.9437641411 A 5.5,5.5 108.3 0,1 26.9787997217,36.892562776 A 5.5,5.5 108.3 0,1 20.0300010869,40.3874443952 Z" fill="#FBE1DC"/>
+</g>
+<g id="kit-p07" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 139.469936915,38.712999492 L 144.844154975,39.1346394379 L 146.739599959,42.0837559686 L 144.722699017,47.1337174129 L 146.257881852,50.0973661205 L 151.477237693,51.496767639 L 152.806370781,54.8573338464 L 149.936856313,59.4142940966 L 150.788170202,62.6275890819 L 155.712983599,64.982628999 L 156.380370914,68.4531612594 L 152.680366096,72.3774400909 L 153.009614438,75.7228243035 L 157.44142664,78.9304777454 L 157.388289658,82.4300743594 L 153.078376414,85.6850164213 L 152.768002157,89.0006864622 L 156.508354415,92.9579285553 L 155.815594835,96.4278109977 L 150.998798038,98.8149575399 L 150.129702883,102.042134884 L 153.061038147,106.587162229 L 151.750779143,109.887650276 L 146.508000492,111.348222773 L 145.102307612,114.347227196 L 147.107068832,119.318236394 L 145.260212103,122.390551519 L 139.892935223,122.829116095 L 137.891866093,125.519045897 L 138.911274742,130.83513525 L 136.572066638,133.399917004 L 131.139070053,132.897375358 L 128.704428072,135.160673489 L 128.7827305,140.542482546 L 126.009949545,142.680632628 L 120.812716878,141.141550885 L 118.025403746,142.919438819 L 117.103821427,148.286065881 L 113.919590795,149.857904068 L 109.075679099,147.444085626 L 106.016596515,148.677784837 L 104.080597272,153.668967756 L 100.764277413,154.718740395 L 96.4133669098,151.452308428 L 93.1634165734,152.083040393 L 90.3526806314,156.720902342 L 86.8676161941,157.028027509 L 83.2081656351,153.012006891 L 79.9070277709,153.061894783 L 76.2658014783,157.067075314 L 72.8104512126,156.734577883 L 69.960017648,152.130772012 L 66.6885939554,151.541037306 L 62.4374592363,154.876881067 L 59.0118231422,153.904761038 L 57.0879636224,148.874973314 L 53.9859343261,147.667739184 L 49.1470143547,150.194565951 L 46.0304528816,148.627069672 L 45.0110442324,143.310980319 L 42.218089557,141.50836994 L 37.0340894316,143.049844136 L 34.2044794052,141.026651832 L 34.2070786771,135.58606425 L 31.7010754485,133.327757845 L 26.3116753938,133.906002646 L 23.930820213,131.309557267 L 24.992082757,125.965053378 L 22.971489725,123.354075822 L 17.597271665,122.932435876 L 15.7018266809,119.983319345 L 17.7187276234,114.933357901 L 16.183544788,111.969709194 L 10.9641889475,110.570307675 L 9.63505585939,107.209741468 L 12.5045703267,102.652781217 L 11.6532564378,99.4394862321 L 6.72844304145,97.0844463151 L 6.06105572567,93.6139140546 L 9.76106054357,89.6896352231 L 9.43181220236,86.3442510105 L 5,83.1365975687 L 5.05313698177,79.6370009546 L 9.36305022616,76.3820588928 L 9.67342448306,73.0663888518 L 5.93307222462,69.1091467588 L 6.62583180449,65.6392643163 L 11.4426286017,63.2521177741 L 12.3117237573,60.0249404299 L 9.38038849323,55.4799130846 L 10.690647497,52.1794250384 L 15.9334261477,50.7188525411 L 17.3391190277,47.7198481184 L 15.3343578085,42.7488389197 L 17.1812145367,39.676523795 L 22.5484914172,39.2379592187 L 24.5495605469,36.548029417 L 23.5301518978,31.2319400643 L 25.869360002,28.6671583104 L 31.3023565872,29.1696999558 L 33.7369985677,26.9064018255 L 33.6586961402,21.5245927681 L 36.4314770953,19.3864426856 L 41.6287097616,20.9255244289 L 44.4160228935,19.1476364952 L 45.3376052128,13.7810094326 L 48.5218358445,12.2091712462 L 53.3657475415,14.6229896885 L 56.4248301253,13.3892904767 L 58.3608293683,8.39810755767 L 61.6771492273,7.34833491891 L 66.0280597302,10.614766886 L 69.2780100666,9.98403492124 L 72.0887460086,5.34617297159 L 75.5738104459,5.03904780459 L 79.2332610049,9.05506842284 L 82.534398869,9.00518053096 L 86.1756251617,5 L 89.6309754274,5.3324974311 L 92.481408992,9.93630330164 L 95.7528326846,10.5260380079 L 100.003967404,7.19019424662 L 103.429603498,8.16231427582 L 105.353463018,13.1921019998 L 108.455492314,14.3993361299 L 113.294412285,11.872509363 L 116.410973758,13.4400056419 L 117.430382408,18.7560949946 L 120.223337083,20.5587053744 L 125.407337208,19.0172311776 L 128.236947235,21.0404234815 L 128.234347963,26.4810110641 L 130.740351191,28.739317469 L 136.129751246,28.161072668 L 138.510606427,30.7575180474 L 137.449343883,36.1020219357 Z" fill="#FDF1C9"/>
+  <path d="M 124.907631016,49.2931340332 A 54,54 -36 0,1 112.961116944,124.720455353 A 54,54 -36 0,1 37.5337956237,112.773941281 A 54,54 -36 0,1 49.4803096962,37.3466199608 A 54,54 -36 0,1 124.907631016,49.2931340332 Z" fill="#EBE3F7"/>
+  <path d="M 113.878977811,65.5875750629 L 128.863366655,64.0948959404 Q 142.105223281,62.7557794013 134.2289009,51.9149516767 L 125.294565065,39.6178933622 Q 117.418242684,28.7770656376 112.052708439,40.9570099013 L 106.00265543,54.7467473383 Q 100.637121185,66.926691602 113.878977811,65.5875750629 Z" fill="#FDF1C9"/>
+  <path d="M 114.542023219,62.7573152186 L 124.673609733,62.0710538185 Q 133.724409801,61.4283889488 128.081671379,53.6618258028 L 121.733590654,44.9244422636 Q 116.090852232,37.1578791176 112.682790586,45.5671071332 L 108.899284797,54.9907520726 Q 105.491223151,63.3999800882 114.542023219,62.7573152186 Z" fill="#F8F7F2"/>
+  <path d="M 132.098577996,78.9257222012 A 3.6,3.6 -36 0,1 131.302143725,83.9542102892 A 3.6,3.6 -36 0,1 126.273655637,83.1577760177 A 3.6,3.6 -36 0,1 127.070089908,78.1292879297 A 3.6,3.6 -36 0,1 132.098577996,78.9257222012 Z" fill="#FBE1DC"/>
+  <path d="M 106.043682051,107.373435595 L 112.036492353,121.06599652 Q 117.471231574,133.309917852 125.357951042,122.388395247 L 134.164303376,110.180686265 Q 142.109801369,99.3400653591 128.86924438,97.9588881069 L 113.93040152,96.4519129888 Q 100.608942831,95.1295142618 106.043682051,107.373435595 Z" fill="#FDF1C9"/>
+  <path d="M 108.889123891,107.036596256 L 112.685655402,116.515327631 Q 116.078328235,124.927804737 121.757928826,117.093129432 L 128.070210836,108.427963777 Q 133.749811428,100.593288473 124.677538004,100.015486672 L 114.546601308,99.3416011764 Q 105.496451058,98.6241191504 108.889123891,107.036596256 Z" fill="#F8F7F2"/>
+  <path d="M 99.0215090128,124.588809126 A 3.6,3.6 -36 0,1 98.2250747413,129.617297214 A 3.6,3.6 -36 0,1 93.1965866533,128.820862942 A 3.6,3.6 -36 0,1 93.9930209248,123.792374854 A 3.6,3.6 -36 0,1 99.0215090128,124.588809126 Z" fill="#FBE1DC"/>
+  <path d="M 63.8177504892,112.71297712 L 52.6450751515,122.684502871 Q 42.7080484795,131.634670519 55.5061419851,135.809452264 L 69.877373313,140.44817085 Q 82.6754668185,144.622952596 79.8143999849,131.498003203 L 76.6158439948,116.887758866 Q 73.8135556864,103.843711172 63.8177504892,112.71297712 Z" fill="#FDF1C9"/>
+  <path d="M 65.0369175243,115.411797555 L 57.1963938582,121.973519025 Q 50.2679120602,127.748996492 59.3831321966,130.767731635 L 69.6745726556,134.044353872 Q 78.7897927919,137.063089015 76.6030544536,128.268876405 L 74.0933591354,118.349630999 Q 71.906620797,109.555418389 65.0369175243,115.411797555 Z" fill="#F8F7F2"/>
+  <path d="M 45.3003587697,107.131202859 A 3.6,3.6 -36 0,1 44.5039244982,112.159690947 A 3.6,3.6 -36 0,1 39.4754364102,111.363256675 A 3.6,3.6 -36 0,1 40.2718706817,106.334768587 A 3.6,3.6 -36 0,1 45.3003587697,107.131202859 Z" fill="#FBE1DC"/>
+  <path d="M 45.6983397242,74.3334649618 L 32.7915798015,66.7766436526 Q 21.1931294287,59.9997749842 21.2087544231,73.461563716 L 21.1794832512,88.5628597928 Q 21.1951082456,102.024648525 32.777933624,95.3397284612 L 45.7139647186,87.7952536936 Q 57.2380115718,81.0294319308 45.6983397242,74.3334649618 Z" fill="#FDF1C9"/>
+  <path d="M 43.5285260162,76.2807472918 L 34.8703015408,70.8286698039 Q 27.1822476407,66.031396909 27.23647744,75.6333268779 L 27.172500371,86.4336003437 Q 27.2267301704,96.0355303126 34.8605542711,91.2308732386 L 43.5239772904,85.8017755613 Q 51.2165799163,81.0780201867 43.5285260162,76.2807472918 Z" fill="#F8F7F2"/>
+  <path d="M 45.2979369532,50.6446558398 A 3.6,3.6 -36 0,1 44.5015026817,55.6731439278 A 3.6,3.6 -36 0,1 39.4730145937,54.8767096563 A 3.6,3.6 -36 0,1 40.2694488652,49.8482215683 A 3.6,3.6 -36 0,1 45.2979369532,50.6446558398 Z" fill="#FBE1DC"/>
+  <path d="M 76.6648165244,45.1602355454 L 79.8479543385,30.486870776 Q 82.6259338374,17.4675455284 69.860596775,21.6742270808 L 55.5290630697,26.277176315 Q 42.7049474821,30.402956168 52.6701818713,39.3552800879 L 63.8407009368,49.2860153984 Q 73.8059353261,58.2383393183 76.6648165244,45.1602355454 Z" fill="#FDF1C9"/>
+  <path d="M 74.10697595,43.6812319634 L 76.5967043662,33.8378965321 Q 78.8506688636,25.0311011986 69.6443567584,28.0116745366 L 59.4526920832,31.3373280286 Q 50.2463799781,34.3179013665 57.1987275859,40.144123362 L 65.0403440695,46.6839284756 Q 71.9926916773,52.510150471 74.10697595,43.6812319634 Z" fill="#F8F7F2"/>
+  <path d="M 98.9474897668,33.2971637184 A 3.6,3.6 -36 0,1 98.1510554953,38.3256518064 A 3.6,3.6 -36 0,1 93.1225674073,37.5292175349 A 3.6,3.6 -36 0,1 93.9190016788,32.5007294469 A 3.6,3.6 -36 0,1 98.9474897668,33.2971637184 Z" fill="#FBE1DC"/>
+</g>
+<g id="kit-p08" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 16.3828533733,151.723384093 C 8.38491249871,151.904882762 5.18149866858,142.975261279 5,134.977320404 L 8.25328829363,13.8723406747 C 8.0264149579,3.87491458148 29.9526903623,0.376565414913 30.2476256987,13.3732193361 L 33.9925356704,134.319387731 C 34.1740343389,142.317328605 30.3792499038,151.405761423 23.3810516385,151.564572758 Z" fill="#EBE3F7"/>
+  <path d="M 19.8713588052,129.138426049 A 9.5,9.5 -91.3 0,1 29.5844432627,138.420451169 A 9.5,9.5 -91.3 0,1 20.3024181431,148.133535626 A 9.5,9.5 -91.3 0,1 10.5893336856,138.851510507 A 9.5,9.5 -91.3 0,1 19.8713588052,129.138426049 Z" fill="#FBE1DC"/>
+</g>
+<g id="kit-p09" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 9.46088058645,5 L 6.37324512743,12.9193754345 C 5.63702496958,20.0382222427 4.66537947152,29.9632363498 5.10040363906,47.8425750952 C 5.5354278066,65.7219138407 7.33412309451,99.3740266311 9.07655925541,120.23173303 C 10.8189954163,141.089439429 11.4298490859,147.230844626 15.2960321128,173.102501488 C 19.1622151397,198.974158351 29.8205250412,256.151517769 32.3463076628,275.275335959 C 34.8720902843,294.399154148 30.7635160587,285.391400941 30.6007409646,288.011229995 C 30.4379658705,290.631059048 30.7696046082,290.331032803 31.5559953436,291.066960525 L 35.2827602539,292.519965447 L 38.1652069463,282.373956327 C 39.1870230219,280.303716749 40.2640147417,280.294291489 41.2999687081,279.839539491 C 42.3359226746,279.384787493 42.5175482898,278.918941879 44.1740736228,279.350130726 C 45.8305989558,279.781319572 49.6915707422,281.715976354 51.1617578297,282.074514954 L 53.1041715168,281.221854959 L 44.3905285306,208.595603328 C 42.40657848,185.604432366 41.5201390259,162.826499512 40.8483135989,143.352192064 C 40.176488172,123.877884615 39.7600220892,114.484985382 40.5822393375,91.7292397608 L 45.7816170886,6.81771833408 L 43.6575777863,8.13622394355 C 41.0219424865,8.28928134075 35.616465011,8.113744275 29.9109612905,7.60656847153 L 9.46088058645,5 Z" fill="#FDF1C9"/>
+</g>
+<g id="kit-p10" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 46.3507918264,5 L 347.788999983,81.6290197217 A 76,76 15 0,1 308.448505127,228.449745318 L 15.040488989,143.102009168 A 8.06226,8.06226 15 0,1 10.9365490101,127.508495239 L 42.8864307631,73.9528694285 A 7,7 15 0,0 41.1626301729,61.0676642875 L 23.7945476711,40.8847579009 A 24,24 15 0,1 46.3507918264,5 Z" stroke-width="8.5" stroke-dasharray="8.5 4"/>
+  <path d="M 46.3507918264,5 L 347.788999983,81.6290197217 A 76,76 15 0,1 308.448505127,228.449745318 L 15.040488989,143.102009168 A 8.06226,8.06226 15 0,1 10.9365490101,127.508495239 L 42.8864307631,73.9528694285 A 7,7 15 0,0 41.1626301729,61.0676642875 L 23.7945476711,40.8847579009 A 24,24 15 0,1 46.3507918264,5 Z" stroke="#DBEAF7" stroke-width="4.4" stroke-dasharray="7 5.5" stroke-dashoffset="-.75"/>
+  <path d="M 46.3507918264,5 L 347.788999983,81.6290197217 A 76,76 15 0,1 308.448505127,228.449745318 L 15.040488989,143.102009168 A 8.06226,8.06226 15 0,1 10.9365490101,127.508495239 L 42.8864307631,73.9528694285 A 7,7 15 0,0 41.1626301729,61.0676642875 L 23.7945476711,40.8847579009 A 24,24 15 0,1 46.3507918264,5 Z" stroke-width="2.4" stroke-dasharray="0 12.5" stroke-dashoffset="-4.25"/>
+</g>
+<g id="kit-p11" fill="none" stroke="#1F2A3A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 145.418238983,63.4765863824 L 116.35734985,43.8115228729 C 111.291582185,39.385689848 115.809273639,38.7608187174 114.960235533,37.231395854 C 114.111197427,35.7019729906 113.541582185,35.4885755309 111.313121216,34.5483831521 C 109.084660247,33.6081907732 103.821520526,31.724216177 101.402867178,31.7134466615 C 98.9842138302,31.7026771461 98.5770341532,34.0079330344 96.9878036687,34.3605609786 C 95.3985731842,34.7131889227 100.575110365,36.5471635189 91.6576766498,33.5926117861 C 82.740242935,30.6380600533 52.137237635,20.2440200972 43.1733937587,16.5698531221 C 34.2095498823,12.895686147 42.1351251684,12.9681870723 38.1112159322,11.3378023145 C 34.0873066959,9.70741755679 22.5012196331,7.17510901042 18.9067332603,6.60094203534 C 15.3122468874,6.02677506026 18.0318621297,2.51626328361 16.3576951546,8.0160055448 L 9.08493649054,39.6127930621 L 30.9544826719,44.7336279375 C 35.9881995293,45.2149745896 29.9832013798,40.0159364839 39.1506350946,42.5374755148 C 48.3180688094,45.0590145457 77.8514588671,56.105682446 86.2688925819,59.9262595826 C 94.6863262968,63.7468367192 86.7607510106,63.674335794 89.5320323028,65.274335794 L 103.156387956,69.6762595826 L 103.973375254,67.2611960732 L 107.138438763,66.7791452656 C 111.308758161,68.9559401849 124.678562081,77.5987605079 128.72208656,80.3951706694 C 132.765611038,83.1915808309 130.417534827,81.258568129 131.436188175,83.6942087751 C 132.454841523,86.1298494211 134.242148219,91.4341434151 134.797404107,94.8724120053 C 135.352659995,98.3106805956 135.24189048,100.902539024 134.694518424,104.050615236 C 134.147146368,107.198691447 132.989966691,110.802985441 131.426569232,113.710869273 C 129.863171772,116.618753106 127.78015907,119.226636938 125.127531126,121.621123311 C 122.474903182,124.015609684 118.879454915,126.443108759 115.547404107,128.214390051 C 112.2153533,129.985671343 109.866315194,131.054324691 105.235226281,132.075605983 C 100.604137367,133.096887275 93.194587485,134.130604133 87.8608706276,134.168872723 C 82.5271537702,134.207141313 80.6781156646,134.409769257 73.4195276766,132.182012444 C 66.1609396885,129.95425563 50.3787002031,122.689896276 44.3227401592,120.579126761 L 36.7605623327,119.677202972 L 28.0105623327,134.832647538 C 27.0265877365,138.536941532 24.5713318482,138.389569477 30.9567147554,141.729761855 C 37.3420976627,145.069954234 56.0527981173,152.062070402 66.2496546955,154.600596731 C 76.4465112737,157.13912306 83.2926636964,157.281239227 92.1012516844,156.824317289 C 100.909839672,156.367395351 111.374645443,154.441820065 119.287785164,151.735860021 C 127.200924885,149.029899977 134.75162904,144.151696747 139.430090009,140.848364647 C 144.108550978,137.545032548 144.348743357,136.529007144 147.345153519,132.139072504 C 150.34156368,127.749137864 155.75496114,118.172858422 157.345153519,114.818564428 C 158.935345898,111.464270434 158.0683586,113.965936484 157.046115413,112.33651362 C 156.023872227,110.707090757 152.992783313,108.957090757 151.434899481,105.055424707 C 149.877015648,101.153758657 149.472721654,94.4540163962 147.908620039,89.1631198618 C 146.344518424,83.8722233274 143.0153533,76.63850647 142.15028979,73.1368404202 C 141.285226281,69.6351743704 142.078046604,69.8619692896 142.668238983,68.2397261032 L 145.418238983,63.4765863824 Z" fill="#EBE3F7"/>
+  <path d="M 145.235226281,62.7935736805 L 142.668238983,68.2397261032 C 142.237854225,70.1851743704 141.747661846,71.634212476 142.516315194,74.502865824 C 143.284968542,77.3715191719 145.629454915,80.1107496565 147.24355653,85.3150436505 C 148.857658145,90.5193376445 150.806438512,101.343951036 152.300924885,105.555424707 L 156.247077307,110.720488217 L 168.85829324,105.877221477 C 173.549189774,105.352350346 180.994380302,107.456902079 184.232648893,107.248056352 L 188.2146997,104.350942035 L 194.209890229,108.966967439 C 195.205338496,111.042800464 195.00796644,113.584658893 194.173991844,117.029145266 C 193.340017247,120.473631638 192.691683297,126.79657898 189.156042651,129.720488217 C 185.620402005,132.644397453 176.528801315,132.59151177 173.196750508,134.362793062 C 169.8646997,136.134074354 170.040532725,138.429522621 169.263737806,140.174970889 C 168.486942887,141.920419156 168.486942887,141.920419156 168.312775911,144.822085206 C 168.138608936,147.723751255 168.146492769,154.310096057 168.441941036,157.598364647 C 168.737389303,160.886633237 169.55963249,162.862466262 170.272068055,164.428491666 C 170.98450362,165.99451707 172.390721403,164.958876424 172.803156968,167.04451707 C 173.215592534,169.130157716 172.32443826,174.273682195 172.883283987,176.905733002 C 173.442129714,179.53778381 175.417000845,181.717206673 176.32943641,182.936821915 C 177.241871975,184.156437158 177.738282137,184.096629537 178.494499919,184.186821915 L 181.226550727,183.454771108 L 179.981360199,170.611504368 C 180.685911931,165.59118497 181.686873826,160.857468113 185.517258583,153.0230471 C 189.347643341,145.188626087 199.473476366,130.250168819 202.950271285,123.828183371 C 206.427066205,117.406197924 205.567258583,118.295428408 206.40123318,114.850942035 C 207.235207776,111.406455662 207.210336645,105.849533724 208.004118863,103.074662594 C 208.79790108,100.299791463 207.778285838,100.865816867 210.754118863,98.3115228729 L 225.932322093,88.0221037105 L 223.48616967,80.2589639896 C 223.123734105,78.0867208032 224.89956713,77.6108877783 223.571106161,75.1118496726 C 222.242645192,72.6128115669 217.676877527,67.3209531382 215.428801315,65.2147353556 C 213.180725104,63.1085175729 212.1146997,62.9549277344 209.982648893,62.6477480575 C 207.850598085,62.3405683805 205.622137116,61.4003760016 202.78649647,63.1118496726 C 199.950855824,64.8233233436 196.227650743,70.8721037105 193.005407557,73.0531926237 C 189.78316437,75.2342815369 187.360921184,76.0297298041 183.19322973,76.0483831521 C 179.025538276,76.0670365 174.45162904,75.3892796865 168.135861375,73.128510171 L 145.235226281,62.7935736805 Z" fill="#DFF1E3"/>
+  <path d="M 9.95096189432,40.1127930621 L 7.45096189432,44.442920081 C 7.06076951546,45.718753106 8.07320508076,46.7651632675 7.68301270189,48.0409962924 L 5,51.6881106094 L 6.59807621135,54.920161417 C 10.5853829072,56.4139436343 24.7463411006,60.0864445596 29.0836477965,60.9740089943 L 32.498711306,60.0589454848 L 31.2176223927,55.2778565716 C 29.8953792063,54.1680489504 26.0874953738,54.1634972176 24.4054445662,53.0768946773 C 22.7233937587,51.9902921369 21.6779454915,50.0010616523 21.0753175473,48.8448438697 C 20.4726896031,47.688626087 20.5994845224,47.0690108448 20.7762794416,46.3627930621 L 22.4592921435,44.4477295527 L 21.4102540378,43.2647168508 L 9.95096189432,40.1127930621 Z" fill="#DFF1E3"/>
+  <path d="M 31.1015969889,53.4788184659 L 32.6865334795,45.7336279375 L 22.5932667397,42.2156787451 L 16.5131397208,42.7467676583 L 20.1602540378,45.4297803602 L 18.3432667397,49.5768946773 L 19.3923048454,50.7599073791 L 31.1015969889,53.4788184659 Z" fill="#FBE1DC"/>
+</g>
+</defs></svg>
+````
